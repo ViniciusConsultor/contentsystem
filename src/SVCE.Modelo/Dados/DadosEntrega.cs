@@ -10,6 +10,6 @@ namespace SVCE.Modelo.Dados
         public string NomeCliente { get; set; }
         public string Endereco { get; set; }
         public DateTime DataPrevisaoEntrega { get; set; }
-        public string HorarioPreferenciaç { get; set; }
+        public string HorarioPreferencial { get; set; }
     }
 }
