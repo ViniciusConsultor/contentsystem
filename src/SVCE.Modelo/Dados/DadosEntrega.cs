@@ -7,9 +7,13 @@ namespace SVCE.Modelo.Dados
 {
     public class DadosEntrega
     {
-        public string NomeCliente { get; set; }
-        public string Endereco { get; set; }
-        public DateTime DataPrevisaoEntrega { get; set; }
-        public string HorarioPreferencial { get; set; }
+        //public string NomeCliente { get; set; }
+        //public string Endereco { get; set; }
+        //public DateTime DataPrevisaoEntrega { get; set; }
+        //public string HorarioPreferencial { get; set; }
+        public string NomeCliente;
+        public string Endereco;
+        public DateTime DataPrevisaoEntrega;
+        public string HorarioPreferencial;
     }
 }
