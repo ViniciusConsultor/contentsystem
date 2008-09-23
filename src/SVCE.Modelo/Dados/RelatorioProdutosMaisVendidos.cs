@@ -17,7 +17,7 @@ namespace SVCE.Modelo.Dados
 
         public void GerarRelatorio()
         {
-            return null;
+
         }
 
     }

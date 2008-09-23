@@ -32,7 +32,7 @@ namespace SVCE.Modelo.Dados
 
         public decimal CalcularValorTotal()
         {
-
+            return 0;
         }
 
 

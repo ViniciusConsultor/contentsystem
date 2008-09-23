@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "site", "site\", "{A1DE21CB-547A-485E-8BED-4028CB94BDE5}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
+		ProjectReferences = "{8A485DCE-28B2-4E80-9C73-C299B0E96F0B}|SVCE.Controle.dll;{ACABA6BF-B8CD-4408-B29F-45724B7D1B61}|SVCE.Modelo.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/site"
 		Debug.AspNetCompiler.PhysicalPath = "site\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\site\"
