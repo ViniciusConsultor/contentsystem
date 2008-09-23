@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="/Principal.aspx" title="Sistema">
+    <siteMapNode url="" title="Administrativo"  description="">
+      <siteMapNode url="~/Administrativo/Funcionarios/Default.aspx" title="Manter Funcionários"  description="" />
+    </siteMapNode>
+    <siteMapNode title="Compras"></siteMapNode>
+    <siteMapNode title="Vendas"></siteMapNode>
+  </siteMapNode>
+</siteMap>

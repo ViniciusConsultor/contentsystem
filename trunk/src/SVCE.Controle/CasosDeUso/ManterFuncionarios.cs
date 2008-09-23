@@ -11,11 +11,22 @@ namespace SVCE.Controle.CasosDeUso
     {
         public Funcionario[] PesquisarFuncionarios()
         {
-            return null;
+            BancoDeDados banco = new BancoDeDados();
+            try
+            {
+                banco.Conectar();
+                return Funcionario.Listar(banco);
+            }
+            finally
+            {
+                banco.Desconectar();
+            }
         }
         public void IncluirFuncionario(Funcionario funcionario)
         {
 
         }
+
+        
     }
 }
