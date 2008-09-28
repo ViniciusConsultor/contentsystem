@@ -8,7 +8,8 @@
     <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
         <asp:View runat="server" ID="vwLista">
             <div>
-                <asp:Button ID="Button1" runat="server" OnCommand="MostrarFormularioInclusao" Text="Incluir Funcionário" />
+                <asp:Button CausesValidation="false" ID="Button1" runat="server" OnCommand="MostrarFormularioInclusao"
+                    Text="Incluir Funcionário" />
             </div>
             <asp:Repeater runat="server" ID="rpFuncionarios">
                 <HeaderTemplate>
@@ -31,6 +32,9 @@
                             </td>
                             <td>
                                 Salário
+                            </td>
+                            <td>
+                                &#160;
                             </td>
                         </thead>
                         <tbody>
@@ -58,110 +62,133 @@
                         <td>
                             <%#Eval("Salario", "{0:C}") %>
                         </td>
+                        <td>
+                            <asp:LinkButton ID="LinkButton1" runat="server" Text="E" OnCommand="MostrarFormularioEdicao"
+                                CommandArgument='<%# Eval("Matricula") %>' />
+                            <asp:LinkButton ID="LinkButton2" runat="server" Text="X" OnCommand="ExcluirFuncionario"
+                                CommandArgument='<%# Eval("Matricula") %>' />
+                        </td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
         </asp:View>
         <asp:View runat="server" ID="vwFormulario">
             <div>
-                <asp:Button runat="server" OnCommand="RetornarListagem" Text="Voltar" />
+                <asp:Button CausesValidation="false" runat="server" OnCommand="RetornarListagem"
+                    Text="Voltar" />
             </div>
+            <asp:ValidationSummary runat="server" />
             <table>
-            <tr>
-            
-                <td colspan="2">Dados Pessoais</td>
-            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h3>
+                            Dados Pessoais
+                        </h3>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <asp:Label runat="server" AssociatedControlID="txtMatricula" Text="Matrícula" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtMatricula" Enabled=false />
+                        <asp:TextBox runat="server" ID="txtMatricula" Enabled="false" />
                     </td>
                 </tr>
-                
                 <tr>
                     <td>
                         <asp:Label ID="Label1" runat="server" AssociatedControlID="txtNome" Text="Nome" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtNome"  />
+                        <asp:TextBox runat="server" ID="txtNome" MaxLength="50" />
+                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" Text="*" ControlToValidate="txtNome"
+                            ErrorMessage="Nome obrigatório" />
                     </td>
                 </tr>
-                
                 <tr>
                     <td>
                         <asp:Label ID="Label2" runat="server" AssociatedControlID="txtCPF" Text="CPF" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtCPF"  />
+                        <asp:TextBox runat="server" ID="txtCPF" MaxLength="11" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
+                            Text="*" ControlToValidate="txtCPF" ErrorMessage="CPF obrigatório" />
+                        <svce:ValidadorCPF runat="server" ControlToValidate="txtCPF" Text="*" ErrorMessage="CPF inválido" />
                     </td>
                 </tr>
                 <tr>
-                
-                    <td colspan="2">Dados de Acesso</td>
-                </tr>
-                 <tr>
-                    <td>
-                        <asp:Label ID="Label3" runat="server" AssociatedControlID="txtLogin" Text="Login" />
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtLogin"  />
-                    </td>
-                </tr>
-                
-                
-                 <tr>
-                    <td>
-                        <asp:Label ID="Label4" runat="server" AssociatedControlID="txtSenha" Text="Senha" />
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" TextMode=Password ID="txtSenha"  />
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>
-                    
-                        <asp:Label runat=server  AssociatedControlID="rbPerfil" Text="Perfil" />
-                    </td>
-                    <td>
-                    
-                    
-                        <asp:RadioButtonList RepeatColumns="2" RepeatDirection=Horizontal runat=server ID="rbPerfil">
-                            <asp:ListItem Text="CONTROLE TOTAL" Value="Master" />
-                            <asp:ListItem Text="SETOR ADMINISTRATIVO" Value="Administrativo" />
-                            <asp:ListItem Text="SETOR DE COMPRAS" Value="Compras" />
-                            <asp:ListItem Text="VENDEDORES" Value="Vendas" />
-                        </asp:RadioButtonList>
-                    
-                    </td>
-                </tr>
-                
-                
-                 <tr>
-                    <td>
-                    
-                        <asp:Label ID="Label5" runat=server  AssociatedControlID="rvStatus" Text="Status" />
-                    </td>
-                    <td>
-                    
-                    
-                        <asp:RadioButtonList RepeatColumns="2" RepeatDirection=Horizontal runat=server ID="rvStatus">
-                            <asp:ListItem Text="ATIVO" Value="Ativo" />
-                            <asp:ListItem Text="INATIVO" Value="Inativo" />
-                        </asp:RadioButtonList>
-                    
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>&nbsp;</td>
-                    <td align=right>
-                        <asp:Button runat=server ID="btnSalvar" Text="Salvar" OnCommand="SalvarFuncionario" />
-                    </td>
-                </tr>
-                
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label3" runat="server" AssociatedControlID="txtSalario" Text="Salário" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtSalario" MaxLength="15" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" Display="Dynamic"
+                                Text="*" ControlToValidate="txtSalario" ErrorMessage="Salário obrigatório" />
+                            <svce:ValidadorDinheiro runat="server" ControlToValidate="txtSalario" Text="*" ErrorMessage="Salário inválido!" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label4" runat="server" AssociatedControlID="txtDataAdmissao" Text="Data Admissão" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtDataAdmissao" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" Display="Dynamic"
+                                Text="*" ControlToValidate="txtDataAdmissao" ErrorMessage="Data de Admissão obrigatória" />
+                            <svce:ValidadorData runat="server" ControlToValidate="txtDataAdmissao" Text="*" ErrorMessage="Data de admissão inválida!" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h3>
+                                Dados de Acesso
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label runat="server" AssociatedControlID="txtLogin" Text="Login" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtLogin" MaxLength="50" />
+                            <asp:RequiredFieldValidator ID="rqLogin" runat="server" Display="Dynamic" Text="*"
+                                ControlToValidate="txtLogin" ErrorMessage="Login obrigatório" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblSenha" runat="server" AssociatedControlID="txtSenha" Text="Senha" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" TextMode="Password" MaxLength="50" ID="txtSenha" />
+                            <asp:RequiredFieldValidator ID="rqSenha" runat="server" Display="Dynamic" Text="*"
+                                ControlToValidate="txtSenha" ErrorMessage="Senha obrigatória" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label runat="server" AssociatedControlID="rbPerfil" Text="Perfil" />
+                        </td>
+                        <td>
+                            <asp:RadioButtonList RepeatColumns="2" RepeatDirection="Horizontal" runat="server"
+                                ID="rbPerfil">
+                                <asp:ListItem Text="CONTROLE TOTAL" Value="Master" />
+                                <asp:ListItem Text="SETOR ADMINISTRATIVO" Value="Administrativo" />
+                                <asp:ListItem Text="SETOR DE COMPRAS" Value="Compras" />
+                                <asp:ListItem Text="VENDEDORES" Value="Vendas" />
+                            </asp:RadioButtonList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" Display="Dynamic"
+                                Text="*" ControlToValidate="rbPerfil" ErrorMessage="Perfil obrigatório" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td align="right">
+                            <asp:Button runat="server" ID="btnSalvar" Text="Salvar" OnCommand="SalvarFuncionario" />
+                        </td>
+                    </tr>
             </table>
         </asp:View>
     </asp:MultiView>
