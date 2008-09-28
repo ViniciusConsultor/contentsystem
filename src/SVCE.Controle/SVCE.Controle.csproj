@@ -50,6 +50,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validadores\ValidadorCPF.cs" />
+    <Compile Include="Validadores\ValidadorDinheiro.cs" />
+    <Compile Include="Validadores\ValidadorData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SVCE.Modelo\SVCE.Modelo.csproj">
