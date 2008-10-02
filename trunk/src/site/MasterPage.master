@@ -10,29 +10,41 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
-    
-        <asp:SiteMapPath runat=server />
-    
+        <asp:SiteMapPath runat="server" />
         <h1>
             <asp:ContentPlaceHolder runat="server" ID="Titulo">
             </asp:ContentPlaceHolder>
         </h1>
-        <asp:Menu DataSourceID="siteMap" runat="server" ID="menu" BackColor="#B5C7DE" DynamicHorizontalOffset="2"
-            Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284E98" Orientation="Horizontal"
-            StaticSubMenuIndent="10px">
-            <StaticSelectedStyle BackColor="#507CD1" />
-            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-            <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
-            <DynamicMenuStyle BackColor="#B5C7DE" />
-            <DynamicSelectedStyle BackColor="#507CD1" />
-            <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-            <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
-        </asp:Menu>
         <asp:SiteMapDataSource ShowStartingNode="false" runat="server" ID="siteMap" />
-        <asp:ContentPlaceHolder ID="Conteudo" runat="server">
-        </asp:ContentPlaceHolder>
+        <div class="menu">
+            <asp:Panel runat="server" ID="pnlAdministrativo">
+                <h1>
+                    Administrativo</h1>
+                <ul>
+                    <li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Funcionarios/Default.aspx"
+                            Text="Manter Funcionários" />
+                    </li>
+                    
+                </ul>
+            </asp:Panel>
+            <asp:Panel runat="server" ID="pnlCompras">
+                <h1>
+                    Compras</h1>
+                <ul>
+                    <li>
+                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Compras/Fornecedores/Default.aspx"
+                            Text="Manter Fornecedores" />
+                    </li>
+                </ul>
+            </asp:Panel>
+        </div>
+        <div class="conteudo">
+            <asp:ContentPlaceHolder ID="Conteudo" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
     </div>
     </form>
+    <div style="clear:both;">&nbsp;</div>
 </body>
 </html>

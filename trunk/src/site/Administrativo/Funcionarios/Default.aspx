@@ -13,8 +13,9 @@
             </div>
             <asp:Repeater runat="server" ID="rpFuncionarios">
                 <HeaderTemplate>
-                    <table width="100%">
+                    <table class=tabela cellspacing=0 cellpadding=0 width="100%">
                         <thead>
+                            <tr>
                             <td>
                                 Matrícula
                             </td>
@@ -36,6 +37,7 @@
                             <td>
                                 &#160;
                             </td>
+                            </tr>
                         </thead>
                         <tbody>
                 </HeaderTemplate>
