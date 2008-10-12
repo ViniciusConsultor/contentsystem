@@ -13,30 +13,30 @@
             </div>
             <asp:Repeater runat="server" ID="rpFuncionarios">
                 <HeaderTemplate>
-                    <table class=tabela cellspacing=0 cellpadding=0 width="100%">
+                    <table class="tabela" cellspacing="0" cellpadding="0" width="100%">
                         <thead>
                             <tr>
-                            <td>
-                                Matrícula
-                            </td>
-                            <td>
-                                Nome
-                            </td>
-                            <td>
-                                CPF
-                            </td>
-                            <td>
-                                Login
-                            </td>
-                            <td>
-                                Data Adm.
-                            </td>
-                            <td>
-                                Salário
-                            </td>
-                            <td>
-                                &#160;
-                            </td>
+                                <td>
+                                    Matrícula
+                                </td>
+                                <td>
+                                    Nome
+                                </td>
+                                <td>
+                                    CPF
+                                </td>
+                                <td>
+                                    Login
+                                </td>
+                                <td>
+                                    Data Adm.
+                                </td>
+                                <td>
+                                    Salário
+                                </td>
+                                <td>
+                                    &#160;
+                                </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +67,7 @@
                         <td>
                             <asp:LinkButton ID="LinkButton1" runat="server" Text="E" OnCommand="MostrarFormularioEdicao"
                                 CommandArgument='<%# Eval("Matricula") %>' />
-                            <asp:LinkButton ID="LinkButton2" runat="server" Text="X" OnCommand="ExcluirFuncionario"
+                            <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este funcionário?');" ID="LinkButton2" runat="server" Text="X" OnCommand="ExcluirFuncionario"
                                 CommandArgument='<%# Eval("Matricula") %>' />
                         </td>
                     </tr>
@@ -75,12 +75,14 @@
             </asp:Repeater>
         </asp:View>
         <asp:View runat="server" ID="vwFormulario">
-            <div>
-                <asp:Button CausesValidation="false" runat="server" OnCommand="RetornarListagem"
-                    Text="Voltar" />
-            </div>
-            <asp:ValidationSummary runat="server" />
+        
+        
+        
+        
             <table>
+                <tr>
+                    <td>
+                     <table>
                 <tr>
                     <td colspan="2">
                         <h3>
@@ -172,7 +174,7 @@
                             <asp:Label runat="server" AssociatedControlID="rbPerfil" Text="Perfil" />
                         </td>
                         <td>
-                            <asp:RadioButtonList RepeatColumns="2" RepeatDirection="Horizontal" runat="server"
+                            <asp:RadioButtonList RepeatColumns="1" RepeatDirection="Horizontal" runat="server"
                                 ID="rbPerfil">
                                 <asp:ListItem Text="CONTROLE TOTAL" Value="Master" />
                                 <asp:ListItem Text="SETOR ADMINISTRATIVO" Value="Administrativo" />
@@ -189,9 +191,25 @@
                         </td>
                         <td align="right">
                             <asp:Button runat="server" ID="btnSalvar" Text="Salvar" OnCommand="SalvarFuncionario" />
+                            <asp:Button ID="Button2" CausesValidation="false" runat="server" OnCommand="RetornarListagem"
+                    Text="Cancelar" />
                         </td>
                     </tr>
             </table>
+                    
+                    </td>
+                    <td valign=top>
+                    
+                    <asp:ValidationSummary runat="server" />
+                    
+                    </td>
+                </tr>
+            </table>
+        
+        
+          
+            
+           
         </asp:View>
     </asp:MultiView>
 </asp:Content>

@@ -7,30 +7,13 @@ using System.Web.UI;
 
 namespace SVCE.Controle.CasosDeUso
 {
-    public class ManterFuncionarios : Page
+    public class ManterFuncionarios
     {
 
 
-        protected int MatriculaEdicao
-        {
-            get
-            {
-                return (int)ViewState["MatriculaEdicao"];
-            }
-            set
-            {
-                ViewState["MatriculaEdicao"] = value;
-            }
-        }
+        
 
 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            if (!IsPostBack)
-                MatriculaEdicao = 0;
-        }
 
         private Funcionario[] ExecutarConsultaFuncionario(FiltrosFuncionario filtros)
         {
@@ -59,7 +42,7 @@ namespace SVCE.Controle.CasosDeUso
                 throw new Exception(string.Format("Funcionário não encontrado: {0}", matricula));
 
             Funcionario funcionario = selecionados[0];
-            MatriculaEdicao = funcionario.Matricula;
+            
 
             return funcionario;
         }
