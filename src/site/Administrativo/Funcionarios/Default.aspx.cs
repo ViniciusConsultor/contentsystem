@@ -13,14 +13,32 @@ using System.Xml.Linq;
 using SVCE.Controle.CasosDeUso;
 using SVCE.Modelo.Dados;
 
-public partial class Administrativo_Funcionarios_Default : ManterFuncionarios
+public partial class Administrativo_Funcionarios_Default : Page
 {
+
+    ManterFuncionarios Controle;
+
+    public int MatriculaEdicao
+    {
+        get
+        {
+            return (int) (ViewState["Matricula"] ?? 0);
+        }
+        set
+        {
+            ViewState["Matricula"] = value;
+        }
+    }
+
+
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
+        Controle = new ManterFuncionarios();
+            
         if (!IsPostBack)
         {
-            MostrarFuncionarios(PesquisarFuncionarios());
+            MostrarFuncionarios(Controle.PesquisarFuncionarios());
         }
 
     }
@@ -47,7 +65,8 @@ public partial class Administrativo_Funcionarios_Default : ManterFuncionarios
     protected void MostrarFormularioEdicao(object sender, CommandEventArgs e)
     {
 
-        Funcionario funcionario = CarregarFuncionario(Int32.Parse((string)e.CommandArgument));
+        Funcionario funcionario = Controle. CarregarFuncionario(Int32.Parse((string)e.CommandArgument));
+        MatriculaEdicao = funcionario.Matricula;
 
         this.txtNome.Text = funcionario.Nome;
         this.txtMatricula.Text = funcionario.Matricula.ToString();
@@ -85,13 +104,13 @@ public partial class Administrativo_Funcionarios_Default : ManterFuncionarios
 
     protected void ExcluirFuncionario(object sender, CommandEventArgs e)
     {
-        MostrarFuncionarios( base.ExcluirFuncionario(Int32.Parse((string)e.CommandArgument)));
+        MostrarFuncionarios( Controle.ExcluirFuncionario(Int32.Parse((string)e.CommandArgument)));
     }
 
     public void RetornarListagem(object sender, CommandEventArgs e)
     {
         mv.ActiveViewIndex = 0;
-        MostrarFuncionarios(PesquisarFuncionarios());
+        MostrarFuncionarios(Controle.PesquisarFuncionarios());
     }
     public void SalvarFuncionario(object sender, CommandEventArgs e)
     {
@@ -101,9 +120,9 @@ public partial class Administrativo_Funcionarios_Default : ManterFuncionarios
         Funcionario funcionario = PreencherFuncionario();
         Funcionario[] listagem;
         if (MatriculaEdicao == 0)
-        listagem =    IncluirFuncionario(funcionario);
+        listagem =    Controle.IncluirFuncionario(funcionario);
         else
-            listagem = AlterarFuncionario(funcionario);
+            listagem = Controle.AlterarFuncionario(funcionario);
 
         MostrarFuncionarios(listagem);
         mv.ActiveViewIndex = 0;
