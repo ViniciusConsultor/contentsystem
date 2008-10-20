@@ -53,15 +53,7 @@ namespace SVCE.Modelo.Dados
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    Funcionario funcionario = new Funcionario();
-                    funcionario.Matricula = (int)reader["MATRICULA"];
-                    funcionario.Nome = (string)reader["NOME"];
-                    funcionario.CPF = (string)reader["CPF"];
-                    funcionario.Login = (string)reader["LOGIN"];
-                    funcionario.Salario = (decimal)reader["SALARIO"];
-                    funcionario.DataAdmissao = (DateTime)reader["DATA_ADMISSAO"];
-                    funcionario.Perfil = (Perfil)(int)reader["ID_PERFIL"];
-                    funcionario.Status = Status.Ativo;
+                    var funcionario = PreencherFuncionario(reader);
                     lista.Add(funcionario);
                 }
 
@@ -74,7 +66,38 @@ namespace SVCE.Modelo.Dados
 
             return lista.ToArray();
         }
+        private static Funcionario PreencherFuncionario(SqlDataReader reader)
+        {
+            Funcionario funcionario = new Funcionario();
+            funcionario.Matricula = (int)reader["MATRICULA"];
+            funcionario.Nome = (string)reader["NOME"];
+            funcionario.CPF = ((string)reader["CPF"]).Trim();
+            funcionario.Login = (string)reader["LOGIN"];
+            funcionario.Salario = (decimal)reader["SALARIO"];
+            funcionario.DataAdmissao = (DateTime)reader["DATA_ADMISSAO"];
+            funcionario.Perfil = (Perfil)(int)reader["ID_PERFIL"];
+            funcionario.Status = Status.Ativo;
+            return funcionario;
+        }
+        public static Funcionario Autenticar(BancoDeDados banco, string usuario, string senha)
+        {
+            string sql = "SELECT MATRICULA, NOME,LOGIN, ID_PERFIL, CPF, SALARIO, DATA_ADMISSAO FROM FUNCIONARIOS WHERE LOGIN = @LOGIN AND CONVERT(NVARCHAR(MAX), SENHA) = @SENHA";
 
+            var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+            cmd.Parameters.Add(new SqlParameter("@LOGIN", usuario));
+            cmd.Parameters.Add(new SqlParameter("@SENHA", senha));
+
+            var reader = cmd.ExecuteReader();
+            Funcionario funcionario;
+            if (reader.Read())
+                funcionario = PreencherFuncionario(reader);
+            else
+                funcionario = null;
+            reader.Close();
+
+
+            return funcionario;
+        }
         public void Incluir(BancoDeDados banco)
         {
             string sql = @"INSERT INTO FUNCIONARIOS (NOME, CPF, SALARIO, DATA_ADMISSAO, LOGIN, SENHA, ID_PERFIL, ID_STATUS) VALUES (@NOME, @CPF, @SALARIO, @DATA_ADMISSAO, @LOGIN, @SENHA, @ID_PERFIL,1); SELECT @MATRICULA = SCOPE_IDENTITY()";
@@ -107,7 +130,7 @@ namespace SVCE.Modelo.Dados
         }
         public void Alterar(BancoDeDados banco)
         {
-            string sql = @"UPDATE FUNCIONARIOS SET NOME = @NOME, CPF=@CPF, SALARIO=@SALARIO, DATA_ADMISSAO = @DATA_ADMISSAO WHERE MATRICULA = @MATRICULA";
+            string sql = @"UPDATE FUNCIONARIOS SET NOME = @NOME, CPF=@CPF, SALARIO=@SALARIO, DATA_ADMISSAO = @DATA_ADMISSAO, ID_PERFIL = @ID_PERFIL WHERE MATRICULA = @MATRICULA";
             SqlCommand cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
             AtribuirParametros(cmd);
 

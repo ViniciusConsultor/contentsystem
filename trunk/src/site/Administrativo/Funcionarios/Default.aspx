@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Default.aspx.cs" Inherits="Administrativo_Funcionarios_Default" Title="Untitled Page" %>
+    CodeFile="Default.aspx.cs" Inherits="Administrativo_Funcionarios_Default"  %>
 
 <asp:Content ID="Titulo" ContentPlaceHolderID="Titulo" runat="Server">
     Manter Funcionários
@@ -34,6 +34,7 @@
                                 <td>
                                     Salário
                                 </td>
+                                <td>Perfil</td>
                                 <td>
                                     &#160;
                                 </td>
@@ -63,6 +64,10 @@
                         </td>
                         <td>
                             <%#Eval("Salario", "{0:C}") %>
+                        </td>
+                        <td>
+                        
+                            <%# Eval("Perfil") %>
                         </td>
                         <td>
                             <asp:LinkButton ID="LinkButton1" runat="server" Text="E" OnCommand="MostrarFormularioEdicao"

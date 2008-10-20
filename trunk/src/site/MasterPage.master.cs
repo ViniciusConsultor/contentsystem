@@ -10,11 +10,47 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
+using SVCE.Controle.CasosDeUso;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (!IsPostBack)
+        {
+            int matricula = Int32.Parse(Page.User.Identity.Name);
+            ManterFuncionarios controle = new ManterFuncionarios();
+            var funcionario = controle.CarregarFuncionario(matricula);
+            if (funcionario == null)
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
+            switch (funcionario.Perfil)
+            {
+                case SVCE.Modelo.Dados.Perfil.Master:
+                    pnlAdministrativo.Visible = true;
+                    pnlCompras.Visible = true;
+                    pnlEstoque.Visible = true;
+                    pnlVendas.Visible = true;
+                    break;
+                case SVCE.Modelo.Dados.Perfil.Administrativo:
+                    pnlAdministrativo.Visible = true;
+                    break;
+                case SVCE.Modelo.Dados.Perfil.Compras:
+                    pnlCompras.Visible = true;
+                    break;
+                case SVCE.Modelo.Dados.Perfil.Estoque:
+                    pnlEstoque.Visible = true;
+                    break;
+                case SVCE.Modelo.Dados.Perfil.Vendas:
+                    pnlVendas.Visible = true;
+                    break;
+            }
+
+        }
 
     }
 }

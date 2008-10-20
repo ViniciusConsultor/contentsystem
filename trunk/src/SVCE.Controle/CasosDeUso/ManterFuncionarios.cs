@@ -90,6 +90,20 @@ namespace SVCE.Controle.CasosDeUso
             }
         }
 
+        public Funcionario AutenticarFuncionario(string usuario, string senha)
+        {
+            BancoDeDados banco = new BancoDeDados();
+            try
+            {
+                banco.Conectar();
+                return Funcionario.Autenticar(banco, usuario, senha);
+            }
+            finally
+            {
+                banco.Desconectar();
+            }
+        }
+
 
     }
 }

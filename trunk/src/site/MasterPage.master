@@ -3,13 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Untitled Page</title>
+    <title>SVCE</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <div class="pageBody">
         <asp:SiteMapPath runat="server" />
         <h1>
             <asp:ContentPlaceHolder runat="server" ID="Titulo">
@@ -17,7 +17,7 @@
         </h1>
         <asp:SiteMapDataSource ShowStartingNode="false" runat="server" ID="siteMap" />
         <div class="menu">
-            <asp:Panel runat="server" ID="pnlAdministrativo">
+            <asp:Panel runat="server" Visible=false ID="pnlAdministrativo">
                 <h1>
                     Administrativo</h1>
                 <ul>
@@ -28,7 +28,7 @@
                     
                 </ul>
             </asp:Panel>
-            <asp:Panel runat="server" ID="pnlCompras">
+            <asp:Panel runat="server" Visible=false ID="pnlCompras">
                 <h1>
                     Compras</h1>
                 <ul>
@@ -37,6 +37,13 @@
                             Text="Manter Fornecedores" />
                     </li>
                 </ul>
+            </asp:Panel>
+            
+            <asp:Panel runat=server Visible=false ID="pnlEstoque">
+                <h1>Estoque</h1>
+            </asp:Panel>
+            <asp:Panel runat=server Visible=false ID="pnlVendas">
+                <h1>Vendas</h1>
             </asp:Panel>
         </div>
         <div class="conteudo">
