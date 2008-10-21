@@ -21,11 +21,21 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void Alterar()
+        public void Alterar(int codigoInterno,string codigoExterno,int idFornecedor, string nome, decimal precovenda, int quantidade,Status status)
         {
+            Produto p = new Produto();
+            p.CodigoInterno = codigoInterno;
+            p.CodigoExterno = codigoExterno;
+            p.IdFornecedor = idFornecedor;
+            p.Nome = nome;
+            p.PrecoVenda = precovenda;
+            p.QuantidadeMinima = quantidade;
+            p.Status = status;
+
             try
             {
                 b.Conectar();
+                p.Alterar();
                
             }
             finally
@@ -33,11 +43,20 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void Incluir()
+        public void Incluir(int codigoInterno, string codigoExterno, int idFornecedor, string nome, decimal precovenda, int quantidade, Status status)
         {
+            Produto p = new Produto();
+            p.CodigoInterno = codigoInterno;
+            p.CodigoExterno = codigoExterno;
+            p.IdFornecedor = idFornecedor;
+            p.Nome = nome;
+            p.PrecoVenda = precovenda;
+            p.QuantidadeMinima = quantidade;
+            p.Status = status;
             try
             {
                 b.Conectar();
+                p.Incluir();
             }
             finally
             {
