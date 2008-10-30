@@ -1,10 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Default.aspx.cs" Inherits="Compras_Fornecedores_Default"  %>
+    CodeFile="Default.aspx.cs" Inherits="Compras_Produtos_Default"  %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Titulo" runat="Server">
-    Manter Fornecedores
+    Manter Produtos
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Conteudo" runat="Server">
     <asp:MultiView runat="server" ID="mvprodutos" ActiveViewIndex="0">
@@ -70,9 +70,6 @@
                                         Quantidade Mínima
                                     </td>
                                     <td>
-                                        Status
-                                    </td>
-                                    <td>
                                         &nbsp;
                                     </td>
                                 </tr>
@@ -99,13 +96,10 @@
                                 <%#Eval("QuantidadeMinima")%>
                             </td>
                             <td>
-                                <%#Eval("Status")%>
-                            </td>
-                            <td>
-                                <asp:LinkButton ID="LinkButton1" runat="server" Text="E" OnCommand="MostrarFormularioEdicao"
+                                <asp:LinkButton ID="btnEdit" runat="server" Text="E" OnCommand="MostrarFormularioEdicao"
                                     CommandArgument='<%# Eval("CodigoInterno") %>' />
-                                <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este fornecedor?');"
-                                    ID="LinkButton2" runat="server" Text="X" OnCommand="ExcluirFornecedor" CommandArgument='<%# Eval("IdFornecedor") %>' />
+                                <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este Produto?');"
+                                    ID="btnExcluir" runat="server" Text="X" OnCommand="ExcluirProduto" CommandArgument='<%# Eval("CodigoInterno") %>' />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -122,20 +116,10 @@
                         <table>
                             <tr>
                                 <td>
-                                    <asp:Label ID="lblCadastroInterno" runat="server" AssociatedControlID="txtCadastrointerno" Text="Código Interno" />
-                                </td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtCadastrointerno" MaxLength="20" />
-                                    <asp:RequiredFieldValidator ID="rfvCodInterno" Display="Dynamic" runat="server" ControlToValidate="txtCadastrointerno"
-                                        Text="*" ErrorMessage="Código Interno obrigatório" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <asp:Label ID="lblCadastroExterno" runat="server" AssociatedControlID="txtCadastroExterno" Text="Código Externo" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtCadastroExterno" MaxLength="50" />
+                                    <asp:TextBox runat="server" ID="txtCadastroExterno" MaxLength="50" runat="server" />
                                     <asp:RequiredFieldValidator Display="Dynamic" ID="rfvCodExterno" runat="server"
                                         ControlToValidate="txtCadastroExterno" Text="*" ErrorMessage="Código Externo obrigatório" />
                                 </td>
@@ -152,7 +136,7 @@
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <asp:Label ID="lblCadastroNome" runat="server" AssociatedControlID="CadastroNome" Text="Nome" />
+                                    <asp:Label ID="lblCadastroNome" runat="server" AssociatedControlID="txtCadastroNome" Text="Nome" />
                                 </td>
                                 <td>
                                     <asp:TextBox runat="server" ID="txtCadastroNome" MaxLength="30" />
@@ -175,19 +159,9 @@
                                     <asp:Label ID="lblCadastroQuantidade" runat="server" AssociatedControlID="txtCadastroQuantidade" Text="Quantidade Mínima" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="CadastroQuantidade" MaxLength="50" />
+                                    <asp:TextBox runat="server" ID="txtCadastroQuantidade" MaxLength="50" />
                                     <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator6" runat="server"
                                         ControlToValidate="txtCadastroQuantidade" Text="*" ErrorMessage="Quantidade Mínima obrigatório" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top">
-                                    <asp:Label ID="Label10" runat="server" AssociatedControlID="txtContato" Text="Contato" />
-                                </td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtContato" MaxLength="50" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator7" runat="server"
-                                        ControlToValidate="txtContato" Text="*" ErrorMessage="Contato obrigatório" />
                                 </td>
                             </tr>
                             <tr>
