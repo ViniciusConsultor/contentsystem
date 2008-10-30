@@ -8,21 +8,23 @@ namespace SVCE.Controle.CasosDeUso
 {
     public class ManterProduto
     {
-        BancoDeDados b = new BancoDeDados();
+        
         public Produto[] Listar(int? codigoInterno, string codigoExterno, string nome)
         {
+            BancoDeDados b = new BancoDeDados();
             try
             {
                 b.Conectar();
-                return Produto.Listar(codigoInterno, codigoExterno, nome);
+                return Produto.Listar(b, codigoInterno, codigoExterno, nome);
             }
             finally
             {
                 b.Desconectar();
             }
         }
-        public void Alterar(int codigoInterno,string codigoExterno,int idFornecedor, string nome, decimal precovenda, int quantidade,Status status)
+        public void Alterar(int codigoInterno,string codigoExterno,int idFornecedor, string nome, decimal precovenda, int quantidade)
         {
+            BancoDeDados b = new BancoDeDados();
             Produto p = new Produto();
             p.CodigoInterno = codigoInterno;
             p.CodigoExterno = codigoExterno;
@@ -30,12 +32,11 @@ namespace SVCE.Controle.CasosDeUso
             p.Nome = nome;
             p.PrecoVenda = precovenda;
             p.QuantidadeMinima = quantidade;
-            p.Status = status;
 
             try
             {
                 b.Conectar();
-                p.Alterar();
+                p.Alterar(b);
                
             }
             finally
@@ -43,20 +44,19 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void Incluir(int codigoInterno, string codigoExterno, int idFornecedor, string nome, decimal precovenda, int quantidade, Status status)
+        public void Incluir(string codigoExterno, int idFornecedor, string nome, decimal precovenda, int quantidade)
         {
+            BancoDeDados b = new BancoDeDados();
             Produto p = new Produto();
-            p.CodigoInterno = codigoInterno;
             p.CodigoExterno = codigoExterno;
             p.IdFornecedor = idFornecedor;
             p.Nome = nome;
             p.PrecoVenda = precovenda;
             p.QuantidadeMinima = quantidade;
-            p.Status = status;
             try
             {
                 b.Conectar();
-                p.Incluir();
+                p.Incluir(b);
             }
             finally
             {
@@ -64,12 +64,13 @@ namespace SVCE.Controle.CasosDeUso
             }
         }
 
-        public void Excluir(int codigoExterno)
+        public void Excluir(int cod)
         {
+            BancoDeDados b = new BancoDeDados();
             try
             {
                 b.Conectar();
-                Produto.Excluir(codigoExterno);
+                Produto.Excluir(b,cod);
             }
             finally
             {
