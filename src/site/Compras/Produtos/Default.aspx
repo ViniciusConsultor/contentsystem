@@ -126,12 +126,13 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="lblCadastroID" runat="server" AssociatedControlID="txtCadastroID" Text="ID Fornecedor" />
+                                    <asp:Label ID="lblCadastroID" runat="server" AssociatedControlID="ddlIDFornecedor" Text="ID Fornecedor" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtCadastroID" MaxLength="10" />
+                                    <%--<asp:TextBox runat="server" ID="txtCadastroID" MaxLength="10" />--%>
+                                    <asp:DropDownList runat="server" ID="ddlIDFornecedor" />
                                     <asp:RequiredFieldValidator Display="Dynamic" ID="rfvIDFornecedor" runat="server"
-                                        ControlToValidate="txtCadastroID" Text="*" ErrorMessage="ID Fornecedor obrigatório" />
+                                        ControlToValidate="ddlIDFornecedor" Text="*" ErrorMessage="ID Fornecedor obrigatório" />
                                 </td>
                             </tr>
                             <tr>

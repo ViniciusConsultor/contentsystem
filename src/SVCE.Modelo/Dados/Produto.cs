@@ -114,11 +114,5 @@ INSERT INTO [PRODUTOS]
             if (count == 0)
                 throw new Exception("Produto inexistente!");
         }
-
-
-        public static Produto[] Listar(string codigoExterno, string codigoExterno_2, string nome)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
