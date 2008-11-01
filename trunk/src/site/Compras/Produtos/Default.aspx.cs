@@ -69,6 +69,19 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     }
      protected void MostrarFormularioEdicao(object sender, CommandEventArgs e)
     {
+        CodInterno = Int32.Parse((string)e.CommandArgument);
+        var cod = (from f in Listar()
+                   where CodInterno == f.CodigoInterno
+                   select f).First();
+        MostrarFornecedor();
+        txtCadastroExterno.Text = cod.CodigoExterno;
+        //txtCadastroID.Text = cod.IdFornecedor.ToString();
+        ddlIDFornecedor.SelectedIndex = cod.IdFornecedor;
+        txtCadastroNome.Text = cod.Nome;
+        txtCadastroQuantidade.Text = cod.QuantidadeMinima.ToString();
+        txtPrecoVenda.Text = cod.PrecoVenda.ToString() ;
+
+        mvprodutos.ActiveViewIndex = 1;
 
     }
     protected void ExcluirProduto(object sender, CommandEventArgs e)
@@ -80,6 +93,7 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     protected void MostrarFormularioInclusao(object sender, CommandEventArgs e)
     {
         Clean();
+        MostrarFornecedor();
         mvprodutos.ActiveViewIndex = 1;
     }
 
@@ -92,9 +106,10 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     {
         if (!IsValid)
             return;
-
-
-        int auxID = Convert.ToInt32(txtCadastroID.Text);
+        int auxID = 0;
+        if(ddlIDFornecedor.SelectedValue != null)
+            auxID = ddlIDFornecedor.SelectedIndex;
+            //int auxID = Convert.ToInt32(txtCadastroID.Text);
         int auxQuant= Convert.ToInt32(txtCadastroQuantidade.Text);
         decimal auxPreco = Convert.ToDecimal(txtPrecoVenda.Text);
 
@@ -108,7 +123,21 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     public void Clean()
     {
         CodInterno = 0;
-        txtCadastroExterno.Text = txtCadastroID.Text = txtCadastroNome.Text = txtCodExterno.Text = txtCodInterno.Text = txtNome.Text = txtPrecoVenda.Text = txtCadastroQuantidade.Text = "";
+        //txtCadastroID.Text =
+        txtCadastroExterno.Text =  txtCadastroNome.Text = txtCodExterno.Text = txtCodInterno.Text = txtNome.Text = txtPrecoVenda.Text = txtCadastroQuantidade.Text = "";
+    }
+
+    // traz os fornecedores..
+    public void MostrarFornecedor()
+    {
+        string nome = null;
+        string cnpj = null;
+        string rz = null;
+        ManterFornecedores f = new ManterFornecedores();
+        ddlIDFornecedor.DataSource= f.ListarFornecedores(nome, rz, cnpj);
+        ddlIDFornecedor.DataTextField = "NOME";
+        ddlIDFornecedor.DataValueField = "IDFORNECEDOR";
+        ddlIDFornecedor.DataBind();
     }
 }
  
