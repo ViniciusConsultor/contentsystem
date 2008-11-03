@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Dados\DadosEntrega.cs" />
     <Compile Include="Dados\FiltrosFuncionario.cs" />
+    <Compile Include="Dados\FormaPagamento.cs" />
     <Compile Include="Dados\Fornecedor.cs" />
     <Compile Include="Dados\Funcionario.cs" />
     <Compile Include="Dados\ItemTransacao.cs" />

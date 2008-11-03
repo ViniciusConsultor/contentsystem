@@ -37,7 +37,7 @@
                             Text="Manter Fornecedores" />
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Compras/Produtos/Default.aspx" Text="Manter produtos" />
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Compras/Produtos/Default.aspx" Text="Manter Produtos" />
                     </li>
                 </ul>
             </asp:Panel>
@@ -47,7 +47,13 @@
             </asp:Panel>
             <asp:Panel runat=server Visible=false ID="pnlVendas">
                 <h1>Vendas</h1>
-                
+                 <ul>
+                    <li>
+                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Vendas/RealizarVenda/Default.aspx"
+                            Text="Realizar Venda" />
+                    </li>
+                    
+                </ul>
             </asp:Panel>
         </div>
         <div class="conteudo">
