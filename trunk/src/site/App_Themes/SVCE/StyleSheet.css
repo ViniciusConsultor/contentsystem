@@ -2,6 +2,9 @@
 {
 	width:1000px;
 	margin:auto;
+	background-color:#e2e9db;
+	padding:10px;
+	height:800px;
 	
 }
 a
@@ -10,7 +13,7 @@ a
 }
 a:hover
 {
-	background-color:magenta;
+	background-color:gray;
 	color:#fff;
 }
 *
@@ -22,7 +25,7 @@ a:hover
 h1
 {
 	border-bottom:1px solid #ddd;
-	color:#993333;
+	color:#1f4b05;
 	font-size:2em;
 	font-weight:bold;	
 }
@@ -31,7 +34,10 @@ h1
 .menu
 {
 	float:left;
-	width:270px;	
+	width:240px;
+	background-color:#baffbc;	
+	padding:10px;
+	margin-right:20px;
 }
 
 .menu h1
