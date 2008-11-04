@@ -11,16 +11,31 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using SVCE.Controle.CasosDeUso;
+using System.Collections.Generic;
+using SVCE.Modelo.Dados;
 
 public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 {
 
 	private RealizarVenda controle;
 
+	public List<ItemTransacao> Produtos
+	{
+		get
+		{
+			return (List<ItemTransacao>)ViewState["Produtos"];
+		}
+		set { ViewState["Produtos"] = value; }
+	}
+
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
 		controle = new RealizarVenda();
+
+
+		if (!IsPostBack)
+			Produtos = new List<ItemTransacao>();
 	}
 
 	protected void ProsseguirParaFormasPagamento(object sender, CommandEventArgs e)
@@ -35,4 +50,65 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 		mv.ActiveViewIndex = 2;
 	}
 
+	private void MostrarProdutos()
+	{
+		this.rpProdutos.DataSource = Produtos;
+		this.rpProdutos.DataBind();
+	}
+	private void LimparDadosProduto()
+	{
+		txtCodigoProduto.Text = txtQuantidade.Text = "";
+	}
+
+	protected void IncluirProduto(object sender, CommandEventArgs e)
+	{
+		if (Page.IsValid)
+		{
+
+			int codigo = Int32.Parse(txtCodigoProduto.Text);
+			int quantidade = Int32.Parse(txtQuantidade.Text);
+
+
+			var itens = (from p in Produtos where p.IdProduto == codigo select p);
+			
+			if (itens.Count() > 0)
+			{
+				var itemExistente = itens.First();
+				itemExistente.Quantidade += quantidade;
+				MostrarProdutos();
+				this.pnlProdutos.Visible = true;
+				LimparDadosProduto();
+			}
+			else
+			{
+
+
+				var produto = controle.BuscarProduto(codigo);
+
+				var sequencial = 0;
+
+				if (produto != null)
+				{
+					var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial,  NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
+					Produtos.Add(item);
+					MostrarProdutos();
+					this.pnlProdutos.Visible = true;
+					LimparDadosProduto();
+				}
+			}
+		}
+	}
+	protected void ExcluirProduto(object sender, CommandEventArgs e)
+	{
+		int codigo = Int32.Parse( (string) e.CommandArgument);
+		var item = (from p in Produtos where p.IdProduto == codigo select p).First();
+
+		Produtos.Remove(item);
+
+		MostrarProdutos();
+		if (Produtos.Count() == 0)
+			pnlProdutos.Visible = false;
+	}
+
+	
 }

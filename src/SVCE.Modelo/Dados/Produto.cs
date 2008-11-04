@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace SVCE.Modelo.Dados
 {
+	[Serializable()]
     public class Produto
     {
 
@@ -16,6 +17,7 @@ namespace SVCE.Modelo.Dados
         public Status Status {get;  set; }
         public int IdFornecedor { get;  set;}
         public int QuantidadeMinima { get;  set; }
+	
 
 
         public static Produto[] Listar(BancoDeDados b, int? codigoInterno, string codigoExterno, string nome)

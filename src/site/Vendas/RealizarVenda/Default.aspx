@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<td>
-							<asp:Label ID="Label1" runat="server" AssociatedControlID="txtQuantidade" Text="Código do Produto" />
+							<asp:Label ID="Label1" runat="server" AssociatedControlID="txtQuantidade" Text="Quantidade" />
 						</td>
 						<td>
 							<asp:TextBox runat="server" MaxLength="5" Columns="5" ID="txtQuantidade" />
@@ -41,15 +41,20 @@
 							&nbsp;
 						</td>
 						<td align="right">
-							<asp:Button runat="server" Text="Incluir" ID="btnIncluirProduto" />
+							<asp:Button runat="server" Text="Incluir" OnCommand="IncluirProduto" ID="btnIncluirProduto" />
 						</td>
 					</tr>
 				</table>
+				
+				
+				
+				
+				
 			</asp:Panel>
-			<asp:Panel runat="server" ID="pnlProdutos" Visible="true">
+			<asp:Panel runat="server" ID="pnlProdutos" Visible="false">
 				<asp:Repeater runat="server" ID="rpProdutos">
 					<HeaderTemplate>
-						<table>
+						<table cellspacing=0 cellpadding=0 class="tabela">
 							<thead>
 								<tr>
 									<td>
@@ -61,6 +66,8 @@
 									<td>
 										Quantidade
 									</td>
+									<td>Preço Unit.</td>
+									<td>Preço Total</td>
 									<td>
 										&nbsp;
 									</td>
@@ -73,7 +80,21 @@
 					<ItemTemplate>
 						<tr>
 							<td>
-								<%# Eval("CodigoInterno") %>
+								<%# Eval("IdProduto") %>
+							</td>
+							<td>
+								<%# Eval("NomeProduto") %>
+							</td>
+							<td align=right>
+								<%# Eval("Quantidade") %>
+							</td>
+							<td align=right><%# Eval("PrecoUnitario", "{0:C}") %></td>
+							<td align=right><%# Eval("PrecoTotal", "{0:C}") %></td>
+							<td>
+							
+								<asp:LinkButton runat=server Text="Excluir" CommandArgument='<%# Eval("IdProduto") %>' CommandName="Excluir" OnCommand="ExcluirProduto" />
+							
+							
 							</td>
 						</tr>
 					</ItemTemplate>

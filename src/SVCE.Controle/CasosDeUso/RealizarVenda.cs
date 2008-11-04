@@ -6,9 +6,27 @@ using SVCE.Modelo.Dados;
 
 namespace SVCE.Controle.CasosDeUso
 {
+	
 	public class RealizarVenda
 	{
-
+		
+		public Produto BuscarProduto(int codigo)
+		{
+			BancoDeDados banco = new BancoDeDados();
+			try
+			{
+				banco.Conectar();
+				var produtos =  Produto.Listar(banco, codigo, null, null);
+				if (produtos.Count() == 0)
+					return null;
+				else
+					return produtos.First();
+			}
+			finally
+			{
+				banco.Desconectar();
+			}
+		}
 
 		public FormaPagamento[] ListarFormasPagamento()
 		{
