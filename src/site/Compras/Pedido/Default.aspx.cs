@@ -33,5 +33,8 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
         var estoque = pedido.ListarBaixoEstoque();
         return estoque;
     }
+    protected void SelecionarProduto(object sender, CommandEventArgs e)
+    {
+    }
 
 }

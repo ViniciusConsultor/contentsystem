@@ -63,6 +63,7 @@
     <Compile Include="Dados\RelatorioProdutosSemEstoque.cs" />
     <Compile Include="Dados\Status.cs" />
     <Compile Include="Dados\StatusTransacao.cs" />
+    <Compile Include="Dados\TipoTransacao.cs" />
     <Compile Include="Dados\Transacao.cs" />
     <Compile Include="Dados\BancoDeDados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
