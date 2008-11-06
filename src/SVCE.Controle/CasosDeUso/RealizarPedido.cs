@@ -20,5 +20,8 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
+        public void Incluir()
+        {
+        }
     }
 }

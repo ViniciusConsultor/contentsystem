@@ -17,7 +17,7 @@
         </h1>
         <asp:SiteMapDataSource ShowStartingNode="false" runat="server" ID="siteMap" />
         <div class="menu">
-            <asp:Panel runat="server" Visible=false ID="pnlAdministrativo">
+            <asp:Panel runat="server" Visible="false" ID="pnlAdministrativo">
                 <h1>
                     Administrativo</h1>
                 <ul>
@@ -25,10 +25,9 @@
                         <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Funcionarios/Default.aspx"
                             Text="Manter Funcionários" />
                     </li>
-                    
                 </ul>
             </asp:Panel>
-            <asp:Panel runat="server" Visible=false ID="pnlCompras">
+            <asp:Panel runat="server" Visible="false" ID="pnlCompras">
                 <h1>
                     Compras</h1>
                 <ul>
@@ -37,29 +36,35 @@
                             Text="Manter Fornecedores" />
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Compras/Produtos/Default.aspx" Text="Manter Produtos" />
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Compras/Produtos/Default.aspx"
+                            Text="Manter Produtos" />
                     </li>
                 </ul>
             </asp:Panel>
-            
-            <asp:Panel runat=server Visible=false ID="pnlEstoque">
-                <h1>Estoque</h1>
+            <asp:Panel runat="server" Visible="false" ID="pnlEstoque">
+                <h1>
+                    Estoque</h1>
             </asp:Panel>
             <ul>
                 <li>
-                <asp:HyperLink ID="ListaEstoque" runat="server" NavigateUrl="~/Compras/Pedido/Default.aspx" Text="Consultar Estoque" />
-                
+                    <asp:HyperLink ID="ListaEstoque" runat="server" NavigateUrl="~/Compras/Pedido/Default.aspx"
+                        Text="Consultar Estoque" />
                 </li>
-            
             </ul>
-            <asp:Panel runat=server Visible=false ID="pnlVendas">
-                <h1>Vendas</h1>
-                 <ul>
+            <ul>
+                <li>
+                    <asp:HyperLink ID="ListaCompras" runat="server" NavigateUrl="~/Compras/Comprar/Default.aspx"
+                        Text="Realizar Compra" />
+                </li>
+            </ul>
+            <asp:Panel runat="server" Visible="false" ID="pnlVendas">
+                <h1>
+                    Vendas</h1>
+                <ul>
                     <li>
                         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Vendas/RealizarVenda/Default.aspx"
                             Text="Realizar Venda" />
                     </li>
-                    
                 </ul>
             </asp:Panel>
         </div>
@@ -69,6 +74,7 @@
         </div>
     </div>
     </form>
-    <div style="clear:both;">&nbsp;</div>
+    <div style="clear: both;">
+        &nbsp;</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Conteudo" runat="Server">
     <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
-        <asp:View ID="View1" runat="server">
+        <asp:View ID="ViewListagem" runat="server">
             <div>
                 <asp:Repeater runat="server" ID="rpListagem">
                     <HeaderTemplate>
@@ -16,7 +16,7 @@
                             <thead>
                                 <tr>
                                     <td>
-                                        IDFornecedor
+                                        Fornecedor
                                     </td>
                                     <td>
                                         Código
@@ -60,8 +60,8 @@
                                 <%#Eval("qtCompra")%>
                             </td>
                             <td>
-                               <%--<asp:LinkButton ID="Selecionar" runat="server" Text="E" OnCommand="SelecionarProduto"
-                                    CommandArgument='<%# Eval("codInterno") %>' />--%>
+                               <asp:LinkButton ID="Selecionar" runat="server" Text="E" OnCommand="SelecionarProduto"
+                                    CommandArgument='<%# Eval("codInterno") %>' />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -71,89 +71,41 @@
                 </asp:Repeater>
             </div>
         </asp:View>
-       <%-- <asp:View ID="View2" runat="server">
+       <asp:View ID="ViewCadastro" runat="server">
             <table>
                 <tr>
                     <td>
                         <table>
                             <tr>
                                 <td>
-                                    <asp:Label ID="Label4" runat="server" AssociatedControlID="txtNome" Text="Nome" />
+                                    <asp:Label ID="lblFornecedor" runat="server" AssociatedControlID="ddlIDFornecedor" Text="Fornecedor" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtNome" MaxLength="50" />
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ControlToValidate="txtNome"
-                                        Text="*" ErrorMessage="Nome obrigatório" />
+                                    <asp:DropDownList runat="server" ID="ddlIDFornecedor" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="Label5" runat="server" AssociatedControlID="txtRazaoSocial" Text="Razão Social" />
+                                    <asp:Label ID="lblCodInterno" runat="server" AssociatedControlID="txtcodInterno" Text="Código Interno" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtRazaoSocial" MaxLength="50" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator2" runat="server"
-                                        ControlToValidate="txtRazaoSocial" Text="*" ErrorMessage="Razão SOcial obrigatória" />
+                                    <asp:TextBox runat="server" ID="txtcodInterno" MaxLength="50" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="Label6" runat="server" AssociatedControlID="txtCNPJ" Text="CNPJ" />
+                                    <asp:Label ID="lblNome" runat="server" AssociatedControlID="txtNome" Text="Nome" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtCNPJ" MaxLength="14" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator3" runat="server"
-                                        ControlToValidate="txtCNPJ" Text="*" ErrorMessage="CNPJ obrigatório" />
-                                        <svce:ValidadorCNPJ ID="ValidadorCNPJ1" runat=server ControlToValidate="txtCNPJ" Text="*" ErrorMessage="CNPJ inválido" />
+                                    <asp:TextBox runat="server" ID="txtNome" MaxLength="14" />
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <asp:Label ID="Label7" runat="server" AssociatedControlID="txtEndereco" Text="Endereço" />
+                                    <asp:Label ID="lblQuantidade" runat="server" AssociatedControlID="txtQuantidade" Text="Quantidade" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" TextMode="MultiLine" Rows="3" Columns="22" Style="overflow-y: auto;"
-                                        ID="txtEndereco" MaxLength="50" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator4" runat="server"
-                                        ControlToValidate="txtEndereco" Text="*" ErrorMessage="Endereço obrigatório" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top">
-                                    <asp:Label ID="Label8" runat="server" AssociatedControlID="txtTelefone" Text="Telefone" />
-                                </td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtTelefone" MaxLength="50" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator5" runat="server"
-                                        ControlToValidate="txtTelefone" Text="*" ErrorMessage="Telefone obrigatório" />
-                                        <svce:ValidadorTelefone ID="ValidadorTelefone1"
-                                            runat="server" ControlToValidate="txtTelefone"
-                                            text="*" ErrorMessage="Formato do telefone inválido" />
-                                    <div style="text-align: right;">
-                                        formato: XX XXXXXXXX</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top">
-                                    <asp:Label ID="Label9" runat="server" AssociatedControlID="txtEmail" Text="E-mail" />
-                                </td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtEmail" MaxLength="50" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator6" runat="server"
-                                        ControlToValidate="txtEmail" Text="*" ErrorMessage="E-mail obrigatório" />
-                                        <svce:ValidadorEmail ID="RegularExpressionValidator1"
-                                            runat="server" ControlToValidate="txtEmail"  
-                                            text="*" ErrorMessage="Formato do e-mail inválido" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top">
-                                    <asp:Label ID="Label10" runat="server" AssociatedControlID="txtContato" Text="Contato" />
-                                </td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtContato" MaxLength="50" />
-                                    <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator7" runat="server"
-                                        ControlToValidate="txtContato" Text="*" ErrorMessage="Contato obrigatório" />
+                                    <asp:TextBox runat="server" ID="txtQuantidade" MaxLength="14" />
                                 </td>
                             </tr>
                             <tr>
@@ -161,8 +113,8 @@
                                     &nbsp;
                                 </td>
                                 <td align="right">
-                                    <asp:Button OnCommand="SalvarFornecedor" ID="Button2" runat="server" Text="Salvar" />
-                                    <asp:Button CausesValidation="false" ID="Button3" runat="server" Text="Cancelar"
+                                    <asp:Button OnCommand="SalvarPedido" ID="btnsalvar" runat="server" Text="Salvar" />
+                                    <asp:Button CausesValidation="false" ID="btnCancelar" runat="server" Text="Cancelar"
                                         OnCommand="RetornarListagem" />
                                 </td>
                             </tr>
@@ -173,6 +125,6 @@
                     </td>
                 </tr>
             </table>
-        </asp:View>--%>
+        </asp:View>
     </asp:MultiView>
 </asp:Content>
