@@ -140,10 +140,51 @@ namespace SVCE.Modelo.Dados
         }
 
 
-        public void Incluir()
+        public static int Incluir(BancoDeDados b,int IdFornecedor, int idResponsavel, decimal valorTotal)
         {
+            int id = 0;
+            string a;
+            string sql = @"INSERT INTO TRANSACOES(ID_TIPO_TRANSACAO, ID_FORNECEDOR, ID_RESPONSAVEL, DATA_TRANSACAO, ID_STATUS, VALOR_TOTAL) VALUES(@IDTIPOTRANSACAO, @IDFORNECEDOR, @IDRESPONSAVEL, @DATATRANSACAO, @IDSTATUS, @VALORTOTAL) SELECT ID = @@IDENTITY";
+            SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+            cmd.Parameters.Add(new SqlParameter("@IDTIPOTRANSACAO",TipoTransacao.Pedido));
+            cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
+            cmd.Parameters.Add(new SqlParameter("@IDRESPONSAVEL", idResponsavel));
+            cmd.Parameters.Add(new SqlParameter("@DATATRANSACAO", DateTime.Now));
+            cmd.Parameters.Add(new SqlParameter("@IDSTATUS", StatusTransacao.Concluido));
+            cmd.Parameters.Add(new SqlParameter("@VALORTOTAL", valorTotal));
 
+            SqlDataReader r = null;
+            try
+            {
+                id =Int32.Parse(cmd.ExecuteScalar().ToString());
+                /*while (r.Read())
+                {
+                    id = r.GetInt32(0);
+                }*/
+                return id;
+            }
+            finally
+            {
+                if (r != null)
+                    r.Close();
+            }     
         }
 
+        public static void IncluirPedido(BancoDeDados b,int idTransação, ItemTransacao l)
+        {
+            string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO, QUANTIDADE, PRECO_UNITARIO, IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO,@QUANTIDADE,@PRECOUNITARIO,@INENTRADASAIDA)";
+
+            SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+            cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", idTransação));
+            cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", l.Sequencial));
+            cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", l.IdProduto));
+            cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", l.Quantidade));
+            cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", l.PrecoUnitario));
+            cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
+            int count = cmd.ExecuteNonQuery();
+
+            if (count == 0)
+                throw new Exception("Não foi possível adcionar os itens.");
+        }
     }
 }

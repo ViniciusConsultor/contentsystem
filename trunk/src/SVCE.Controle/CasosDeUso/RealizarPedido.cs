@@ -20,7 +20,20 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void IncluirProduto(List<ItemTransacao> item)
+        public int IncluirPedido(int IdFornecedor, int idResponsavel, decimal valorTotal)
+        {
+            BancoDeDados b = new BancoDeDados();
+            try
+            {
+                b.Conectar();
+                return PedidoCompra.Incluir(b, IdFornecedor, idResponsavel, valorTotal);
+            }
+            finally
+            {
+                b.Desconectar();
+            }
+        }
+        public void IncluirProduto(List<ItemTransacao> item, int idTransacao)
         {
             BancoDeDados b = new BancoDeDados();
             try
@@ -33,8 +46,8 @@ namespace SVCE.Controle.CasosDeUso
                     it.NomeProduto = i.NomeProduto;
                     it.PrecoUnitario = i.PrecoUnitario;
                     it.Quantidade = i.Quantidade;
-                    it.Sequencial = i.Sequencial;
-
+                    it.Sequencial = it.Sequencial + 1;
+                    PedidoCompra.IncluirPedido(b,idTransacao, it);
                 }
             }
             finally
