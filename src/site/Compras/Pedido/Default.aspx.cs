@@ -46,6 +46,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             ListarEstoque();
+            Produtos = new List<ItemTransacao>();
         }
     }
 
@@ -78,7 +79,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
     }
     protected void SalvarPedido(object sender, CommandEventArgs e)
     {
-
+        SalvarProduto();
     }
     public void MostrarFornecedor()
     {
@@ -100,7 +101,23 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
 
         if (itens.Count() > 0)
         {
-            
+            List<ItemTransacao> it = new List<ItemTransacao>();
+            it.AddRange(itens);
+            pedido.IncluirProduto(it);
+        }
+        else
+        {
+            RealizarVenda controle = new RealizarVenda();
+            var produto =controle.BuscarProduto(cod);
+
+            var sequencial = 0;
+
+            if (produto != null)
+            {
+                var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quant };
+                Produtos.Add(item);
+                pedido.IncluirProduto(Produtos);
+            }
         }
 
     }
