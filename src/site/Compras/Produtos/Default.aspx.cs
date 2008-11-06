@@ -103,12 +103,12 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
         ListaProdutos();
     }
     protected void SalvarProduto(object sender, CommandEventArgs e)
-    {
+     {
         if (!IsValid)
             return;
         int auxID = 0;
         if(ddlIDFornecedor.SelectedValue != null)
-            auxID = ddlIDFornecedor.SelectedIndex;
+            auxID =Int32.Parse(ddlIDFornecedor.SelectedValue);
             //int auxID = Convert.ToInt32(txtCadastroID.Text);
         int auxQuant= Convert.ToInt32(txtCadastroQuantidade.Text);
         decimal auxPreco = Convert.ToDecimal(txtPrecoVenda.Text);

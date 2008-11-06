@@ -29,6 +29,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
             ViewState["CodInterno"] = value;
         }
     }
+
     public List<ItemTransacao> Produtos
     {
         get
@@ -80,6 +81,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
     protected void SalvarPedido(object sender, CommandEventArgs e)
     {
         SalvarProduto();
+        ListarPedidos();
     }
     public void MostrarFornecedor()
     {
@@ -96,30 +98,27 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
     {
         int cod = Int32.Parse(txtcodInterno.Text);
         int quant = Int32.Parse(txtQuantidade.Text);
+        int idF =Int32.Parse(ddlIDFornecedor.SelectedValue);
+        int matricula = Int32.Parse(Page.User.Identity.Name);
 
-        var itens = (from f in Produtos where f.IdProduto == cod select f);
+     
+        RealizarVenda controle = new RealizarVenda();
+        var produto =controle.BuscarProduto(cod);
 
-        if (itens.Count() > 0)
+        var sequencial = 0;
+
+        if (produto != null)
         {
-            List<ItemTransacao> it = new List<ItemTransacao>();
-            it.AddRange(itens);
-            pedido.IncluirProduto(it);
-        }
-        else
-        {
-            RealizarVenda controle = new RealizarVenda();
-            var produto =controle.BuscarProduto(cod);
-
-            var sequencial = 0;
-
-            if (produto != null)
-            {
-                var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quant };
-                Produtos.Add(item);
-                pedido.IncluirProduto(Produtos);
-            }
+            decimal vlTotal = produto.PrecoVenda * quant;
+            int idTransacao = pedido.IncluirPedido(idF, matricula, vlTotal);
+            var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quant };
+            Produtos.Add(item);
+            pedido.IncluirProduto(Produtos, idTransacao);
         }
 
+    }
+    public void ListarPedidos()
+    {
     }
 
 }
