@@ -4,45 +4,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SVCE</title>
+<link rel="stylesheet" href="App_Themes/SVCE/StyleSheet.css" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <div class="telaLogin">
     
-        <asp:Panel runat=server DefaultButton="btnEnviar">
+        <asp:Panel runat="server" DefaultButton="btnEnviar">
     
         <table>
             <tr>
-                <td>
+                <td align="right">
                     <asp:Label runat="server" AssociatedControlID="txtLogin" Text="Usuário" />
                 </td>
-                <td>
+                <td align="right">
                     <asp:TextBox runat="server" MaxLength="50" Width="200px" ID="txtLogin" />
-                    <asp:RequiredFieldValidator runat=server ControlToValidate="txtLogin" Text="*" ErrorMessage="Usuário obrigatório" />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLogin" Text="*" ErrorMessage="Usuário obrigatório" />
                 </td>
             </tr>
             
             
              <tr>
-                <td>
+                <td align="right">
                     <asp:Label ID="Label1" runat="server" AssociatedControlID="txtSenha"  Text="Senha" />
                 </td>
-                <td>
+                <td align="right">
                     <asp:TextBox runat="server" MaxLength="50" TextMode=Password Width="200px" ID="txtSenha" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat=server ControlToValidate="txtSenha" Text="*" ErrorMessage="Senha obrigatória" />
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td align=right>
+                <td align="right" style="padding-right:15px;">
                 
-                    <asp:Button OnCommand="Logar" Text="Entrar" ID="btnEnviar" runat=server />
+                    <asp:Button OnCommand="Logar" Text="Entrar" ID="btnEnviar" runat="server" />
                 </td>
             </tr>
         </table>
         
         
-        <asp:ValidationSummary runat=server ID="vs" />
+        <asp:ValidationSummary runat="server" ID="vs" />
         </asp:Panel>
         
         
