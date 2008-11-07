@@ -2,9 +2,10 @@
 {
 	width:1000px;
 	margin:auto;
-	background-color:#e2e9db;
 	padding:10px;
 	height:800px;
+	background:url('header.jpg') no-repeat top;
+	padding-top:200px;
 	
 }
 a
@@ -33,7 +34,7 @@ h1
 {
 	border-bottom:1px solid #ddd;
 	color:#1f4b05;
-	font-size:2em;
+	font-size:1.8em;
 	font-weight:bold;	
 }
 
@@ -83,4 +84,17 @@ table.tabela thead tr td
 	background-color:#ccc;
 	padding:3px;
 	font-weight:bold;
+}
+.telaLogin
+{
+	background:url('header.jpg') no-repeat top;
+	height:600px;
+	padding-top:300px;
+	text-align:center;
+}
+.navegacao
+{
+	padding-top:20px;
+	display:block;
+	font-size:12px;
 }

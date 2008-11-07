@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
     <div class="pageBody">
-        <asp:SiteMapPath runat="server" />
+        <asp:SiteMapPath runat="server" CssClass="navegacao" />
         <h1>
             <asp:ContentPlaceHolder runat="server" ID="Titulo">
             </asp:ContentPlaceHolder>
