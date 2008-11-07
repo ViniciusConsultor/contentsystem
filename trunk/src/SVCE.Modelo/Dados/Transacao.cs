@@ -131,9 +131,36 @@ namespace SVCE.Modelo.Dados
     }
     public class PedidoCompra : Transacao
     {
-        public static PedidoCompra[] ListarPedidosCompra(int? idProduto, StatusTransacao? statusTransacao, DateTime? dataInicial, DateTime? DataFinal)
+        public static PedidoCompra[] ListarPedidosCompra(BancoDeDados b, int? idProduto)
         {
-            string sql = @"SELECT ";
+
+            List<SqlParameter> listaParameters = new List<SqlParameter>();
+            string where = "WHERE	T.ID_TIPO_TRANSACAO = 5";
+            if (idProduto != null)
+            {
+                where += "AND PR.ID_PRODUTO = @IDPRODUTO";
+                listaParameters.Add(new SqlParameter("@IDPRODUTO", idProduto));
+            }
+            SqlCommand cmd = b.CriarComando(string.Format(@"SELECT	T.ID_TRANSACAO, I.NOME, 
+		P.DESCRICAO, T.DATA_TRANSACAO, 
+		T.VALOR_TOTAL, S.DESCRICAO, 
+		F.NOME, IT.QUANTIDADE, 
+		IT.PRECO_UNITARIO,PR.NOME
+
+FROM	TRANSACOES T
+INNER JOIN FORNECEDORES F
+ON		T.ID_FORNECEDOR = F.ID_FORNECEDOR 
+INNER JOIN FUNCIONARIOS I
+ON		T.ID_RESPONSAVEL = I.MATRICULA
+INNER JOIN TIPOS_TRANSACAO P
+ON		T.ID_TIPO_TRANSACAO = P.ID_TIPO_TRANSACAO
+INNER JOIN STATUS_TRANSACAO S
+ON		T.ID_STATUS = S.ID_STATUS
+INNER JOIN ITENS_TRANSACOES IT
+ON		T.ID_TRANSACAO = IT.ID_TRANSACAO
+INNER JOIN PRODUTOS PR
+ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Text);
+            cmd.Parameters.AddRange(listaParameters.ToArray());
 
 
             return null;
