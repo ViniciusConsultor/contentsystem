@@ -18,8 +18,15 @@ a:hover
 }
 *
 {
-	font-family:Sans-Serif;
+	font-family:Verdana;
 	font-size:1em;
+}
+input
+{
+	border:1px solid #ccc;
+	font-size:12px;
+	background-color:#fff;
+	
 }
 
 h1
