@@ -139,6 +139,8 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
         ddlIDFornecedor.DataValueField = "IDFORNECEDOR";
         ddlIDFornecedor.DataBind();
     }
+
+	
 }
  
 
