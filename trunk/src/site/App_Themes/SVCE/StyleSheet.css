@@ -98,3 +98,13 @@ table.tabela thead tr td
 	display:block;
 	font-size:12px;
 }
+
+
+
+.autocomplete
+{
+	
+	background-color:#fff;
+	border:1px solid #ccc;	
+	width:300px!important;
+}
