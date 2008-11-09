@@ -147,6 +147,11 @@ window.onload = function()
 			<h3 style="text-align:center;">
 				Venda realizada com sucesso!</h3>
 			<div style="text-align:center;">
+			
+			
+			
+			<asp:LinkButton runat=server ID="lbNotaFiscal" Text="Imprimir Cupom Fiscal" /><br />
+			
 				<a href="Default.aspx">Nova Venda</a>
 			</div>
 		</asp:View>

@@ -22,7 +22,7 @@ a:hover
 	font-family:Verdana;
 	font-size:1em;
 }
-input
+input.texto
 {
 	border:1px solid #ccc;
 	font-size:12px;

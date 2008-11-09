@@ -47,6 +47,18 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 	protected void SalvarVenda(object sender, CommandEventArgs e)
 	{
 
+
+		Venda venda = new Venda();
+		venda.IdResponsavel = Int32.Parse( User.Identity.Name);
+		venda.IdFormaPagamento = Int32.Parse(rblFormasPagamento.SelectedValue);
+		venda.Itens = new List<ItemTransacao>();
+		foreach (var p in Produtos)
+			venda.Itens.Add(p);
+		venda.ValorTotal = venda.CalcularValorTotal();
+
+		controle.RegistrarVenda(venda);
+		lbNotaFiscal.OnClientClick = "window.open('notafiscal.aspx?v=" + venda.IdTransacao + "');";
+
 		mv.ActiveViewIndex = 2;
 	}
 
@@ -89,12 +101,14 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 
 				if (produto != null)
 				{
-					var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial,  NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
+					var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
 					Produtos.Add(item);
 					MostrarProdutos();
 					this.pnlProdutos.Visible = true;
 					LimparDadosProduto();
 				}
+				else
+					Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não encontrado!');", true);
 			}
 		}
 	}
