@@ -41,6 +41,7 @@ namespace SVCE.Modelo.Dados
             var cmd = conexao.CreateCommand();
             cmd.CommandText = sql;
             cmd.CommandType = tipoComando;
+			cmd.Transaction = transacao;
             return cmd;
         }
         

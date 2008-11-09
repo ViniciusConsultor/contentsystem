@@ -6,142 +6,191 @@ using System.Data.SqlClient;
 
 namespace SVCE.Modelo.Dados
 {
-    public class Transacao
-    {
-        //public int IdTransacao { get; set; }
-        //public int? IdTransacaoPai { get; set; }
-        //public TipoTransacao TipoTransacao { get; set; }
-        //public int IdFornecedor { get; set; }
-        //public int IdResponsavel { get; set; }
-        //public DateTime DataTransacao { get; set; }
-        //public StatusTransacao StatusTransacao { get; set; }
-        //public decimal ValorTotal { get; set; }
-        //public int? NumeroNotaFiscal { get; set; }
-        //public List<ItemTransacao> Itens { get; set; }
+	public class Transacao
+	{
+		//public int IdTransacao { get; set; }
+		//public int? IdTransacaoPai { get; set; }
+		//public TipoTransacao TipoTransacao { get; set; }
+		//public int IdFornecedor { get; set; }
+		//public int IdResponsavel { get; set; }
+		//public DateTime DataTransacao { get; set; }
+		//public StatusTransacao StatusTransacao { get; set; }
+		//public decimal ValorTotal { get; set; }
+		//public int? NumeroNotaFiscal { get; set; }
+		//public List<ItemTransacao> Itens { get; set; }
 
 
-        public int IdTransacao { get; set; }
-        public int? IdTransacaoPai { get; set; }
-        public TipoTransacao tpTransacao { get; set; }
-        public int IdFornecedor { get; set; }
-        public int IdResponsavel { get; set; }
-        public DateTime DataTransacao { get; set; }
-        public StatusTransacao StatusTransacao { get; set; }
-        public decimal ValorTotal { get; set; }
-        public List<ItemTransacao> Itens { get; set; }
-        public int? NumeroNotaFiscal { get; set; }
+		public int IdTransacao { get; set; }
+		public int? IdTransacaoPai { get; set; }
+		public TipoTransacao tpTransacao { get; set; }
+		public int IdFornecedor { get; set; }
+		public int IdResponsavel { get; set; }
+		public DateTime DataTransacao { get; set; }
+		public StatusTransacao StatusTransacao { get; set; }
+		public decimal ValorTotal { get; set; }
+		public List<ItemTransacao> Itens { get; set; }
+		public int? NumeroNotaFiscal { get; set; }
+		public int IdFormaPagamento { get; set; }
 
 
-        public decimal CalcularValorTotal()
-        {
-            return 0;
-        }
+		public decimal CalcularValorTotal()
+		{
+			return (from item in Itens
+			 select item.PrecoTotal).Sum();
+		}
 
 
 
-        protected void Incluir()
-        {
+		protected void Incluir()
+		{
 
-        }
-        protected void AlterarStatusTransacao(int id_transacao, StatusTransacao novoStatusTransacao)
-        {
+		}
+		protected void AlterarStatusTransacao(int id_transacao, StatusTransacao novoStatusTransacao)
+		{
 
-        }
+		}
 
-    }
+	}
 
-    public class Compra : Transacao
-    {
-        public void Incluir(BancoDeDados b)
-        {
-            foreach (ItemTransacao i in Itens)
-            {
-                string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO,QUANTIDADE,PRECO_UNITARIO,IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO, @QUANTIDADE,@PRECOUNITARIO, @INENTRADASAIDA)";
-                SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
-                cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
-                cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", i.Sequencial));
-                cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", i.IdProduto));
-                cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", i.Quantidade));
-                cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", i.PrecoUnitario));
-                cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
+	public class Compra : Transacao
+	{
+		public void Incluir(BancoDeDados b)
+		{
+			foreach (ItemTransacao i in Itens)
+			{
+				string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO,QUANTIDADE,PRECO_UNITARIO,IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO, @QUANTIDADE,@PRECOUNITARIO, @INENTRADASAIDA)";
+				SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+				cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
+				cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", i.Sequencial));
+				cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", i.IdProduto));
+				cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", i.Quantidade));
+				cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", i.PrecoUnitario));
+				cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
 
-                int count = cmd.ExecuteNonQuery();
-                if (count == 0)
-                    throw new Exception("Não foi possível cadastrar o produto.");
-            }
-
-
-            string sql2 = @"UPDATE TRANSACOES SET ID_TIPO_TRANSACAO = @TIPOTRANSACAO, DATA_TRANSACAO = @DATATRANSACAO  WHERE ID_TRANSACAO = @IDTRANSACAO";
-            SqlCommand cmd2 = b.CriarComando(sql2, System.Data.CommandType.Text);
-            cmd2.Parameters.Add(new SqlParameter("@TIPOTRANSACAO", TipoTransacao.Compra));
-            cmd2.Parameters.Add(new SqlParameter("@DATATRANSACAO", DataTransacao));
-            cmd2.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
+				int count = cmd.ExecuteNonQuery();
+				if (count == 0)
+					throw new Exception("Não foi possível cadastrar o produto.");
+			}
 
 
-            int count2 = cmd2.ExecuteNonQuery();
-            if (count2 == 0)
-                throw new Exception("Não foi possível realizar a compra!");
-
-        }
-
-        public void Concluir(BancoDeDados b)
-        {
-            
-
-        }
-        public void Cancelar()
-        {
-
-        }
-
-        public static Compra[] ListarCompras(int? id_produto, int? id_fornecedor, DateTime? data_inicial, DateTime? data_final, StatusTransacao statusTransacao)
-        {
-            return null;
-        }
+			string sql2 = @"UPDATE TRANSACOES SET ID_TIPO_TRANSACAO = @TIPOTRANSACAO, DATA_TRANSACAO = @DATATRANSACAO  WHERE ID_TRANSACAO = @IDTRANSACAO";
+			SqlCommand cmd2 = b.CriarComando(sql2, System.Data.CommandType.Text);
+			cmd2.Parameters.Add(new SqlParameter("@TIPOTRANSACAO", TipoTransacao.Compra));
+			cmd2.Parameters.Add(new SqlParameter("@DATATRANSACAO", DataTransacao));
+			cmd2.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
 
 
-    }
-    public class Venda : Transacao
-    {
+			int count2 = cmd2.ExecuteNonQuery();
+			if (count2 == 0)
+				throw new Exception("Não foi possível realizar a compra!");
+
+		}
+
+		public void Concluir(BancoDeDados b)
+		{
 
 
-        public void Incluir()
-        {
+		}
+		public void Cancelar()
+		{
 
-        }
+		}
 
-        public static Venda PesquisarVenda(int numeroNotaFiscal)
-        {
-            return null;
-        }
+		public static Compra[] ListarCompras(int? id_produto, int? id_fornecedor, DateTime? data_inicial, DateTime? data_final, StatusTransacao statusTransacao)
+		{
+			return null;
+		}
 
-    }
-    public class Troca : Transacao
-    {
 
-        public void Incluir()
-        {
+	}
+	public class Venda : Transacao
+	{
 
-        }
 
-        public Troca[] ListarTrocas(DateTime dataInicial, DateTime dataFinal)
-        {
-            return null;
-        }
-    }
-    public class PedidoCompra : Transacao
-    {
-        public static PedidoCompra[] ListarPedidosCompra(BancoDeDados b, int? idProduto)
-        {
+		public void Incluir(BancoDeDados banco)
+		{
+			string sql = @"INSERT INTO [dbo].[TRANSACOES]
+           ([ID_TRANSACAO_PAI]
+           ,[ID_TIPO_TRANSACAO]
+           ,[ID_FORNECEDOR]
+           ,[ID_RESPONSAVEL]
+           ,[NUMERO_NOTA_FISCAL]
+           ,[DATA_TRANSACAO]
+           ,[ID_STATUS]
+           ,[VALOR_TOTAL]
+           ,[ID_MOTIVO_TROCA]
+           ,[ID_FORMA_PAGAMENTO])
+     VALUES
+           (null
+           ,2
+           ,null
+           ,@ID_RESPONSAVEL
+           ,null
+           ,getdate()
+           ,3
+           ,@VALOR_TOTAL
+           ,null
+           ,@ID_FORMA_PAGAMENTO
+	);SELECT @@IDENTITY;";
 
-            List<SqlParameter> listaParameters = new List<SqlParameter>();
-            string where = "WHERE	T.ID_TIPO_TRANSACAO = 5";
-            if (idProduto != null)
-            {
-                where += "AND PR.ID_PRODUTO = @IDPRODUTO";
-                listaParameters.Add(new SqlParameter("@IDPRODUTO", idProduto));
-            }
-            SqlCommand cmd = b.CriarComando(string.Format(@"SELECT	T.ID_TRANSACAO, I.NOME, 
+			var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+			cmd.Parameters.Add(new SqlParameter("@ID_RESPONSAVEL", this.IdResponsavel));
+			cmd.Parameters.Add(new SqlParameter("@VALOR_TOTAL", this.ValorTotal));
+			cmd.Parameters.Add(new SqlParameter("@ID_FORMA_PAGAMENTO", this.IdFormaPagamento));
+
+			int idVenda = Convert.ToInt32(cmd.ExecuteScalar());
+			this.IdTransacao = idVenda;
+
+			int sequencial = 1;
+			foreach (ItemTransacao i in Itens)
+			{
+				sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO,QUANTIDADE,PRECO_UNITARIO,IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO, @QUANTIDADE,@PRECOUNITARIO, @INENTRADASAIDA)";
+				cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+				cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
+				cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", sequencial++));
+				cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", i.IdProduto));
+				cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", i.Quantidade));
+				cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", i.PrecoUnitario));
+				cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "S"));
+
+				cmd.ExecuteNonQuery();
+
+			}
+
+		}
+
+		public static Venda PesquisarVenda(int numeroNotaFiscal)
+		{
+			return null;
+		}
+
+	}
+	public class Troca : Transacao
+	{
+
+		public void Incluir()
+		{
+
+		}
+
+		public Troca[] ListarTrocas(DateTime dataInicial, DateTime dataFinal)
+		{
+			return null;
+		}
+	}
+	public class PedidoCompra : Transacao
+	{
+		public static PedidoCompra[] ListarPedidosCompra(BancoDeDados b, int? idProduto)
+		{
+
+			List<SqlParameter> listaParameters = new List<SqlParameter>();
+			string where = "WHERE	T.ID_TIPO_TRANSACAO = 5";
+			if (idProduto != null)
+			{
+				where += "AND PR.ID_PRODUTO = @IDPRODUTO";
+				listaParameters.Add(new SqlParameter("@IDPRODUTO", idProduto));
+			}
+			SqlCommand cmd = b.CriarComando(string.Format(@"SELECT	T.ID_TRANSACAO, I.NOME, 
 		P.DESCRICAO, T.DATA_TRANSACAO, 
 		T.VALOR_TOTAL, S.DESCRICAO, 
 		F.NOME, IT.QUANTIDADE, 
@@ -160,58 +209,58 @@ INNER JOIN ITENS_TRANSACOES IT
 ON		T.ID_TRANSACAO = IT.ID_TRANSACAO
 INNER JOIN PRODUTOS PR
 ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Text);
-            cmd.Parameters.AddRange(listaParameters.ToArray());
+			cmd.Parameters.AddRange(listaParameters.ToArray());
 
 
-            return null;
-        }
+			return null;
+		}
 
 
-        public static int Incluir(BancoDeDados b,int IdFornecedor, int idResponsavel, decimal valorTotal)
-        {
-            int id = 0;
-            string a;
-            string sql = @"INSERT INTO TRANSACOES(ID_TIPO_TRANSACAO, ID_FORNECEDOR, ID_RESPONSAVEL, DATA_TRANSACAO, ID_STATUS, VALOR_TOTAL) VALUES(@IDTIPOTRANSACAO, @IDFORNECEDOR, @IDRESPONSAVEL, @DATATRANSACAO, @IDSTATUS, @VALORTOTAL) SELECT ID = @@IDENTITY";
-            SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
-            cmd.Parameters.Add(new SqlParameter("@IDTIPOTRANSACAO",TipoTransacao.Pedido));
-            cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
-            cmd.Parameters.Add(new SqlParameter("@IDRESPONSAVEL", idResponsavel));
-            cmd.Parameters.Add(new SqlParameter("@DATATRANSACAO", DateTime.Now));
-            cmd.Parameters.Add(new SqlParameter("@IDSTATUS", StatusTransacao.Concluido));
-            cmd.Parameters.Add(new SqlParameter("@VALORTOTAL", valorTotal));
+		public static int Incluir(BancoDeDados b, int IdFornecedor, int idResponsavel, decimal valorTotal)
+		{
+			int id = 0;
+			string a;
+			string sql = @"INSERT INTO TRANSACOES(ID_TIPO_TRANSACAO, ID_FORNECEDOR, ID_RESPONSAVEL, DATA_TRANSACAO, ID_STATUS, VALOR_TOTAL) VALUES(@IDTIPOTRANSACAO, @IDFORNECEDOR, @IDRESPONSAVEL, @DATATRANSACAO, @IDSTATUS, @VALORTOTAL) SELECT ID = @@IDENTITY";
+			SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+			cmd.Parameters.Add(new SqlParameter("@IDTIPOTRANSACAO", TipoTransacao.Pedido));
+			cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
+			cmd.Parameters.Add(new SqlParameter("@IDRESPONSAVEL", idResponsavel));
+			cmd.Parameters.Add(new SqlParameter("@DATATRANSACAO", DateTime.Now));
+			cmd.Parameters.Add(new SqlParameter("@IDSTATUS", StatusTransacao.Concluido));
+			cmd.Parameters.Add(new SqlParameter("@VALORTOTAL", valorTotal));
 
-            SqlDataReader r = null;
-            try
-            {
-                id =Int32.Parse(cmd.ExecuteScalar().ToString());
-                /*while (r.Read())
-                {
-                    id = r.GetInt32(0);
-                }*/
-                return id;
-            }
-            finally
-            {
-                if (r != null)
-                    r.Close();
-            }     
-        }
+			SqlDataReader r = null;
+			try
+			{
+				id = Int32.Parse(cmd.ExecuteScalar().ToString());
+				/*while (r.Read())
+				{
+					id = r.GetInt32(0);
+				}*/
+				return id;
+			}
+			finally
+			{
+				if (r != null)
+					r.Close();
+			}
+		}
 
-        public static void IncluirPedido(BancoDeDados b,int idTransação, ItemTransacao l)
-        {
-            string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO, QUANTIDADE, PRECO_UNITARIO, IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO,@QUANTIDADE,@PRECOUNITARIO,@INENTRADASAIDA)";
+		public static void IncluirPedido(BancoDeDados b, int idTransação, ItemTransacao l)
+		{
+			string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO, QUANTIDADE, PRECO_UNITARIO, IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO,@QUANTIDADE,@PRECOUNITARIO,@INENTRADASAIDA)";
 
-            SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
-            cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", idTransação));
-            cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", l.Sequencial));
-            cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", l.IdProduto));
-            cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", l.Quantidade));
-            cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", l.PrecoUnitario));
-            cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
-            int count = cmd.ExecuteNonQuery();
+			SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+			cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", idTransação));
+			cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", l.Sequencial));
+			cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", l.IdProduto));
+			cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", l.Quantidade));
+			cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", l.PrecoUnitario));
+			cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
+			int count = cmd.ExecuteNonQuery();
 
-            if (count == 0)
-                throw new Exception("Não foi possível adcionar os itens.");
-        }
-    }
+			if (count == 0)
+				throw new Exception("Não foi possível adcionar os itens.");
+		}
+	}
 }
