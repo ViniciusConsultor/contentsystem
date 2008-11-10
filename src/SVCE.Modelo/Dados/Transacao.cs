@@ -31,6 +31,11 @@ namespace SVCE.Modelo.Dados
 		public List<ItemTransacao> Itens { get; set; }
 		public int? NumeroNotaFiscal { get; set; }
 		public int IdFormaPagamento { get; set; }
+        public string nomeF { get; set; }
+        public int qt { get; set; }
+        public string desPro { get; set; }
+        public int pu { get; set; }
+        public string nomeP { get; set;}
 
 
 		public decimal CalcularValorTotal()
@@ -210,9 +215,32 @@ ON		T.ID_TRANSACAO = IT.ID_TRANSACAO
 INNER JOIN PRODUTOS PR
 ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Text);
 			cmd.Parameters.AddRange(listaParameters.ToArray());
+            SqlDataReader r = null;
+            List<PedidoCompra> l = new List<PedidoCompra>();
+            try
+            {
+                r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    PedidoCompra t = new PedidoCompra();
+                    t.IdTransacao = r.GetInt32(0);
+                    t.DataTransacao = r.GetDateTime(1);
+                    t.ValorTotal = r.GetDecimal(2);
+                    t.desPro = r.GetString(3);
+                    t.nomeF = r.GetString(4);
+                    t.qt = r.GetInt32(5);
+                    t.pu = r.GetInt32(6);
+                    t.nomeP = r.GetString(7);
+                    l.Add(t);
+                }
+            }
+            finally
+            {
+                if (r != null)
+                    r.Close();
+            }
+            return l.ToArray();
 
-
-			return null;
 		}
 
 
@@ -233,10 +261,6 @@ ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Tex
 			try
 			{
 				id = Int32.Parse(cmd.ExecuteScalar().ToString());
-				/*while (r.Read())
-				{
-					id = r.GetInt32(0);
-				}*/
 				return id;
 			}
 			finally
