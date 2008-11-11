@@ -34,8 +34,9 @@ namespace SVCE.Modelo.Dados
         public string nomeF { get; set; }
         public int qt { get; set; }
         public string desPro { get; set; }
-        public int pu { get; set; }
+        public decimal pu { get; set; }
         public string nomeP { get; set;}
+        public string nomeFU { get; set; }
 
 
 		public decimal CalcularValorTotal()
@@ -61,21 +62,6 @@ namespace SVCE.Modelo.Dados
 	{
 		public void Incluir(BancoDeDados b)
 		{
-			foreach (ItemTransacao i in Itens)
-			{
-				string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO,QUANTIDADE,PRECO_UNITARIO,IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO, @QUANTIDADE,@PRECOUNITARIO, @INENTRADASAIDA)";
-				SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
-				cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
-				cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", i.Sequencial));
-				cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", i.IdProduto));
-				cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", i.Quantidade));
-				cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", i.PrecoUnitario));
-				cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
-
-				int count = cmd.ExecuteNonQuery();
-				if (count == 0)
-					throw new Exception("Não foi possível cadastrar o produto.");
-			}
 
 
 			string sql2 = @"UPDATE TRANSACOES SET ID_TIPO_TRANSACAO = @TIPOTRANSACAO, DATA_TRANSACAO = @DATATRANSACAO  WHERE ID_TRANSACAO = @IDTRANSACAO";
@@ -196,7 +182,7 @@ namespace SVCE.Modelo.Dados
 				listaParameters.Add(new SqlParameter("@IDPRODUTO", idProduto));
 			}
 			SqlCommand cmd = b.CriarComando(string.Format(@"SELECT	T.ID_TRANSACAO, I.NOME, 
-		P.DESCRICAO, T.DATA_TRANSACAO, 
+		T.ID_TIPO_TRANSACAO, T.DATA_TRANSACAO, 
 		T.VALOR_TOTAL, S.DESCRICAO, 
 		F.NOME, IT.QUANTIDADE, 
 		IT.PRECO_UNITARIO,PR.NOME
@@ -224,13 +210,36 @@ ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Tex
                 {
                     PedidoCompra t = new PedidoCompra();
                     t.IdTransacao = r.GetInt32(0);
-                    t.DataTransacao = r.GetDateTime(1);
-                    t.ValorTotal = r.GetDecimal(2);
-                    t.desPro = r.GetString(3);
-                    t.nomeF = r.GetString(4);
-                    t.qt = r.GetInt32(5);
-                    t.pu = r.GetInt32(6);
-                    t.nomeP = r.GetString(7);
+                    t.nomeFU = r.GetString(1);
+                    int a = r.GetInt32(2);
+                    switch (a)
+                    {
+                        case 1:
+                            t.tpTransacao = TipoTransacao.Compra;
+                            break;
+                        case 2:
+                            t.tpTransacao = TipoTransacao.VendaLoja;
+                            break;
+                        case 3:
+                            t.tpTransacao = TipoTransacao.VendaTelefone;
+                            break;
+                        case 4:
+                            t.tpTransacao = TipoTransacao.Troca;
+                            break;
+                        case 5:
+                            t.tpTransacao = TipoTransacao.Pedido;
+                            break;
+                        default:
+                            t.tpTransacao = TipoTransacao.NotSet;
+                            break;
+                    }
+                    t.DataTransacao = r.GetDateTime(3);
+                    t.ValorTotal = r.GetDecimal(4);
+                    t.desPro = r.GetString(5);
+                    t.nomeF = r.GetString(6);
+                    t.qt = r.GetInt32(7);
+                    t.pu = r.GetDecimal(8);
+                    t.nomeP = r.GetString(9);
                     l.Add(t);
                 }
             }
@@ -254,7 +263,7 @@ ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Tex
 			cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
 			cmd.Parameters.Add(new SqlParameter("@IDRESPONSAVEL", idResponsavel));
 			cmd.Parameters.Add(new SqlParameter("@DATATRANSACAO", DateTime.Now));
-			cmd.Parameters.Add(new SqlParameter("@IDSTATUS", StatusTransacao.Concluido));
+			cmd.Parameters.Add(new SqlParameter("@IDSTATUS", StatusTransacao.Pendente));
 			cmd.Parameters.Add(new SqlParameter("@VALORTOTAL", valorTotal));
 
 			SqlDataReader r = null;

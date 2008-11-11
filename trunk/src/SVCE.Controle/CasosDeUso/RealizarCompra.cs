@@ -6,7 +6,7 @@ using SVCE.Modelo.Dados;
 
 namespace SVCE.Controle.CasosDeUso
 {
-    class RealizarCompra
+    public class RealizarCompra
     {
         public PedidoCompra[] Listarpedido(int? idProduto)
         {

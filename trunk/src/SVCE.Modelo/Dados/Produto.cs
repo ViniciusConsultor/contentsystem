@@ -27,6 +27,9 @@ namespace SVCE.Modelo.Dados
                 nome = string.Format(formato, nome);
             if (codigoExterno != null)
                 codigoExterno = string.Format(formato, codigoExterno);
+            //if (codigoInterno != null)
+               // codigoInterno = string.Format(formato, codigoInterno);
+
             var sql = @"SELECT CODIGO_INTERNO, NOME,CODIGO_EXTERNO,ID_FORNECEDOR,PRECO_VENDA,QUNTIDADE_MINIMA,ID_STATUS FROM PRODUTOS WHERE	ID_STATUS = 1 
             AND     NOME LIKE  COALESCE(@NOME, NOME) 
             AND		CODIGO_EXTERNO LIKE COALESCE(@CODIGO_EXTERNO, CODIGO_EXTERNO)

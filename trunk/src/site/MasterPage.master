@@ -39,6 +39,10 @@
                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Compras/Produtos/Default.aspx"
                             Text="Manter Produtos" />
                     </li>
+                <li>
+                    <asp:HyperLink ID="ListaCompras" runat="server" NavigateUrl="~/Compras/Comprar/Default.aspx"
+                        Text="Realizar Compra" />
+                </li>
                 </ul>
             </asp:Panel>
             <asp:Panel runat="server" Visible="false" ID="pnlEstoque">
@@ -49,12 +53,6 @@
                 <li>
                     <asp:HyperLink ID="ListaEstoque" runat="server" NavigateUrl="~/Compras/Pedido/Default.aspx"
                         Text="Consultar Estoque" />
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <asp:HyperLink ID="ListaCompras" runat="server" NavigateUrl="~/Compras/Comprar/Default.aspx"
-                        Text="Realizar Compra" />
                 </li>
             </ul>
             <asp:Panel runat="server" Visible="false" ID="pnlVendas">
