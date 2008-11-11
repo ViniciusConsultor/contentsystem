@@ -81,7 +81,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
     protected void SalvarPedido(object sender, CommandEventArgs e)
     {
         SalvarProduto();
-        ListarPedidos();
+        ListarEstoque();
     }
     public void MostrarFornecedor()
     {
@@ -116,9 +116,6 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
             pedido.IncluirProduto(Produtos, idTransacao);
         }
 
-    }
-    public void ListarPedidos()
-    {
     }
 
 }
