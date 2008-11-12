@@ -53,6 +53,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
 
     public void ListarEstoque()
     {
+        this.mv.ActiveViewIndex = 0;
         this.rpListagem.DataSource = this.Listar();
         this.rpListagem.DataBind();
     }
