@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CasosDeUso\GeraRelatorio.cs" />
     <Compile Include="CasosDeUso\RealizarCompra.cs" />
     <Compile Include="CasosDeUso\RealizarPedido.cs" />
     <Compile Include="CasosDeUso\ManterFornecedores.cs" />

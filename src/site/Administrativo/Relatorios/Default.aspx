@@ -10,13 +10,13 @@
     <div>
         <ul>
             <li>
-                <asp:HyperLink ID="rltMaisVendido" runat="server" NavigateUrl="" Text="Relatório por produto mais vendido." Target="_blank" />  
+                <asp:HyperLink ID="rltMaisVendido" runat="server" NavigateUrl="~/Administrativo/Relatorios/MaisVendido.aspx" Text="Relatório por produto mais vendido." Target="_blank" />  
             </li>
             <li>
-                <asp:HyperLink ID="rltPorVenda" runat="server" NavigateUrl="" Text="Relatório por período." Target="_blank" />
+                <asp:HyperLink ID="rltPorVenda" runat="server" NavigateUrl="~/Administrativo/Relatorios/SemEstoque.aspx" Text="Relatório produto em falta no Estoque." Target="_blank" />
             </li>
             <li>
-                <asp:HyperLink ID="rltMelhorVenda" runat="server" NavigateUrl="" Text="Relatório produto em falta no Estoque." Target="_blank" />
+                <asp:HyperLink ID="rltMelhorVenda" runat="server" NavigateUrl="~/Administrativo/Relatorios/VolumeVendas.aspx" Text="Relatório por volume de venda." Target="_blank" />
             </li>
         </ul>
     </div>
