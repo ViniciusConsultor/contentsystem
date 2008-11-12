@@ -69,11 +69,11 @@
                         
                             <%# Eval("Perfil") %>
                         </td>
-                        <td>
-                            <asp:LinkButton ID="LinkButton1" runat="server" Text="E" OnCommand="MostrarFormularioEdicao"
-                                CommandArgument='<%# Eval("Matricula") %>' />
-                            <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este funcionário?');" ID="LinkButton2" runat="server" Text="X" OnCommand="ExcluirFuncionario"
-                                CommandArgument='<%# Eval("Matricula") %>' />
+                        <td align="center">
+                            <asp:LinkButton ID="LinkButton1" runat="server" OnCommand="MostrarFormularioEdicao"
+                                CommandArgument='<%# Eval("Matricula") %>' CssClass="btnPreview" Width="16"    />
+                            <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este funcionário?');" ID="LinkButton2" runat="server" OnCommand="ExcluirFuncionario"
+                                CommandArgument='<%# Eval("Matricula") %>' CssClass="btnExcluir" Width="16" />
                         </td>
                     </tr>
                 </ItemTemplate>

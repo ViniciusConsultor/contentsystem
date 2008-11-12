@@ -67,7 +67,7 @@
                                 <%#Eval("qtCompra")%>
                             </td>
                             <td>
-                               <asp:LinkButton ID="Selecionar" runat="server" Text="E" OnCommand="SelecionarProduto"
+                               <asp:LinkButton ID="Selecionar" runat="server" CssClass="btnPreview" Width="16"  OnCommand="SelecionarProduto"
                                     CommandArgument='<%# Eval("codInterno") %>' />
                             </td>
                         </tr>

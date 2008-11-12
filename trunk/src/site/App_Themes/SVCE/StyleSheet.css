@@ -12,11 +12,6 @@ a
 {
 	text-decoration:none;
 }
-a:hover
-{
-	background-color:gray;
-	color:#fff;
-}
 *
 {
 	font-family:Verdana;
@@ -73,6 +68,10 @@ table.tabela
 	margin-bottom:10px;
 	
 }
+table.tabela tr
+{
+	height:18px;
+}
 table.tabela tr td
 {
 	border:1px solid #666;
@@ -107,4 +106,20 @@ table.tabela thead tr td
 	background-color:#fff;
 	border:1px solid #ccc;	
 	width:300px!important;
+}
+.btnPreview
+{
+	background:url('icoPreview.gif') no-repeat top;
+	width:20px;
+	height:20px;
+	margin-left:5px;
+	margin-top:3px;
+}
+.btnExcluir
+{
+	background:url('icoExcluir.gif') no-repeat top;
+	width:20px;
+	height:20px;
+	margin-left:5px;
+	margin-top:3px;
 }
