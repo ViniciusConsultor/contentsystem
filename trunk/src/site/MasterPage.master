@@ -25,6 +25,9 @@
                         <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Funcionarios/Default.aspx"
                             Text="Manter Funcionários" />
                     </li>
+                    <li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Relatorios/Default.aspx" Text="Gerar Relatorios" />
+                    </li>
                 </ul>
             </asp:Panel>
             <asp:Panel runat="server" Visible="false" ID="pnlCompras">
