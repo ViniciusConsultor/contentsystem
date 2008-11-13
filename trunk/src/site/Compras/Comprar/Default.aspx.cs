@@ -17,6 +17,18 @@ using System.Collections.Generic;
 public partial class Compras_Comprar_Default : System.Web.UI.Page
 {
 
+    public int IdPedido
+    {
+        get
+        {
+            return (int)ViewState["Pedido"];
+        }
+        set
+        {
+            ViewState["Pedido"] = value;
+        }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         ListarPedidos();
@@ -41,5 +53,27 @@ public partial class Compras_Comprar_Default : System.Web.UI.Page
 
         var produto = r.Listarpedido(idProduto);
         return produto;
+    }
+    public void MostrarFornecedor()
+    {
+        string nome = null;
+        string cnpj = null;
+        string rz = null;
+        ManterFornecedores f = new ManterFornecedores();
+        ddlIDFornecedor.DataSource = f.ListarFornecedores(nome, rz, cnpj);
+        ddlIDFornecedor.DataTextField = "NOME";
+        ddlIDFornecedor.DataValueField = "IDFORNECEDOR";
+        ddlIDFornecedor.DataBind();
+    }
+    public void Pesquisar(object sender, CommandEventArgs e)
+    {
+        this.Listar();
+    }
+    public void SelecionarPedido(object sender, CommandEventArgs e)
+    {
+        IdPedido = Int32.Parse((string)e.CommandArgument);
+        RealizarCompra r = new RealizarCompra();
+        r.IncluirCompra(IdPedido);
+        ListarPedidos();
     }
 }

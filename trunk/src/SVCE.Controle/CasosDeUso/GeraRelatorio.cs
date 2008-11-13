@@ -23,15 +23,17 @@ namespace SVCE.Controle.CasosDeUso
             }
         }
 
-        public ItemRelatorioProdutosMaisVendidos[] ListarProdutosMaisVendido(DateTime df, DateTime di)
+        public ItemRelatorioProdutosMaisVendidos[] ListarProdutosMaisVendido(DateTime? df, DateTime? di)
         {
             BancoDeDados b = new BancoDeDados();
             RelatorioProdutosMaisVendidos r = new RelatorioProdutosMaisVendidos();
+            if (df != null)
+                r.DataFinal = df;
+            if (di != null)
+                r.DataInicial = di;
             try
             {
                 b.Conectar();
-                r.DataFinal = df;
-                r.DataInicial = di;
                 return r.GerarRelatorioMaisVendido(b);
             }
             finally
@@ -40,12 +42,14 @@ namespace SVCE.Controle.CasosDeUso
             }
         }
 
-        public ItemRelatorioProdutosMaisVendidos[] ListarVolumeVendas(DateTime dt, DateTime df, string periodo)
+        public ItemRelatorioProdutosMaisVendidos[] ListarVolumeVendas(DateTime? dt, DateTime? df, string periodo)
         {
             BancoDeDados b = new BancoDeDados();
             RelatorioProdutosMaisVendidos r = new RelatorioProdutosMaisVendidos();
-            r.DataFinal = df;
-            r.DataInicial = dt;
+            if(df != null)
+                r.DataFinal = df;
+            if(dt != null)
+                r.DataInicial = dt;
             r.perido = periodo;
             try
             {

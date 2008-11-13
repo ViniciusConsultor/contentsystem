@@ -26,6 +26,12 @@
                         <td>
                             <asp:TextBox runat="server" ID="txtProduto" MaxLength="20" />
                         </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <asp:Button runat="server" Text="Pesquisar" ID="btnPesquisar" OnCommand="Pesquisar" />
+                        </td>
                     </tr>
                 </table>
                 <asp:Repeater runat="server" ID="rpListagem">
@@ -102,8 +108,8 @@
                                 <%#Eval("nomeP")%>
                             </td>
                             <td>
-                               <%--<asp:LinkButton ID="Selecionar" runat="server" Text="E" OnCommand="SelecionarProduto"
-                                    CommandArgument='<%# Eval("codInterno") %>' />--%>
+                               <asp:LinkButton ID="Selecionar" runat="server" Text="E" OnCommand="SelecionarPedido"
+                                    CommandArgument='<%# Eval("IdTransacao") %>' />
                             </td>
                         </tr>
                     </ItemTemplate>

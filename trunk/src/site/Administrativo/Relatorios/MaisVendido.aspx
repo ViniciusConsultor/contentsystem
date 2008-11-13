@@ -1,25 +1,34 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="MaisVendido.aspx.cs" Inherits="Administrativo_Relatorios_MaisVendido"  %>
+﻿<%@ Page Language="C#"  AutoEventWireup="true" CodeFile="MaisVendido.aspx.cs" Inherits="Administrativo_Relatorios_MaisVendido"  %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Titulo" runat="Server">
-    Mais vendido
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Conteudo" runat="Server">
-    <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
-        <asp:View ID="View1" runat="server">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Produto mais vendido</title>
+</head>
+<body>
+    <form id="form1" runat="server">
             <div>
                 <table>
                     <tr>
                         <td>
                         <h2>Digite a data do Relatório:</h2>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
-                            <asp:Label ID="lbldata" runat="server" AssociatedControlID="txtdata" Text="Data" />
+                            <asp:Label ID="lbldata" runat="server" AssociatedControlID="txtdi" Text="Data Inicial" />
                         </td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtdata" MaxLength="10" />
+                            <asp:TextBox runat="server" ID="txtdi" MaxLength="10" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lbldf" runat="server" AssociatedControlID="txtdf" Text="Data Final" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtdf" MaxLength="10" />
                         </td>
                     </tr>
                     <tr>
@@ -27,7 +36,7 @@
                             &nbsp;
                         </td>
                         <td>
-                            <%--<asp:Button runat="server" Text="Pesquisar" ID="btnPesquisar" OnCommand="ChamarListagem" />--%>
+                            <asp:Button runat="server" Text="Pesquisar" ID="btnPesquisar" OnCommand="Pesquisar" />
                         </td>
                     </tr>
                 </table>
@@ -37,10 +46,10 @@
                             <thead>
                                 <tr>
                                     <td>
-                                        Data
+                                        Nome do Produto
                                     </td>
                                     <td>
-                                        Valor
+                                        Quantidade
                                     </td>
                                 </tr>
                             </thead>
@@ -60,6 +69,11 @@
                     </FooterTemplate>
                 </asp:Repeater>
             </div>
-        </asp:View>
-        </asp:MultiView>
-        </asp:content>
+         <div>
+		<a href="javascript:;" onclick="window.print();">
+		    Imprimir
+		</a>
+        </div>
+        </form>
+    </body>
+</html>

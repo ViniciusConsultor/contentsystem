@@ -21,12 +21,16 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void IncluirCompra()
+        public void IncluirCompra(int id)
         {
+            Compra c = new Compra();
             BancoDeDados b = new BancoDeDados();
+            c.IdTransacao = id;
+            c.DataTransacao = DateTime.Now;
             try
             {
                 b.Conectar();
+                c.Incluir(b);
             }
             finally
             {
