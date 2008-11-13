@@ -2,14 +2,28 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="~/default.aspx" title="Início">
     <siteMapNode url="" title="Administrativo"  description="">
-      <siteMapNode url="~/Administrativo/Funcionarios/Default.aspx" title="Manter Funcionários"  description="" />
-    </siteMapNode>
+		<siteMapNode url="~/Administrativo/Funcionarios/Default.aspx" title="Manter Funcionários"  description="" />
+		<siteMapNode url="~/Administrativo/Relatorios/Default.aspx" title="Relatórios"  description="" />
+	</siteMapNode>
     <siteMapNode title="Compras">
 
-      <siteMapNode url="~/Compras/Fornecedores/Default.aspx" title="Manter Fornecedores"  description="" />
-      
-      
-    </siteMapNode>
-    <siteMapNode title="Vendas"></siteMapNode>
+		<siteMapNode url="~/Compras/Fornecedores/Default.aspx" title="Manter Fornecedores"  description="" />
+		<siteMapNode url="~/Compras/Produtos/Default.aspx" title="Manter Produtos"  description="" />
+		<siteMapNode url="~/Compras/Comprar/Default.aspx" title="Realizar Compra"  description="" />
+
+
+	</siteMapNode>
+	  <siteMapNode title="Vendas">
+
+		  <siteMapNode url="~/Vendas/RealizarVenda/Default.aspx" title="Realizar Vendas"  description="" />
+
+
+	  </siteMapNode>
+	  <siteMapNode title="Estoque">
+
+		  <siteMapNode url="~/Compras/Pedido/Default.aspx" title="Consultar Estoque"  description="" />
+
+
+	  </siteMapNode>
   </siteMapNode>
 </siteMap>

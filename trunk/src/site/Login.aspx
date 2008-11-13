@@ -4,15 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SVCE</title>
-<link rel="stylesheet" href="App_Themes/SVCE/StyleSheet.css" type="text/css" />
+    
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="telaLogin">
+    <div class="pageBody">
     
+    
+		<h1>Login</h1>
         <asp:Panel runat="server" DefaultButton="btnEnviar">
     
-        <table>
+        <table align=center>
             <tr>
                 <td align="right">
                     <asp:Label runat="server" AssociatedControlID="txtLogin" Text="Usuário" />

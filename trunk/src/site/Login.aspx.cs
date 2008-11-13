@@ -19,7 +19,12 @@ public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+		if (!IsPostBack)
+		{
+			if (User.Identity.IsAuthenticated)
+				Response.Redirect("default.aspx");
+		}
+		txtLogin.Focus();
     }
 
     protected void Logar(object sender, CommandEventArgs e)
