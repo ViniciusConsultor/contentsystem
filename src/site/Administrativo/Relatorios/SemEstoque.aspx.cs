@@ -23,7 +23,7 @@ public partial class Administrativo_Relatorios_SemEstoque : System.Web.UI.Page
     public ItemRelatorioProdutosSemEstoque[] Listar()
     {
         GeraRelatorio g = new GeraRelatorio();
-        var item = g.Listar();
+        var item = g.ListarProdutosSemEstoque();
         return item;
     }
 
