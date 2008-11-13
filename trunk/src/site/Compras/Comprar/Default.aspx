@@ -7,9 +7,17 @@
     Comprar
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Conteudo" runat="Server">
+
     <asp:MultiView runat="server" ID="mvCompras" ActiveViewIndex="0">
         <asp:View ID="ViewListagem" runat="server">
             <div>
+            <table>
+                <tr>
+                    <td>
+                    Lista de Pedidos:
+                    </td>
+                </tr>
+            </table>
                 <table>
                     <tr>
                         <td>

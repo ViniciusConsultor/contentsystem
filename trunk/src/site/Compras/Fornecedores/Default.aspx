@@ -138,7 +138,7 @@
                                     <asp:Label ID="Label5" runat="server" AssociatedControlID="txtEndereco" Text="Endereço" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" TextMode="MultiLine" Rows="3" Columns="22" Style="overflow-y: auto;"
+                                    <asp:TextBox runat="server" TextMode="MultiLine" Rows="3" Columns="22" Style="overflow-y:auto;"
                                         ID="txtEndereco" MaxLength="50" />
                                     <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator3" runat="server"
                                         ControlToValidate="txtEndereco" Text="*" ErrorMessage="Endereço obrigatório" />
