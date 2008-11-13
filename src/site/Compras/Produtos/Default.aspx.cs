@@ -76,7 +76,7 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
         MostrarFornecedor();
         txtCadastroExterno.Text = cod.CodigoExterno;
         //txtCadastroID.Text = cod.IdFornecedor.ToString();
-        ddlIDFornecedor.SelectedIndex = cod.IdFornecedor;
+        ddlIDFornecedor.SelectedValue = cod.IdFornecedor.ToString();
         txtCadastroNome.Text = cod.Nome;
         txtCadastroQuantidade.Text = cod.QuantidadeMinima.ToString();
         txtPrecoVenda.Text = cod.PrecoVenda.ToString() ;
