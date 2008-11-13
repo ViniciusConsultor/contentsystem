@@ -52,5 +52,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
         }
 
+
     }
+	protected void Logout(object sender, CommandEventArgs e)
+	{
+		FormsAuthentication.SignOut();
+		Session.Abandon();
+		Response.Redirect("~/Login.aspx");
+	}
 }
