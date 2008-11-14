@@ -20,9 +20,6 @@
 		<thead>
 		<tr>
 			<td>
-				ID do Produto
-			</td>
-			<td>
 			   Nome do Produto
 			</td>
 			<td>
@@ -43,9 +40,6 @@
 		
 		
 		<tr>
-			<td>
-				<%# Eval("IdProduto")%>
-			</td>
 			<td>
 				<%# Eval("NomeProduto")%>
 			</td>

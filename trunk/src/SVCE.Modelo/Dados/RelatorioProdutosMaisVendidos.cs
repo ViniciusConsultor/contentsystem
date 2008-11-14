@@ -19,7 +19,7 @@ namespace SVCE.Modelo.Dados
 
         public ItemRelatorioProdutosMaisVendidos[] GerarRelarioVolumeVenda(BancoDeDados b)
         {
-            string sql = @"relatorio_volume_venda";
+            string sql = @"relatorio_volume_vendas";
             var cmd = b.CriarComando(sql, System.Data.CommandType.StoredProcedure);
             cmd.Parameters.Add(new SqlParameter("@data_inicial",((object)DataInicial) ??(object)DBNull.Value));
             cmd.Parameters.Add(new SqlParameter("@data_final",((object)DataFinal) ?? (object)DBNull.Value));
