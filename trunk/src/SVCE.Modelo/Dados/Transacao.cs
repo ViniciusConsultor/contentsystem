@@ -175,7 +175,7 @@ namespace SVCE.Modelo.Dados
 		{
 
 			List<SqlParameter> listaParameters = new List<SqlParameter>();
-			string where = "WHERE	T.ID_TIPO_TRANSACAO = 5";
+			string where = "WHERE T.ID_TIPO_TRANSACAO = 5";
 			if (idProduto != null)
 			{
 				where += "AND PR.ID_PRODUTO = @IDPRODUTO";
@@ -185,7 +185,7 @@ namespace SVCE.Modelo.Dados
 		T.ID_TIPO_TRANSACAO, T.DATA_TRANSACAO, 
 		T.VALOR_TOTAL, S.DESCRICAO, 
 		F.NOME, IT.QUANTIDADE, 
-		IT.PRECO_UNITARIO,PR.NOME
+		IT.PRECO_UNITARIO,PR.NOME,PR.ID_PRODUTO
 
 FROM	TRANSACOES T
 INNER JOIN FORNECEDORES F
