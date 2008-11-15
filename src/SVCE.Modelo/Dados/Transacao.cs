@@ -178,14 +178,14 @@ namespace SVCE.Modelo.Dados
 			string where = "WHERE T.ID_TIPO_TRANSACAO = 5";
 			if (idProduto != null)
 			{
-				where += "AND PR.ID_PRODUTO = @IDPRODUTO";
+				where += "AND PR.CODIGO_INTERNO = @IDPRODUTO";
 				listaParameters.Add(new SqlParameter("@IDPRODUTO", idProduto));
 			}
 			SqlCommand cmd = b.CriarComando(string.Format(@"SELECT	T.ID_TRANSACAO, I.NOME, 
 		T.ID_TIPO_TRANSACAO, T.DATA_TRANSACAO, 
 		T.VALOR_TOTAL, S.DESCRICAO, 
 		F.NOME, IT.QUANTIDADE, 
-		IT.PRECO_UNITARIO,PR.NOME,PR.ID_PRODUTO
+		IT.PRECO_UNITARIO,PR.NOME,PR.CODIGO_INTERNO AS ID_PRODUTO 
 
 FROM	TRANSACOES T
 INNER JOIN FORNECEDORES F
