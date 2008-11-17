@@ -119,7 +119,7 @@
                 </asp:Repeater>
             </div>
         </asp:View>
-       <asp:View ID="ViewCadastro" runat="server">
+       <%--<asp:View ID="ViewCadastro" runat="server">
             <table>
                 <tr>
                     <td>
@@ -161,15 +161,24 @@
                                     &nbsp;
                                 </td>
                                 <td align="right">
-                                    <%--<asp:Button OnCommand="SalvarPedido" ID="btnsalvar" runat="server" Text="Salvar" />
+                                    <asp:Button OnCommand="SalvarPedido" ID="btnsalvar" runat="server" Text="Salvar" />
                                     <asp:Button CausesValidation="false" ID="btnCancelar" runat="server" Text="Cancelar"
-                                        OnCommand="RetornarListagem" />--%>
+                                        OnCommand="RetornarListagem" />
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
             </table>
-        </asp:View>
+        </asp:View>--%>
+        	<asp:View ID="vmCompraRealidade" runat="server">
+			<h3 style="text-align:center;">
+				Compra realizada com sucesso!</h3>
+			<div style="text-align:center;">
+			
+		
+				<a href="Default.aspx">Listar pedidos</a>
+			</div>
+		</asp:View>
     </asp:MultiView>
 </asp:Content>

@@ -75,6 +75,7 @@ namespace SVCE.Modelo.Dados
 			if (count2 == 0)
 				throw new Exception("Não foi possível realizar a compra!");
 
+
 		}
 
 		public void Concluir(BancoDeDados b)

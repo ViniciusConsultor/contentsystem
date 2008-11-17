@@ -54,17 +54,6 @@ public partial class Compras_Comprar_Default : System.Web.UI.Page
         var produto = r.Listarpedido(idProduto);
         return produto;
     }
-    public void MostrarFornecedor()
-    {
-        string nome = null;
-        string cnpj = null;
-        string rz = null;
-        ManterFornecedores f = new ManterFornecedores();
-        ddlIDFornecedor.DataSource = f.ListarFornecedores(nome, rz, cnpj);
-        ddlIDFornecedor.DataTextField = "NOME";
-        ddlIDFornecedor.DataValueField = "IDFORNECEDOR";
-        ddlIDFornecedor.DataBind();
-    }
     public void Pesquisar(object sender, CommandEventArgs e)
     {
         this.Listar();
@@ -75,5 +64,6 @@ public partial class Compras_Comprar_Default : System.Web.UI.Page
         RealizarCompra r = new RealizarCompra();
         r.IncluirCompra(IdPedido);
         ListarPedidos();
+        mvCompras.ActiveViewIndex = 1;
     }
 }
