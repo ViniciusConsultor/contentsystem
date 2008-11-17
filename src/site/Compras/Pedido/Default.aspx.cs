@@ -110,11 +110,11 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
 
         if (produto != null)
         {
-            decimal vlTotal = produto.PrecoVenda * quant;
-            int idTransacao = pedido.IncluirPedido(idF, matricula, vlTotal);
+            decimal vlTotal = produto.PrecoVenda * quant;   
             var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quant };
-            Produtos.Add(item);
-            pedido.IncluirProduto(Produtos, idTransacao);
+            List<ItemTransacao> it = new List<ItemTransacao>();
+            it.Add(item);
+            pedido.IncluirPedido(idF, matricula, vlTotal, it); 
         }
 
     }
