@@ -255,7 +255,7 @@ ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Tex
 		}
 
 
-		public static int Incluir(BancoDeDados b, int IdFornecedor, int idResponsavel, decimal valorTotal)
+        public void Incluir(BancoDeDados b, int IdFornecedor, int idResponsavel, decimal valorTotal,List<ItemTransacao> l)
 		{
 			int id = 0;
 			string a;
@@ -268,34 +268,20 @@ ON		PR.CODIGO_INTERNO = IT.ID_PRODUTO {0} ", where), System.Data.CommandType.Tex
 			cmd.Parameters.Add(new SqlParameter("@IDSTATUS", StatusTransacao.Pendente));
 			cmd.Parameters.Add(new SqlParameter("@VALORTOTAL", valorTotal));
 
-			SqlDataReader r = null;
-			try
-			{
 				id = Int32.Parse(cmd.ExecuteScalar().ToString());
-				return id;
-			}
-			finally
-			{
-				if (r != null)
-					r.Close();
-			}
-		}
+                foreach (ItemTransacao i in l)
+                {
+                    string sql2 = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO, QUANTIDADE, PRECO_UNITARIO, IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO,@QUANTIDADE,@PRECOUNITARIO,@INENTRADASAIDA)";
 
-		public static void IncluirPedido(BancoDeDados b, int idTransação, ItemTransacao l)
-		{
-			string sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO, QUANTIDADE, PRECO_UNITARIO, IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO,@QUANTIDADE,@PRECOUNITARIO,@INENTRADASAIDA)";
-
-			SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
-			cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", idTransação));
-			cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", l.Sequencial));
-			cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", l.IdProduto));
-			cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", l.Quantidade));
-			cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", l.PrecoUnitario));
-			cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
-			int count = cmd.ExecuteNonQuery();
-
-			if (count == 0)
-				throw new Exception("Não foi possível adcionar os itens.");
+                    SqlCommand cmd2 = b.CriarComando(sql2, System.Data.CommandType.Text);
+                    cmd2.Parameters.Add(new SqlParameter("@IDTRANSACAO", id));
+                    cmd2.Parameters.Add(new SqlParameter("@SEQUENCIAL", i.Sequencial + 1));
+                    cmd2.Parameters.Add(new SqlParameter("@IDPRODUTO", i.IdProduto));
+                    cmd2.Parameters.Add(new SqlParameter("@QUANTIDADE", i.Quantidade));
+                    cmd2.Parameters.Add(new SqlParameter("@PRECOUNITARIO", i.PrecoUnitario));
+                    cmd2.Parameters.Add(new SqlParameter("@INENTRADASAIDA", "E"));
+                    int count = cmd2.ExecuteNonQuery();
+                }
 		}
 	}
 }

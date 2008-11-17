@@ -20,40 +20,41 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public int IncluirPedido(int IdFornecedor, int idResponsavel, decimal valorTotal)
+        public void IncluirPedido(int IdFornecedor, int idResponsavel, decimal valorTotal,List<ItemTransacao> item)
         {
             BancoDeDados b = new BancoDeDados();
+            PedidoCompra p = new PedidoCompra();
             try
             {
                 b.Conectar();
-                return PedidoCompra.Incluir(b, IdFornecedor, idResponsavel, valorTotal);
+                p.Incluir(b, IdFornecedor, idResponsavel, valorTotal, item);
             }
             finally
             {
                 b.Desconectar();
             }
         }
-        public void IncluirProduto(List<ItemTransacao> item, int idTransacao)
-        {
-            BancoDeDados b = new BancoDeDados();
-            try
-            {
-                b.Conectar();
-                foreach (ItemTransacao i in item)
-                {
-                    ItemTransacao it = new ItemTransacao();
-                    it.IdProduto = i.IdProduto;
-                    it.NomeProduto = i.NomeProduto;
-                    it.PrecoUnitario = i.PrecoUnitario;
-                    it.Quantidade = i.Quantidade;
-                    it.Sequencial = it.Sequencial + 1;
-                    PedidoCompra.IncluirPedido(b,idTransacao, it);
-                }
-            }
-            finally
-            {
-                b.Desconectar();
-            }
-        }
+        //public void IncluirProduto(List<ItemTransacao> item, int idTransacao)
+        //{
+        //    BancoDeDados b = new BancoDeDados();
+        //    try
+        //    {
+        //        b.Conectar();
+        //        foreach (ItemTransacao i in item)
+        //        {
+        //            ItemTransacao it = new ItemTransacao();
+        //            it.IdProduto = i.IdProduto;
+        //            it.NomeProduto = i.NomeProduto;
+        //            it.PrecoUnitario = i.PrecoUnitario;
+        //            it.Quantidade = i.Quantidade;
+        //            it.Sequencial = it.Sequencial + 1;
+        //            PedidoCompra.IncluirPedido(b,idTransacao, it);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        b.Desconectar();
+        //    }
+        //}
     }
 }
