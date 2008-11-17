@@ -64,11 +64,12 @@ namespace SVCE.Modelo.Dados
 		{
 
 
-			string sql2 = @"UPDATE TRANSACOES SET ID_TIPO_TRANSACAO = @TIPOTRANSACAO, DATA_TRANSACAO = @DATATRANSACAO  WHERE ID_TRANSACAO = @IDTRANSACAO";
+            string sql2 = @"UPDATE TRANSACOES SET ID_TIPO_TRANSACAO = @TIPOTRANSACAO, DATA_TRANSACAO = @DATATRANSACAO, ID_STATUS = @STATUS  WHERE ID_TRANSACAO = @IDTRANSACAO";
 			SqlCommand cmd2 = b.CriarComando(sql2, System.Data.CommandType.Text);
 			cmd2.Parameters.Add(new SqlParameter("@TIPOTRANSACAO", TipoTransacao.Compra));
 			cmd2.Parameters.Add(new SqlParameter("@DATATRANSACAO", DataTransacao));
 			cmd2.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
+            cmd2.Parameters.Add(new SqlParameter("@STATUS", 3));
 
 
 			int count2 = cmd2.ExecuteNonQuery();
