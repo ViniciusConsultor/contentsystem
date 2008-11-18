@@ -82,6 +82,9 @@
                     <li>
                         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Vendas/RealizarVenda/Default.aspx"
                             Text="Realizar Venda" />
+                    </li><li>
+                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Vendas/RealizarTroca/Default.aspx"
+                            Text="Realizar Troca" />
                     </li>
                 </ul>
             </asp:Panel>

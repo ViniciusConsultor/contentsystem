@@ -16,6 +16,7 @@
 	  <siteMapNode title="Vendas">
 
 		  <siteMapNode url="~/Vendas/RealizarVenda/Default.aspx" title="Realizar Vendas"  description="" />
+		  <siteMapNode url="~/Vendas/RealizarTroca/Default.aspx" title="Realizar Troca"  description="" />
 
 
 	  </siteMapNode>
