@@ -14,7 +14,12 @@
             <table>
                 <tr>
                     <td>
-                    Lista de Pedidos:
+                    <h2>Lista de Pedidos:</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
                     </td>
                 </tr>
             </table>
@@ -26,9 +31,21 @@
                         <td>
                             <asp:TextBox runat="server" ID="txtProduto" MaxLength="20" />
                         </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblPeriodo" runat="server" AssociatedControlID="txtdata" Text="Data do pedido" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtdata" MaxLength="10" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             &nbsp;
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <asp:Button runat="server" Text="Pesquisar" ID="btnPesquisar" OnCommand="Pesquisar" />
                         </td>
@@ -87,10 +104,10 @@
                                 <%#Eval("tpTransacao")%>
                             </td>
                             <td>
-                                <%#Eval("DataTransacao")%>
+                                <%#Eval("DataTransacao", "{0:d}")%>
                             </td>
                             <td>
-                                <%#Eval("ValorTotal")%>
+                                <%#Eval("ValorTotal", "{0:C}")%>
                             </td>
                             <td>
                                 <%#Eval("desPro")%>
@@ -102,7 +119,7 @@
                                 <%#Eval("qt")%>
                             </td>
                             <td>
-                                <%#Eval("pu")%>
+                                <%#Eval("pu", "{0:C}")%>
                             </td>
                             <td>
                                 <%#Eval("nomeP")%>

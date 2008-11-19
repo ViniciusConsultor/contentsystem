@@ -8,13 +8,13 @@ namespace SVCE.Controle.CasosDeUso
 {
     public class RealizarCompra
     {
-        public PedidoCompra[] Listarpedido(int? idProduto)
+        public PedidoCompra[] Listarpedido(int? idProduto, DateTime? dtPedido)
         {
             BancoDeDados b = new BancoDeDados();
             try
             {
                 b.Conectar();
-                return PedidoCompra.ListarPedidosCompra(b, idProduto);
+                return PedidoCompra.ListarPedidosCompra(b, idProduto, dtPedido); 
             }
             finally
             {

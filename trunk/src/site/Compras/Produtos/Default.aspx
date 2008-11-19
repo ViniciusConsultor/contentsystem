@@ -90,7 +90,7 @@
                                 <%#Eval("Nome")%>
                             </td>
                             <td>
-                                <%#Eval("PrecoVenda")%>
+                                <%#Eval("PrecoVenda", "{0:C}")%>
                             </td>
                             <td>
                                 <%#Eval("QuantidadeMinima")%>
