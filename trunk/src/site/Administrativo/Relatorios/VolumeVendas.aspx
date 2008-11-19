@@ -70,7 +70,7 @@
                     <ItemTemplate>
                         <tr>
                             <td>
-                                <%#Eval("data")%>
+                                <%#Eval("data", "{0:d}")%>
                             </td>
                             <td>
                                 <%#Eval("VolumeVendas")%>
