@@ -85,5 +85,20 @@ namespace SVCE.Controle.CasosDeUso
 				banco.Desconectar();
 			}
 		}
+        public Estoque[] ConsultarEstoque()
+        {
+            BancoDeDados b = new BancoDeDados();
+            try
+            {
+                b.Conectar();
+                return Estoque.ConsultarEstoque(b);
+
+            }
+            finally
+            {
+                b.Desconectar();
+                
+            }
+        }
 	}
 }
