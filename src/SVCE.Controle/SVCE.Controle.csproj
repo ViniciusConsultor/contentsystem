@@ -53,6 +53,7 @@
     <Compile Include="CasosDeUso\ManterFuncionarios.cs">
     </Compile>
     <Compile Include="CasosDeUso\ManterProduto.cs" />
+    <Compile Include="CasosDeUso\RealizarTroca.cs" />
     <Compile Include="CasosDeUso\RealizarVenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

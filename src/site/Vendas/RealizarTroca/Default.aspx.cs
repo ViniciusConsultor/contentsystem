@@ -18,7 +18,20 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 {
 
 
-	private RealizarVenda controle;
+	protected Venda VendaSelecionada
+	{
+		get
+		{
+			return (Venda)ViewState["Venda"];
+		}
+		set
+		{
+			ViewState["Venda"] = value;
+		}
+	}
+
+
+	private RealizarTroca controle;
 
 	public List<ItemTransacao> Produtos
 	{
@@ -32,7 +45,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
-		controle = new RealizarVenda();
+		controle = new RealizarTroca();
 
 
 		if (!IsPostBack)
@@ -125,8 +138,23 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 			pnlProdutos.Visible = false;
 	}
 
+
+	public void ValidarNumeroNotaFiscal(object sender, ServerValidateEventArgs e)
+	{
+		int numeroNota = Int32.Parse((string)e.Value);
+		var venda = controle.CarregarVenda(numeroNota);
+
+		if (venda == null)
+			e.IsValid = false;
+		else
+			this.VendaSelecionada = venda;
+	}
+
 	protected void IniciarTroca(object sender, CommandEventArgs e)
 	{
-		mv.ActiveViewIndex = 0;
+		if (IsValid)
+		{
+			mv.ActiveViewIndex = 0;
+		}
 	}
 }
