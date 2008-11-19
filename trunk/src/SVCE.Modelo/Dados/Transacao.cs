@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace SVCE.Modelo.Dados
 {
+	[Serializable]
 	public class Transacao
 	{
 		//public int IdTransacao { get; set; }
@@ -56,6 +57,34 @@ namespace SVCE.Modelo.Dados
 
 		}
 
+		public void CarregarItens(BancoDeDados banco)
+		{
+			string sql = "SELECT * FROM ITENS_TRANSACOES WHERE ID_TRANSACAO = @ID_TRANSACAO";
+			var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+			cmd.Parameters.Add(new SqlParameter("@id_transacao", this.IdTransacao));
+
+			var reader = cmd.ExecuteReader();
+			try
+			{
+				while (reader.Read())
+				{
+					ItemTransacao item = new ItemTransacao();
+					item.Sequencial = (int) reader["SEQUENCIAL"];
+					item.IdProduto = (int)reader["ID_PRODUTO"];
+					item.TipoItem =  ((string) reader["IN_ENTRADA_SAIDA"]) == "E" ? TipoItemTransacao.Entrada : TipoItemTransacao.Saida;
+
+					if (this.Itens == null)
+						this.Itens = new List<ItemTransacao>();
+					Itens.Add(item);
+				}
+			}
+			finally
+			{
+				reader.Close();
+			}
+
+		}
+
 	}
 
 	public class Compra : Transacao
@@ -96,6 +125,7 @@ namespace SVCE.Modelo.Dados
 
 
 	}
+	[Serializable]
 	public class Venda : Transacao
 	{
 
@@ -152,9 +182,32 @@ namespace SVCE.Modelo.Dados
 
 		}
 
-		public static Venda PesquisarVenda(int numeroNotaFiscal)
+		public static Venda PesquisarVenda(BancoDeDados banco,  int numeroNotaFiscal)
 		{
-			return null;
+			string sql = "SELECT ID_TRANSACAO FROM TRANSACOES WHERE NUMERO_NOTA_FISCAL = @NUMERO_NOTA_FISCAL";
+			
+			var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+			cmd.Parameters.Add(new SqlParameter("@NUMERO_NOTA_FISCAL", numeroNotaFiscal));
+			var reader = cmd.ExecuteReader();
+			try
+			{
+				while (reader.Read())
+				{
+
+					Venda venda = new Venda();
+					venda.IdTransacao = (int)reader["ID_TRANSACAO"];
+					
+
+
+					return venda;
+				}
+				return null;
+			}
+			finally
+			{
+				reader.Close();
+			}
+
 		}
 
 	}

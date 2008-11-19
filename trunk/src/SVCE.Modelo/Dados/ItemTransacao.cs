@@ -5,6 +5,13 @@ using System.Text;
 
 namespace SVCE.Modelo.Dados
 {
+
+
+	public enum TipoItemTransacao
+	{
+		Entrada, Saida
+	}
+
 	[Serializable]
     public class ItemTransacao
     {
@@ -12,6 +19,8 @@ namespace SVCE.Modelo.Dados
 		public int IdProduto { get; set; }
 		public int Quantidade { get; set; }
 		public decimal PrecoUnitario { get; set; }
+
+		public TipoItemTransacao TipoItem { get; set; }
 		
 
 

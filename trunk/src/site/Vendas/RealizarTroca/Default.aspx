@@ -168,6 +168,7 @@ window.onload = function()
 					<asp:TextBox runat=server MaxLength="5" ID="txtNumeroNota" />
 					<asp:RequiredFieldValidator runat=server ControlToValidate="txtNumeroNota" Text="*" ErrorMessage="Número da nota fiscal obrigatório" />
 					<asp:RegularExpressionValidator runat=server ControlToValidate="txtNumeroNota" Text="*" ErrorMessage="Número da nota fiscal inválido" ValidationExpression="^\d+$" />
+					<asp:CustomValidator runat=server ControlToValidate="txtNumeroNota" OnServerValidate="ValidarNumeroNotaFiscal" Text="*" ErrorMessage="Nota fiscal não encontrada" />
 				</td>
 			</tr>
 		</table>
