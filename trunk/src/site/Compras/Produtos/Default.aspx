@@ -95,7 +95,7 @@
                             <td>
                                 <%#Eval("QuantidadeMinima")%>
                             </td>
-                            <td>
+                            <td width="65">
                                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btnPreview" Width="16" OnCommand="MostrarFormularioEdicao"
                                     CommandArgument='<%# Eval("CodigoInterno") %>' />
                                 <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este Produto?');"
