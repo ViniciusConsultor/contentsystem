@@ -83,7 +83,7 @@
                             <td>
                                 <%#Eval("CNPJ") %>
                             </td>
-                            <td align="center">
+                            <td align="center" width="65">
                                 <asp:LinkButton ID="LinkButton1" runat="server" OnCommand="MostrarFormularioEdicao"
                                     CommandArgument='<%# Eval("IdFornecedor") %>' CssClass="btnPreview" Width="16"   />
                                 <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este fornecedor?');"
