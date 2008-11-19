@@ -74,43 +74,57 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 
 	protected void IncluirProduto(object sender, CommandEventArgs e)
 	{
-		if (Page.IsValid)
-		{
+        if (Page.IsValid)
+        {
 
-			int codigo = Int32.Parse(txtCodigoProduto.Text);
-			int quantidade = Int32.Parse(txtQuantidade.Text);
+            int codigo = Int32.Parse(txtCodigoProduto.Text);
+            int quantidade = Int32.Parse(txtQuantidade.Text);
+            List<Estoque> le = new List<Estoque>();
+            le = controle.ConsultarEstoque().ToList<Estoque>();
+            foreach (Estoque es in le)
+            {
+                if (es.codInterno == codigo)
+                {
+                    if (es.qtEstoque >= quantidade)
+                    {
+                        var itens = (from p in Produtos where p.IdProduto == codigo select p);
+
+                        if (itens.Count() > 0)
+                        {
+                            var itemExistente = itens.First();
+                            itemExistente.Quantidade += quantidade;
+                            MostrarProdutos();
+                            this.pnlProdutos.Visible = true;
+                            LimparDadosProduto();
+                        }
+                        else
+                        {
 
 
-			var itens = (from p in Produtos where p.IdProduto == codigo select p);
-			
-			if (itens.Count() > 0)
-			{
-				var itemExistente = itens.First();
-				itemExistente.Quantidade += quantidade;
-				MostrarProdutos();
-				this.pnlProdutos.Visible = true;
-				LimparDadosProduto();
-			}
-			else
-			{
+                            var produto = controle.BuscarProduto(codigo);
 
+                            var sequencial = 0;
 
-				var produto = controle.BuscarProduto(codigo);
+                            if (produto != null)
+                            {
+                                var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
+                                Produtos.Add(item);
+                                MostrarProdutos();
+                                this.pnlProdutos.Visible = true;
+                                LimparDadosProduto();
+                            }
+                            else
+                                Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não encontrado!');", true);
+                        }
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('quantidade inferior!');", true);
+                    }
+                }
+            }
 
-				var sequencial = 0;
-
-				if (produto != null)
-				{
-					var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
-					Produtos.Add(item);
-					MostrarProdutos();
-					this.pnlProdutos.Visible = true;
-					LimparDadosProduto();
-				}
-				else
-					Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não encontrado!');", true);
-			}
-		}
+        }
 	}
 	protected void ExcluirProduto(object sender, CommandEventArgs e)
 	{

@@ -16,7 +16,7 @@ namespace SVCE.Modelo.Dados
 
         public static Estoque[] ListarProdutosAbaixoEstoque(BancoDeDados b)
         {
-            var sql = @" SELECT * FROM ESTOQUE";
+            var sql = @" SELECT * FROM estoque_abaixo";
             var cmd = b.CriarComando(sql, System.Data.CommandType.Text);
             SqlDataReader r = null;
             try
@@ -42,6 +42,33 @@ namespace SVCE.Modelo.Dados
                     r.Close();
             }
         }
-
+        public static Estoque[] ConsultarEstoque(BancoDeDados b)
+        {
+            var sql = @"SELECT * FROM ESTOQUE";
+            var cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+            SqlDataReader r = null;
+            try
+            {
+                r = cmd.ExecuteReader();
+                List<Estoque> retorno = new List<Estoque>();
+                while (r.Read())
+                {
+                    Estoque e = new Estoque();
+                    e.idFornecedor = r.GetInt32(0);
+                    e.codInterno = r.GetInt32(1);
+                    e.nome = r.GetString(2);
+                    e.qtMinima = r.GetInt32(3);
+                    e.qtEstoque = r.GetInt32(4);
+                    e.qtCompra = r.GetInt32(5);
+                    retorno.Add(e);
+                }
+                return retorno.ToArray();
+            }
+            finally
+            {
+                if (r != null)
+                    r.Close();
+            }
+       }
     }
 }
