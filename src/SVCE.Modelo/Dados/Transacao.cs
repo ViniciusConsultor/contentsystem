@@ -226,7 +226,7 @@ namespace SVCE.Modelo.Dados
 	}
 	public class PedidoCompra : Transacao
 	{
-		public static PedidoCompra[] ListarPedidosCompra(BancoDeDados b, int? idProduto)
+		public static PedidoCompra[] ListarPedidosCompra(BancoDeDados b, int? idProduto, DateTime? dtPedido)
 		{
 
 			List<SqlParameter> listaParameters = new List<SqlParameter>();
@@ -236,6 +236,11 @@ namespace SVCE.Modelo.Dados
 				where += "AND PR.CODIGO_INTERNO = @IDPRODUTO";
 				listaParameters.Add(new SqlParameter("@IDPRODUTO", idProduto));
 			}
+            if (dtPedido != null)
+            {
+                where += " AND T.DATA_TRANSACAO = @DTPEDIDO";
+                listaParameters.Add(new SqlParameter("@DTPEDIDO", dtPedido));
+            }
 			SqlCommand cmd = b.CriarComando(string.Format(@"SELECT	T.ID_TRANSACAO, I.NOME, 
 		T.ID_TIPO_TRANSACAO, T.DATA_TRANSACAO, 
 		T.VALOR_TOTAL, S.DESCRICAO, 

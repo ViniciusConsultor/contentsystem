@@ -43,15 +43,18 @@ public partial class Compras_Comprar_Default : System.Web.UI.Page
     {
         RealizarCompra r = new RealizarCompra();
         Nullable<int> idProduto = 0;
+        Nullable<DateTime> dtPedido = null;
         
         if (txtProduto.Text != "")
             idProduto = Int32.Parse(txtProduto.Text);
+        if (txtdata.Text != "")
+            dtPedido = DateTime.Parse(txtdata.Text);
 
         if(idProduto == 0)
             idProduto = null;
 
 
-        var produto = r.Listarpedido(idProduto);
+        var produto = r.Listarpedido(idProduto,dtPedido);
         return produto;
     }
     public void Pesquisar(object sender, CommandEventArgs e)
