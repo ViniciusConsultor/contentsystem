@@ -108,10 +108,16 @@ namespace SVCE.Modelo.Dados
 
 		}
 
-		public void Concluir(BancoDeDados b)
+		public void Concluir(BancoDeDados b, int idTransacao)
 		{
+            string sql = @"UPDATE TRANSACOES SET ID_STATUS = @STATUS WHERE ID_TRANSACAO = @IDTRANSACAO";
+            SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+            cmd.Parameters.Add(new SqlParameter("@STATUS", 3));
+            cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", idTransacao));
 
-
+            int count = cmd.ExecuteNonQuery();
+            if (count == 0)
+                throw new Exception("Não foi possível de dar baixa na compra!");
 		}
 		public void Cancelar()
 		{
