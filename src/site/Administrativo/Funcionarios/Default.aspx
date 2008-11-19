@@ -69,7 +69,7 @@
                         
                             <%# Eval("Perfil") %>
                         </td>
-                        <td align="center">
+                        <td align="center" width="65">
                             <asp:LinkButton ID="LinkButton1" runat="server" OnCommand="MostrarFormularioEdicao"
                                 CommandArgument='<%# Eval("Matricula") %>' CssClass="btnPreview" Width="16"    />
                             <asp:LinkButton OnClientClick="return confirm('Tem certeza que deseja excluir este funcionário?');" ID="LinkButton2" runat="server" OnCommand="ExcluirFuncionario"
