@@ -41,7 +41,7 @@ namespace SVCE.Controle.CasosDeUso
             if (selecionados.Length == 0)
                 throw new Exception(string.Format("Funcionário não encontrado: {0}", matricula));
 
-            Funcionario funcionario = selecionados[0];
+                Funcionario funcionario = selecionados[0];
             
 
             return funcionario;
