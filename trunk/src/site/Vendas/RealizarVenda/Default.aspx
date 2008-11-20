@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-	CodeFile="Default.aspx.cs" Inherits="Vendas_RealizarVenda_Default" Title="Untitled Page" %>
+	CodeFile="Default.aspx.cs" Inherits="Vendas_RealizarVenda_Default"  %>
 <asp:Content ContentPlaceHolderID=head runat=server>
 
 <script src="../../lib/prototype-1.6.0.3.js"></script>
@@ -117,7 +117,7 @@ window.onload = function()
 							<td align=right><%# Eval("PrecoTotal", "{0:C}") %></td>
 							<td>
 							
-								<asp:LinkButton runat=server Text="Excluir" CommandArgument='<%# Eval("IdProduto") %>' CommandName="Excluir" OnCommand="ExcluirProduto" />
+								<asp:LinkButton runat=server CssClass="btnExcluir" Width="16" CommandArgument='<%# Eval("IdProduto") %>' CommandName="Excluir" OnCommand="ExcluirProduto" />
 							
 							
 							</td>
