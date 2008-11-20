@@ -18,7 +18,7 @@ namespace SVCE.Controle.CasosDeUso
 			try
 			{
 				banco.Conectar();
-				var produtos =  Produto.Listar(banco, codigo, null, null);
+				var produtos =  Produto.Listar(banco, codigo, null, null,null);
 				if (produtos.Count() == 0)
 					return null;
 				else

@@ -20,7 +20,7 @@ public partial class Compras_Produtos_AutoComplete : System.Web.UI.Page
 
 		var filtro = Request["filtro"];
 		var controle = new ManterProduto();
-		var produtos = controle.Listar(null, null, filtro);
+		var produtos = controle.Listar(null, null, filtro,null);
 
 
 		Response.Write("<ul>");

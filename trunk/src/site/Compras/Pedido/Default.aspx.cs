@@ -47,6 +47,7 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             ListarEstoque();
+            BindProdutosEmEstoque();
             Produtos = new List<ItemTransacao>();
         }
     }
@@ -57,10 +58,21 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
         this.rpListagem.DataSource = this.Listar();
         this.rpListagem.DataBind();
     }
+    public void BindProdutosEmEstoque()
+    {
+        this.mv.ActiveViewIndex = 0;
+        this.rpEstoque.DataSource = this.ListarProdutosEmEstoque();
+        this.rpEstoque.DataBind();
+    }
     public Estoque[] Listar()
     {
         var estoque = pedido.ListarBaixoEstoque();
         return estoque;
+    }
+    public Estoque[] ListarProdutosEmEstoque()
+    {
+        var estoque = pedido.ListarEstoque();
+            return estoque;
     }
     protected void SelecionarProduto(object sender, CommandEventArgs e)
     {
@@ -78,11 +90,13 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
     protected void RetornarListagem(object sender, CommandEventArgs e)
     {
         ListarEstoque();
+        BindProdutosEmEstoque();
     }
     protected void SalvarPedido(object sender, CommandEventArgs e)
     {
         SalvarProduto();
         ListarEstoque();
+        BindProdutosEmEstoque();
     }
     public void MostrarFornecedor()
     {

@@ -10,13 +10,7 @@
     <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
         <asp:View ID="ViewListagem" runat="server">
             <div>
-            <table>
-                <tr>
-                    <td>
-                    Listar Produtos Abaixo do estoque:
-                    </td>
-                </tr>
-            </table>
+                <h3>Listar produtos abaixo do estoque:</h3>
                 <asp:Repeater runat="server" ID="rpListagem">
                     <HeaderTemplate>
                         <table class="tabela" cellspacing="0" cellpadding="0" width="100%">
@@ -76,7 +70,61 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-            </div>
+         <h3>produtos em estoque:</h3>
+            <asp:Repeater runat="server" ID="rpEstoque">
+                <HeaderTemplate>
+                <table cellpadding="0" cellspacing="0" class="tabela">
+                    <thead>
+                        <tr>
+                            <td>
+                                Nome Fornecedor
+                            </td>
+                            <td>
+                                Código do Produto
+                            </td>
+                            <td>
+                                Nome do produto
+                            </td>
+                            <td>
+                                Quantidade Mínima
+                            </td>
+                            <td>
+                                Quantidade Estoque
+                            </td>
+                            <td>
+                                Preço de Venda
+                            </td>
+                        </tr>
+                    </thead>
+                <tbody>
+                </HeaderTemplate>
+                <FooterTemplate>
+                    </tbody></table>
+                </FooterTemplate>
+                <ItemTemplate>
+                <tr>
+                    <td>
+                        <%#Eval("NFornecedor")%>
+                    </td>
+                    <td>
+                        <%#Eval("codInterno")%>
+                    </td>
+                    <td>
+                        <%#Eval("nome")%>
+                    </td>
+                    <td>
+                        <%#Eval("qtMinima")%>
+                    </td>
+                    <td>
+                        <%#Eval("qtEstoque")%>
+                    </td>
+                    <td>
+                        <%#Eval("Preco", "{0:C}")%>
+                    </td>
+                </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
         </asp:View>
        <asp:View ID="ViewCadastro" runat="server">
             <table>

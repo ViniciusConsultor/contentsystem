@@ -30,10 +30,18 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="lblNome" runat="server" AssociatedControlID="txtNome" Text="Nome" />
+                            <asp:Label ID="lblNome" runat="server" AssociatedControlID="txtNome" Text="Nome do Produto" />
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtNome" MaxLength="30" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblFornecedor" runat="server" AssociatedControlID="txtnFornecedor" Text="Nome do Fornecedor" />
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtnFornecedor" MaxLength="30" />
                         </td>
                     </tr>
                     <tr>

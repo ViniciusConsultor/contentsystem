@@ -20,26 +20,35 @@ namespace SVCE.Modelo.Dados
 	
 
 
-        public static Produto[] Listar(BancoDeDados b, int? codigoInterno, string codigoExterno, string nome)
+        public static Produto[] Listar(BancoDeDados b, int? codigoInterno, string codigoExterno, string nome, string nFornecedor)
         {
             string formato = "%{0}%";
             if (nome != null)
                 nome = string.Format(formato, nome);
             if (codigoExterno != null)
                 codigoExterno = string.Format(formato, codigoExterno);
+            if (nFornecedor != null)
+                nFornecedor = string.Format(formato, nFornecedor);
             //if (codigoInterno != null)
                // codigoInterno = string.Format(formato, codigoInterno);
 
-            var sql = @"SELECT CODIGO_INTERNO, NOME,CODIGO_EXTERNO,ID_FORNECEDOR,PRECO_VENDA,QUNTIDADE_MINIMA,ID_STATUS FROM PRODUTOS WHERE	ID_STATUS = 1 
-            AND     NOME LIKE  COALESCE(@NOME, NOME) 
-            AND		CODIGO_EXTERNO LIKE COALESCE(@CODIGO_EXTERNO, CODIGO_EXTERNO)
-            AND		COALESCE(@CODIGO_INTERNO, CODIGO_INTERNO) = CODIGO_INTERNO ";
+            var sql = @"		SELECT	P.CODIGO_INTERNO, P.NOME,P.CODIGO_EXTERNO,P.ID_FORNECEDOR,
+				P.PRECO_VENDA,P.QUNTIDADE_MINIMA,P.ID_STATUS 
+		FROM	PRODUTOS P
+		LEFT OUTER JOIN FORNECEDORES F
+		ON		P.ID_FORNECEDOR = F.ID_FORNECEDOR
+		WHERE	P.ID_STATUS = 1 
+				AND     P.NOME LIKE  COALESCE(@NOME, P.NOME) 
+				AND		P.CODIGO_EXTERNO LIKE COALESCE(@CODIGO_EXTERNO, P.CODIGO_EXTERNO)
+				AND		COALESCE(@CODIGO_INTERNO, P.CODIGO_INTERNO) = P.CODIGO_INTERNO
+				AND		F.NOME LIKE COALESCE(@NOMEFORNECEDOR, F.NOME)";
 
 
             var cmd = b.CriarComando(sql, System.Data.CommandType.Text);
             cmd.Parameters.Add(new SqlParameter("@NOME", ((object)nome) ?? (object)DBNull.Value));
             cmd.Parameters.Add(new SqlParameter("@CODIGO_EXTERNO", ((object)codigoExterno) ?? (object)DBNull.Value));
             cmd.Parameters.Add(new SqlParameter("@CODIGO_INTERNO", ((object)codigoInterno) ?? (object)DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@NOMEFORNECEDOR", ((object)nFornecedor) ?? (object)DBNull.Value));
 
             SqlDataReader r = null;
             try
