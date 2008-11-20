@@ -81,7 +81,7 @@ namespace SVCE.Modelo.Dados
         }
         public static Funcionario Autenticar(BancoDeDados banco, string usuario, string senha)
         {
-            string sql = "SELECT MATRICULA, NOME,LOGIN, ID_PERFIL, CPF, SALARIO, DATA_ADMISSAO FROM FUNCIONARIOS WHERE LOGIN = @LOGIN AND CONVERT(NVARCHAR(MAX), SENHA) = @SENHA";
+            string sql = "SELECT MATRICULA, NOME,LOGIN, ID_PERFIL, CPF, SALARIO, DATA_ADMISSAO FROM FUNCIONARIOS WHERE LOGIN = @LOGIN AND CONVERT(NVARCHAR(MAX), SENHA) = @SENHA AND ID_STATUS = 1";
 
             var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
             cmd.Parameters.Add(new SqlParameter("@LOGIN", usuario));
