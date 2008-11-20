@@ -26,5 +26,19 @@ namespace SVCE.Controle.CasosDeUso
 			}
 		}
 
+		public MotivoTroca[] ListarMotivosTroca()
+		{
+			BancoDeDados banco = new BancoDeDados();
+			try
+			{
+				banco.Conectar();
+				return MotivoTroca.Listar(banco);
+			}
+			finally
+			{
+				banco.Desconectar();
+			}
+		}
+
 	}
 }

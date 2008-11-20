@@ -57,6 +57,10 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 			this.ddlCodigoProduto.DataSource = controleProdutos.Listar(null, null, null,null);
 			this.ddlCodigoProduto.DataBind();
 
+
+			this.ddlMotivoTroca.DataSource = controle.ListarMotivosTroca();
+			this.ddlMotivoTroca.DataBind();
+
 		}
 	}
 
@@ -100,7 +104,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 			var entrada = (from p in Produtos where p.TipoItem == TipoItemTransacao.Entrada select p).Count();
 			var saida = (from p in Produtos where p.TipoItem == TipoItemTransacao.Saida select p).Count();
 
-			if (saida == 0 || entrada == 0)
+			if (saida == 0 || entrada == 0 || CalcularSaldo() < 0)
 				this.btnProsseguir1.Enabled = false;
 			else
 				btnProsseguir1.Enabled = true;
