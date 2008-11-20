@@ -49,7 +49,15 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 
 
 		if (!IsPostBack)
+		{
+			ManterProduto controleProdutos = new ManterProduto();
 			Produtos = new List<ItemTransacao>();
+
+
+			this.ddlCodigoProduto.DataSource = controleProdutos.Listar(null, null, null);
+			this.ddlCodigoProduto.DataBind();
+
+		}
 	}
 
 	protected void ProsseguirParaFormasPagamento(object sender, CommandEventArgs e)
@@ -78,12 +86,37 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 
 	private void MostrarProdutos()
 	{
-		this.rpProdutos.DataSource = Produtos;
+		this.rpProdutos.DataSource = from p in Produtos where p.TipoItem == TipoItemTransacao.Entrada select p;
 		this.rpProdutos.DataBind();
+		this.rpNovosProdutos.DataSource = from p in Produtos where p.TipoItem == TipoItemTransacao.Saida select p;
+		this.rpNovosProdutos.DataBind();
+
+
+
+		if (Produtos.Count() == 0)
+			pnlProdutos.Visible = false;
+		else
+		{
+			var entrada = (from p in Produtos where p.TipoItem == TipoItemTransacao.Entrada select p).Count();
+			var saida = (from p in Produtos where p.TipoItem == TipoItemTransacao.Saida select p).Count();
+
+			if (saida == 0 || entrada == 0)
+				this.btnProsseguir1.Enabled = false;
+			else
+				btnProsseguir1.Enabled = true;
+		}
+
 	}
 	private void LimparDadosProduto()
 	{
-		txtCodigoProduto.Text = txtQuantidade.Text = "";
+		ddlCodigoProduto.SelectedIndex = 0;
+		txtQuantidade.Text = "";
+	}
+
+
+	protected decimal CalcularSaldo()
+	{
+		return (from p in Produtos select (p.TipoItem == TipoItemTransacao.Entrada ? -1 : 1) * p.PrecoTotal).Sum();
 	}
 
 	protected void IncluirProduto(object sender, CommandEventArgs e)
@@ -91,11 +124,12 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 		if (Page.IsValid)
 		{
 
-			int codigo = Int32.Parse(txtCodigoProduto.Text);
+			int codigo = Int32.Parse(ddlCodigoProduto.Text);
 			int quantidade = Int32.Parse(txtQuantidade.Text);
 
+			var tipo = (TipoItemTransacao)Enum.Parse(typeof(TipoItemTransacao), rbEntradaSaida.SelectedValue);
 
-			var itens = (from p in Produtos where p.IdProduto == codigo select p);
+			var itens = (from p in Produtos where p.IdProduto == codigo && tipo == p.TipoItem select p);
 
 			if (itens.Count() > 0)
 			{
@@ -103,6 +137,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 				itemExistente.Quantidade += quantidade;
 				MostrarProdutos();
 				this.pnlProdutos.Visible = true;
+				itemExistente.TipoItem = tipo;
 				LimparDadosProduto();
 			}
 			else
@@ -116,6 +151,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 				if (produto != null)
 				{
 					var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
+					item.TipoItem = tipo;
 					Produtos.Add(item);
 					MostrarProdutos();
 					this.pnlProdutos.Visible = true;
@@ -134,9 +170,9 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 		Produtos.Remove(item);
 
 		MostrarProdutos();
-		if (Produtos.Count() == 0)
-			pnlProdutos.Visible = false;
+		
 	}
+
 
 
 	public void ValidarNumeroNotaFiscal(object sender, ServerValidateEventArgs e)
