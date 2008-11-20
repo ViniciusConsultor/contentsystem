@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
             <div>
                 <table>
-                    <%-- <tr>
+                    <tr>
                         <td>
                             <asp:Label ID="lbldata" runat="server" AssociatedControlID="txtdi" Text="Data Inicial" />
                         </td>
@@ -25,7 +25,7 @@
                         <td>
                             <asp:TextBox runat="server" ID="txtdf" MaxLength="10" />
                         </td>
-                    </tr>--%>
+                    </tr>
                     <tr>
                         <td>
                             <asp:Button runat="server" Text="Pesquisar" ID="btnPesquisar" OnCommand="Pesquisar" />
