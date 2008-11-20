@@ -205,7 +205,7 @@
 					 <% var saldo = CalcularSaldo();
 
 			   if (saldo < 0)
-				   Response.Write(string.Format("Valor a ser pago ao cliente: {0:C}", -saldo));
+				   Response.Write(string.Format("Valor restante: {0:C}", -saldo));
 			   else
 				   Response.Write(string.Format("Valor a ser pago pelo cliente: {0:C}", saldo));		 	
 			
@@ -221,14 +221,33 @@
 			</asp:Panel>
 		</asp:View>
 		<asp:View ID="View2" runat="server">
+		
+		
+			<asp:ValidationSummary runat=server />
+		
+		
 			<p>
-				Selecione a forma de pagamento</p>
+				<asp:Label runat=server Text="Motivo da Troca" AssociatedControlID="ddlMotivoTroca" /><br />
+				<asp:DropDownList runat=server ID="ddlMotivoTroca" DataValueField="IdMotivoTroca" DataTextField="Descricao" AppendDataBoundItems=true>
+					<asp:ListItem Text="" Value="" />
+				</asp:DropDownList>
+				<asp:RequiredFieldValidator runat=server ControlToValidate="ddlMotivoTroca" ErrorMessage="Selecione um motivo para a troca" Text="*" />
+			</p>
+		
+		
+			<p>Valor Total a Pagar:
+			
+				<%=string.Format( "{0:C}", CalcularSaldo()) %>
+			</p>
+		
+			<p>
+				Selecione a forma de pagamento
+					<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Selecione a forma de pagamento" Text="*"
+					ControlToValidate="rblFormasPagamento" />
+			
+				</p>
 			<asp:RadioButtonList runat="server" ID="rblFormasPagamento" DataTextField="Descricao"
 				DataValueField="ID" RepeatDirection="Horizontal" RepeatColumns="1" />
-			<div>
-				<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" Text="Selecione a forma de pagamento"
-					ControlToValidate="rblFormasPagamento" />
-			</div>
 			<div>
 				<asp:Button runat="server" ID="btnProsseguir2" OnCommand="SalvarVenda" Text="Prosseguir" />
 			</div>
