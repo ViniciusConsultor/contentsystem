@@ -10,8 +10,7 @@
     <form id="form1" runat="server">
     <div class="pageBody">
     
-    
-		<h1>Login</h1>
+    <br /><br /><br /><br />
         <asp:Panel runat="server" DefaultButton="btnEnviar">
     
         <table align=center>
