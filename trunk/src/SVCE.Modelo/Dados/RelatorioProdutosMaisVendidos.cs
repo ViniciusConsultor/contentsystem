@@ -33,7 +33,7 @@ namespace SVCE.Modelo.Dados
                 while (r.Read())
                 {
                     ItemRelatorioProdutosMaisVendidos i = new ItemRelatorioProdutosMaisVendidos();
-                    i.data = r.GetDateTime(0);
+                    i.data = r.GetString(0);
                     i.VolumeVendas = r.GetDecimal(1);
                     l.Add(i);
                 }
@@ -95,7 +95,7 @@ namespace SVCE.Modelo.Dados
         public string NomeFornecedor { get; set; }
         public int QuantidadeVendida { get; set; }
         public decimal VolumeVendas { get; set; }
-        public DateTime data { get; set; }
+        public string data { get; set; }
 
     }
 }
