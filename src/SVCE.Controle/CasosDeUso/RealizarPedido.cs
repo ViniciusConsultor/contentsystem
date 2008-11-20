@@ -34,27 +34,19 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        //public void IncluirProduto(List<ItemTransacao> item, int idTransacao)
-        //{
-        //    BancoDeDados b = new BancoDeDados();
-        //    try
-        //    {
-        //        b.Conectar();
-        //        foreach (ItemTransacao i in item)
-        //        {
-        //            ItemTransacao it = new ItemTransacao();
-        //            it.IdProduto = i.IdProduto;
-        //            it.NomeProduto = i.NomeProduto;
-        //            it.PrecoUnitario = i.PrecoUnitario;
-        //            it.Quantidade = i.Quantidade;
-        //            it.Sequencial = it.Sequencial + 1;
-        //            PedidoCompra.IncluirPedido(b,idTransacao, it);
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        b.Desconectar();
-        //    }
-        //}
+        public Estoque[] ListarEstoque()
+        {
+            BancoDeDados b = new BancoDeDados();
+            try
+            {
+                b.Conectar();
+                return Estoque.ConsultarEstoque(b);
+            }
+            finally
+            {
+                b.Desconectar();
+            }
+        }
+
     }
 }

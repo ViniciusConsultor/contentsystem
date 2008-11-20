@@ -9,13 +9,13 @@ namespace SVCE.Controle.CasosDeUso
     public class ManterProduto
     {
         
-        public Produto[] Listar(int? codigoInterno, string codigoExterno, string nome)
+        public Produto[] Listar(int? codigoInterno, string codigoExterno, string nome, string nFornecedor)
         {
             BancoDeDados b = new BancoDeDados();
             try
             {
                 b.Conectar();
-                return Produto.Listar(b, codigoInterno, codigoExterno, nome);
+                return Produto.Listar(b, codigoInterno, codigoExterno, nome,nFornecedor);
             }
             finally
             {

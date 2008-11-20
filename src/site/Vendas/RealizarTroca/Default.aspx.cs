@@ -54,7 +54,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 			Produtos = new List<ItemTransacao>();
 
 
-			this.ddlCodigoProduto.DataSource = controleProdutos.Listar(null, null, null);
+			this.ddlCodigoProduto.DataSource = controleProdutos.Listar(null, null, null,null);
 			this.ddlCodigoProduto.DataBind();
 
 		}

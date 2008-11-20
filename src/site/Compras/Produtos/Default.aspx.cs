@@ -44,10 +44,11 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     public Produto[] Listar()
     {
         Nullable<int> codInterno = null;
-        string codExterno, nome;
+        string codExterno, nome, nForncedor;
 
         nome = txtNome.Text;
         codExterno = txtCodExterno.Text;
+        nForncedor = txtnFornecedor.Text;
         if (txtCodInterno.Text != "")
             codInterno = Convert.ToInt32(txtCodInterno.Text);
 
@@ -57,8 +58,10 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
             codExterno = null;
         if (codInterno == 0)
             codInterno = null;
-        
-        var produtos = produto.Listar(codInterno, codExterno, nome);
+        if (nForncedor == "")
+            nForncedor = null;
+
+        var produtos = produto.Listar(codInterno, codExterno, nome, nForncedor);
 
         return produtos;
 
