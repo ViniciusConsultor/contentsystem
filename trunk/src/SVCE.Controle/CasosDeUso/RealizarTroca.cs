@@ -39,6 +39,26 @@ namespace SVCE.Controle.CasosDeUso
 				banco.Desconectar();
 			}
 		}
+		public void RegistrarTroca(Troca troca)
+		{
+			BancoDeDados banco = new BancoDeDados();
 
+			try
+			{
+				banco.Conectar();
+				banco.IniciarTransacao();
+				troca.Incluir(banco);
+				banco.ConcluirTransacao();
+			}
+			catch (Exception ex)
+			{
+				banco.AbortarTransacao();
+				throw new Exception("Não foi possível registrar venda!", ex);
+			}
+			finally
+			{
+				banco.Desconectar();
+			}
+		}
 	}
 }

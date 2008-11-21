@@ -85,6 +85,7 @@
 			<td>Produto</td>
 			<td>Valor Unit.</td>
 			<td>Valor Total</td>
+			<td>Tipo</td>
 		</tr>
 		</thead>
 		<tbody>
@@ -116,6 +117,9 @@
 			
 				<%# Eval("Valor_Total", "{0:C}") %>
 			
+			</td>
+			<td>
+				<%# Eval("DIRECAO")%>
 			</td>
 		</tr>
 		</ItemTemplate>

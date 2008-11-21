@@ -220,10 +220,66 @@ namespace SVCE.Modelo.Dados
 	public class Troca : Transacao
 	{
 
-		public void Incluir()
+
+		public void Incluir(BancoDeDados banco)
 		{
+			string sql = @"INSERT INTO [dbo].[TRANSACOES]
+           ([ID_TRANSACAO_PAI]
+           ,[ID_TIPO_TRANSACAO]
+           ,[ID_FORNECEDOR]
+           ,[ID_RESPONSAVEL]
+           ,[NUMERO_NOTA_FISCAL]
+           ,[DATA_TRANSACAO]
+           ,[ID_STATUS]
+           ,[VALOR_TOTAL]
+           ,[ID_MOTIVO_TROCA]
+           ,[ID_FORMA_PAGAMENTO])
+     VALUES
+           (@id_transacao_pai
+           ,4
+           ,null
+           ,@ID_RESPONSAVEL
+           ,null
+           ,getdate()
+           ,3
+           ,@VALOR_TOTAL
+           ,null
+           ,@ID_FORMA_PAGAMENTO
+	);SELECT @@IDENTITY;";
+
+			var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+			cmd.Parameters.Add(new SqlParameter("@id_transacao_pai", this.IdTransacaoPai));
+			cmd.Parameters.Add(new SqlParameter("@ID_RESPONSAVEL", this.IdResponsavel));
+			cmd.Parameters.Add(new SqlParameter("@VALOR_TOTAL", this.ValorTotal));
+			cmd.Parameters.Add(new SqlParameter("@ID_FORMA_PAGAMENTO", this.IdFormaPagamento));
+
+			int idVenda = Convert.ToInt32(cmd.ExecuteScalar());
+			this.IdTransacao = idVenda;
+
+			int sequencial = 1;
+
+			Itens.Sort(new Comparison<ItemTransacao>(delegate(ItemTransacao a, ItemTransacao b)
+				{
+					return a.TipoItem.CompareTo(b.TipoItem);
+				}));
+
+			foreach (ItemTransacao i in Itens)
+			{
+				sql = @"INSERT INTO ITENS_TRANSACOES(ID_TRANSACAO,SEQUENCIAL,ID_PRODUTO,QUANTIDADE,PRECO_UNITARIO,IN_ENTRADA_SAIDA) VALUES(@IDTRANSACAO,@SEQUENCIAL,@IDPRODUTO, @QUANTIDADE,@PRECOUNITARIO, @INENTRADASAIDA)";
+				cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
+				cmd.Parameters.Add(new SqlParameter("@IDTRANSACAO", IdTransacao));
+				cmd.Parameters.Add(new SqlParameter("@SEQUENCIAL", sequencial++));
+				cmd.Parameters.Add(new SqlParameter("@IDPRODUTO", i.IdProduto));
+				cmd.Parameters.Add(new SqlParameter("@QUANTIDADE", i.Quantidade));
+				cmd.Parameters.Add(new SqlParameter("@PRECOUNITARIO", i.PrecoUnitario));
+				cmd.Parameters.Add(new SqlParameter("@INENTRADASAIDA", i.TipoItem == TipoItemTransacao.Entrada	 ? "E" : "S"));
+
+				cmd.ExecuteNonQuery();
+
+			}
 
 		}
+
 
 		public Troca[] ListarTrocas(DateTime dataInicial, DateTime dataFinal)
 		{
