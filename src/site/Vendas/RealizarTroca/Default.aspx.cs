@@ -74,16 +74,17 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 	{
 
 
-		Venda venda = new Venda();
-		venda.IdResponsavel = Int32.Parse(User.Identity.Name);
-		venda.IdFormaPagamento = Int32.Parse(rblFormasPagamento.SelectedValue);
-		venda.Itens = new List<ItemTransacao>();
+		Troca troca = new Troca();
+		troca.IdResponsavel = Int32.Parse(User.Identity.Name);
+		troca.IdTransacaoPai = this.VendaSelecionada.IdTransacao;
+		troca.IdFormaPagamento = Int32.Parse(rblFormasPagamento.SelectedValue);
+		troca.Itens = new List<ItemTransacao>();
 		foreach (var p in Produtos)
-			venda.Itens.Add(p);
-		venda.ValorTotal = venda.CalcularValorTotal();
+			troca.Itens.Add(p);
+		troca.ValorTotal = CalcularSaldo();
 
-		controle.RegistrarVenda(venda);
-		lbNotaFiscal.OnClientClick = "window.open('notafiscal.aspx?v=" + venda.IdTransacao + "');";
+		controle.RegistrarTroca(troca);
+		lbNotaFiscal.OnClientClick = "window.open('../realizarvenda/notafiscal.aspx?v=" + troca.IdTransacao + "');";
 
 		mv.ActiveViewIndex = 2;
 	}
