@@ -181,10 +181,11 @@
                         <td>
                             <asp:RadioButtonList RepeatColumns="1" RepeatDirection="Horizontal" runat="server"
                                 ID="rbPerfil">
-                                <asp:ListItem Text="CONTROLE TOTAL" Value="Master" />
-                                <asp:ListItem Text="SETOR ADMINISTRATIVO" Value="Administrativo" />
+                                <asp:ListItem Text="MASTER" Value="Master" />
+                                <asp:ListItem Text="ADMINISTRATIVO" Value="Administrativo" />
                                 <asp:ListItem Text="SETOR DE COMPRAS" Value="Compras" />
-                                <asp:ListItem Text="VENDEDORES" Value="Vendas" />
+                                <asp:ListItem Text="VENDEDOR" Value="Vendas" />
+                                <%--<asp:ListItem Text="ESTOQUISTA" Value="Estoquista" />--%>
                             </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" Display="Dynamic"
                                 Text="*" ControlToValidate="rbPerfil" ErrorMessage="Perfil obrigatório" />
