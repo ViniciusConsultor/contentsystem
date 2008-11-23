@@ -21,7 +21,7 @@
 			</td>
 			<td align=right>
 			
-			<asp:LinkButton runat=server Text="Sair" oncommand="Logout" />
+			<asp:LinkButton runat=server Text="Sair" CausesValidation=false oncommand="Logout" />
 			</td>
 		</tr>
 		</table>
