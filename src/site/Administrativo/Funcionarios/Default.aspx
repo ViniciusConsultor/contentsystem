@@ -184,10 +184,9 @@
                                 <asp:ListItem Text="MASTER" Value="Master" />
                                 <asp:ListItem Text="ADMINISTRATIVO" Value="Administrativo" />
                                 <asp:ListItem Text="SETOR DE COMPRAS" Value="Compras" />
-                                <asp:ListItem Text="ESTOQUE" Value="Estoque" />
+                                <asp:ListItem Text="ESTOQUISTA" Value="Estoque" />
                                 <asp:ListItem Text="VENDEDOR" Value="Vendas" />
-                                <%--<asp:ListItem Text="ESTOQUISTA" Value="Estoquista" />--%>
-                            </asp:RadioButtonList>
+                              </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" Display="Dynamic"
                                 Text="*" ControlToValidate="rbPerfil" ErrorMessage="Perfil obrigatório" />
                         </td>
