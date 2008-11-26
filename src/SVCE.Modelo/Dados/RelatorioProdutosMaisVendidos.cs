@@ -51,7 +51,7 @@ namespace SVCE.Modelo.Dados
             string sql = @"RELATORIO_PRODUTOS_MAIS_VENDIDOS";
             var cmd = b.CriarComando(sql, System.Data.CommandType.StoredProcedure);
             cmd.Parameters.Add(new SqlParameter("@DATA_INICIAL", ((object)DataInicial) ?? (object)DBNull.Value));
-            cmd.Parameters.Add(new SqlParameter("@DATA_FINAL", ((object)DataInicial) ?? (object)DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@DATA_FINAL", ((object)DataFinal) ?? (object)DBNull.Value));
 
             SqlDataReader r = null;
             List<ItemRelatorioProdutosMaisVendidos> l = new List<ItemRelatorioProdutosMaisVendidos>();
