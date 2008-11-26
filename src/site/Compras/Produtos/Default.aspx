@@ -25,7 +25,7 @@
                                 Text="Código Externo" />
                         </td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtCodExterno" MaxLength="20" />
+                            <asp:TextBox runat="server" ID="txtCodExterno" MaxLength="13" />
                         </td>
                     </tr>
                     <tr>

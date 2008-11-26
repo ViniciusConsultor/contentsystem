@@ -77,12 +77,12 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
                    where CodInterno == f.CodigoInterno
                    select f).First();
         MostrarFornecedor();
-        txtCadastroExterno.Text = cod.CodigoExterno;
+        txtCadastroExterno.Text = cod.CodigoExterno.Trim();
         //txtCadastroID.Text = cod.IdFornecedor.ToString();
         ddlIDFornecedor.SelectedValue = cod.IdFornecedor.ToString();
         txtCadastroNome.Text = cod.Nome;
         txtCadastroQuantidade.Text = cod.QuantidadeMinima.ToString();
-        txtPrecoVenda.Text = cod.PrecoVenda.ToString() ;
+        txtPrecoVenda.Text = cod.PrecoVenda.ToString("N");
 
         mvprodutos.ActiveViewIndex = 1;
 
@@ -119,7 +119,7 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
         if(CodInterno == 0)
             produto.Incluir(txtCadastroExterno.Text, auxID, txtCadastroNome.Text, auxPreco, auxQuant);
         else
-            produto.Alterar(CodInterno, txtCodExterno.Text, auxID,txtCadastroNome.Text, auxPreco, auxQuant);
+            produto.Alterar(CodInterno, txtCadastroExterno.Text, auxID, txtCadastroNome.Text, auxPreco, auxQuant);
         RetornarListagem(sender, e);
     }
 
