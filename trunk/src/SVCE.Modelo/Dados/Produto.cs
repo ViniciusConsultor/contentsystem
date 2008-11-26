@@ -107,9 +107,9 @@ INSERT INTO [PRODUTOS]
         {
             string sql = "UPDATE [PRODUTOS] SET [NOME] = @NOME, [CODIGO_EXTERNO] = @CODIGOEXTERNO, [ID_FORNECEDOR] = @IDFORNECEDOR, [PRECO_VENDA] = @PRECOVENDA, [QUNTIDADE_MINIMA] = @QUNTIDADEMINIMA WHERE CODIGO_INTERNO = @CODIGOINTERNO";
             SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
-            cmd.Parameters.Add(new SqlParameter("@INTERNO", CodigoInterno));
+            cmd.Parameters.Add(new SqlParameter("@CODIGOINTERNO", CodigoInterno));
             cmd.Parameters.Add(new SqlParameter("@NOME", Nome));
-            cmd.Parameters.Add(new SqlParameter("@EXTERNO", CodigoExterno));
+            cmd.Parameters.Add(new SqlParameter("@CODIGOEXTERNO", CodigoExterno));
             cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
             cmd.Parameters.Add(new SqlParameter("@PRECOVENDA", PrecoVenda));
             cmd.Parameters.Add(new SqlParameter("@QUNTIDADEMINIMA", QuantidadeMinima));
