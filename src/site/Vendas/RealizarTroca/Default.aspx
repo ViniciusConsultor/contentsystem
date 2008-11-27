@@ -136,7 +136,7 @@
 								<%# Eval("PrecoTotal", "{0:C}") %>
 							</td>
 							<td>
-								<asp:LinkButton ID="LinkButton1" runat="server" Text="Excluir" CommandArgument='<%# Eval("IdProduto") %>'
+								<asp:LinkButton ID="LinkButton1" runat="server" CssClass="btnPreview" Width="16" CommandArgument='<%# Eval("IdProduto") %>'
 									CommandName="Excluir" OnCommand="ExcluirProduto" />
 							</td>
 						</tr>
@@ -191,7 +191,7 @@
 								<%# Eval("PrecoTotal", "{0:C}") %>
 							</td>
 							<td>
-								<asp:LinkButton ID="LinkButton1" runat="server" Text="Excluir" CommandArgument='<%# Eval("IdProduto") %>'
+								<asp:LinkButton ID="LinkButton1" runat="server" CssClass="btnExcluir" Width="16" CommandArgument='<%# Eval("IdProduto") %>'
 									CommandName="Excluir" OnCommand="ExcluirProduto" />
 							</td>
 						</tr>
