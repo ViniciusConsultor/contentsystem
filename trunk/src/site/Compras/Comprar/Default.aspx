@@ -125,7 +125,7 @@
                                 <%#Eval("nomeP")%>
                             </td>
                             <td>
-                               <asp:LinkButton ID="Selecionar" runat="server" Text="E" OnCommand="SelecionarPedido"
+                               <asp:LinkButton ID="Selecionar" runat="server" Text="Finalizar" OnCommand="SelecionarPedido"
                                     CommandArgument='<%# Eval("IdTransacao") %>' />
                             </td>
                         </tr>
