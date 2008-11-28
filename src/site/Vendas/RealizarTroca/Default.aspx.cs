@@ -134,37 +134,88 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 
 			var tipo = (TipoItemTransacao)Enum.Parse(typeof(TipoItemTransacao), rbEntradaSaida.SelectedValue);
 
-			var itens = (from p in Produtos where p.IdProduto == codigo && tipo == p.TipoItem select p);
+            if (tipo == TipoItemTransacao.Entrada)
+            {
+                if (ValidaTroca(codigo))
+                {
+                    var itens = (from p in Produtos where p.IdProduto == codigo && tipo == p.TipoItem select p);
 
-			if (itens.Count() > 0)
-			{
-				var itemExistente = itens.First();
-				itemExistente.Quantidade += quantidade;
-				MostrarProdutos();
-				this.pnlProdutos.Visible = true;
-				itemExistente.TipoItem = tipo;
-				LimparDadosProduto();
-			}
-			else
-			{
+                    if (itens.Count() > 0)
+                    {
+                        var itemExistente = itens.First();
+                        itemExistente.Quantidade += quantidade;
+                        MostrarProdutos();
+                        this.pnlProdutos.Visible = true;
+                        itemExistente.TipoItem = tipo;
+                        LimparDadosProduto();
+                    }
+                    else
+                    {
 
 
-				var produto = controle.BuscarProduto(codigo);
+                        var produto = controle.BuscarProduto(codigo);
 
-				var sequencial = 0;
+                        var sequencial = 0;
 
-				if (produto != null)
-				{
-					var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
-					item.TipoItem = tipo;
-					Produtos.Add(item);
-					MostrarProdutos();
-					this.pnlProdutos.Visible = true;
-					LimparDadosProduto();
-				}
-				else
-					Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não encontrado!');", true);
-			}
+                        if (produto != null)
+                        {
+                            var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
+                            item.TipoItem = tipo;
+                            Produtos.Add(item);
+                            MostrarProdutos();
+                            this.pnlProdutos.Visible = true;
+                            LimparDadosProduto();
+                        }
+                        else
+                            Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não encontrado!');", true);
+                    }
+                }
+                    // do teste do produto
+                else
+                {
+                    Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Não faz parte da nota fiscal indicada!');", true);
+                }
+            }
+                // else do tipo
+            else
+            {
+                if (ValidaEstoque(codigo, quantidade))
+                {
+                    var itens = (from p in Produtos where p.IdProduto == codigo && tipo == p.TipoItem select p);
+
+                    if (itens.Count() > 0)
+                    {
+                        var itemExistente = itens.First();
+                        itemExistente.Quantidade += quantidade;
+                        MostrarProdutos();
+                        this.pnlProdutos.Visible = true;
+                        itemExistente.TipoItem = tipo;
+                        LimparDadosProduto();
+                    }
+                    else
+                    {
+
+
+                        var produto = controle.BuscarProduto(codigo);
+
+                        var sequencial = 0;
+
+                        if (produto != null)
+                        {
+                            var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quantidade };
+                            item.TipoItem = tipo;
+                            Produtos.Add(item);
+                            MostrarProdutos();
+                            this.pnlProdutos.Visible = true;
+                            LimparDadosProduto();
+                        }
+                        else
+                            Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não encontrado!');", true);
+                    }
+                }
+                else
+                    Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Produto não contém no estoque!');", true);
+            }
 		}
 	}
 	protected void ExcluirProduto(object sender, CommandEventArgs e)
@@ -189,6 +240,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 			e.IsValid = false;
 		else
 			this.VendaSelecionada = venda;
+
 	}
 
 	protected void IniciarTroca(object sender, CommandEventArgs e)
@@ -198,4 +250,42 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 			mv.ActiveViewIndex = 0;
 		}
 	}
+
+    public bool ValidaTroca(int id)
+    {
+        bool validProduto = true;
+        List<ItemTransacao> it = new List<ItemTransacao>();
+        it = VendaSelecionada.Itens;
+        foreach (ItemTransacao i in it)
+        {
+            if (i.IdProduto == id)
+                validProduto = true;
+            else
+                validProduto = false;
+            
+        }
+
+        return validProduto;
+    }
+
+    public bool ValidaEstoque(int id, int qt)
+    {
+        bool validProduto = true;
+        RealizarVenda controle = new RealizarVenda();
+        List<Estoque> es = new List<Estoque>();
+        es =controle.ConsultarEstoque().ToList<Estoque>();
+        foreach (Estoque e in es)
+        {
+            if (e.codInterno == id)
+            {
+                if (e.qtEstoque >= qt)
+                    validProduto = true;
+                else
+                    validProduto = false;
+            }
+        }
+
+
+        return validProduto;
+    }
 }
