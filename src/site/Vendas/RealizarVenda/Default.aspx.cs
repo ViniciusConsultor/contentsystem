@@ -34,8 +34,11 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 		controle = new RealizarVenda();
 
 
-		if (!IsPostBack)
-			Produtos = new List<ItemTransacao>();
+        if (!IsPostBack)
+        {
+            Produtos = new List<ItemTransacao>();
+            PopularProdutos();
+        }
 	}
 
 	protected void ProsseguirParaFormasPagamento(object sender, CommandEventArgs e)
@@ -61,7 +64,22 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 
 		mv.ActiveViewIndex = 2;
 	}
-
+    private void PopularProdutos()
+    {
+        //ManterProduto p = new ManterProduto();
+        List<Estoque> le = new List<Estoque>();
+        List<Estoque> ddl = new List<Estoque>();
+        le = controle.ConsultarEstoque().ToList<Estoque>();
+        foreach (Estoque e in le)
+        {
+            if (e.qtEstoque > 0)
+            {
+                ddl.Add(e);
+            }
+        }
+        txtCodigoProduto.DataSource = ddl;
+        txtCodigoProduto.DataBind();
+    }
 	private void MostrarProdutos()
 	{
 		this.rpProdutos.DataSource = Produtos;
@@ -69,7 +87,9 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 	}
 	private void LimparDadosProduto()
 	{
-		txtCodigoProduto.Text = txtQuantidade.Text = "";
+		txtQuantidade.Text = "";
+        //ddlCodProduto.SelectedIndex = 0;
+        
 	}
 
 	protected void IncluirProduto(object sender, CommandEventArgs e)
@@ -77,7 +97,8 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
         if (Page.IsValid)
         {
 
-            int codigo = Int32.Parse(txtCodigoProduto.Text);
+            //int codigo = Int32.Parse(txtCodigoProduto.Text);
+            int codigo =Convert.ToInt32(txtCodigoProduto.SelectedValue);
             int quantidade = Int32.Parse(txtQuantidade.Text);
             List<Estoque> le = new List<Estoque>();
             le = controle.ConsultarEstoque().ToList<Estoque>();

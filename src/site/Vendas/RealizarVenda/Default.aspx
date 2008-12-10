@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
 
-
+/*
 window.onload = function()
 {
 	new Ajax.Autocompleter('<%=txtCodigoProduto.ClientID %>', "autocomplete", '<%=ResolveUrl("~/Compras/Produtos/AutoComplete.aspx") %>',
@@ -15,7 +15,7 @@ window.onload = function()
 		paramName:'filtro'
 		,indicator: 'indicator'
 	}); 
-}
+}*/
 
 </script>
 
@@ -37,16 +37,19 @@ window.onload = function()
 							<asp:Label runat="server" AssociatedControlID="txtCodigoProduto" Text="Código do Produto" />
 						</td>
 						<td>
-							<asp:TextBox runat="server" MaxLength="10" ID="txtCodigoProduto" /><asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtCodigoProduto"
+						    <asp:DropDownList runat="server" ID="txtCodigoProduto" AppendDataBoundItems="true" DataValueField="codInterno" DataTextField="nome" />
+							
+							<asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtCodigoProduto"
 								Text="*" ErrorMessage="Código do produto obrigatório" />
-							<asp:RegularExpressionValidator runat="server" ControlToValidate="txtCodigoProduto"
-								ValidationExpression="^\d+$" Text="*" ErrorMessage="Código de Produto inválido" />
+							<%--<asp:TextBox runat="server" MaxLength="10" ID="txtCodigoProduto" />--%>
+							<%--<asp:RegularExpressionValidator runat="server" ControlToValidate="txtCodigoProduto"
+								ValidationExpression="^\d+$" Text="*" ErrorMessage="Código de Produto inválido" />--%>
 								
-								<div style="display:none;" id="indicator">carregando...</div>
+								<%--<div style="display:none;" id="indicator">carregando...</div>
 								<div class="autocomplete" id="autocomplete">
 								
 									<h1>Autocomplete</h1>
-								</div>
+								</div>--%>
 						</td>
 					</tr>
 					<tr>
