@@ -127,4 +127,23 @@ public partial class Administrativo_Funcionarios_Default : Page
         MostrarFuncionarios(listagem);
         mv.ActiveViewIndex = 0;
     }
+
+	protected string TraduzirPerfil(Perfil perfil)
+	{
+		switch (perfil)
+		{
+			case Perfil.Master:
+				return "Master";
+			case Perfil.Administrativo:
+				return "Administrativo";
+			case Perfil.Compras:
+				return "Setor de Compras";
+			case Perfil.Estoque:
+				return "Estoquista";
+			case Perfil.Vendas:
+				return "Vendedor";
+			default:
+				return "";
+		}
+	}
 }
