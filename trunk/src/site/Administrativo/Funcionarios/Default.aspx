@@ -67,7 +67,7 @@
                         </td>
                         <td>
                         
-                            <%# Eval("Perfil") %>
+                            <%# TraduzirPerfil((SVCE.Modelo.Dados.Perfil)  Eval("Perfil")) %>
                         </td>
                         <td align="center" width="65">
                             <asp:LinkButton ID="LinkButton1" runat="server" OnCommand="MostrarFormularioEdicao"
