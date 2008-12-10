@@ -52,7 +52,7 @@ namespace SVCE.Modelo.Dados
 FROM			ESTOQUE E
 LEFT OUTER JOIN FORNECEDORES F
 ON				F.ID_FORNECEDOR = E.ID_FORNECEDOR
-INNER JOIN		PRODUTOS P
+LEFT OUTER JOIN		PRODUTOS P
 ON				E.CODIGO_INTERNO = P.CODIGO_INTERNO";
             var cmd = b.CriarComando(sql, System.Data.CommandType.Text);
             SqlDataReader r = null;
