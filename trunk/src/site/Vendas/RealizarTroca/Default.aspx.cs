@@ -52,7 +52,7 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 		{
 			ManterProduto controleProdutos = new ManterProduto();
 			Produtos = new List<ItemTransacao>();
-
+            
 
 			this.ddlCodigoProduto.DataSource = controleProdutos.Listar(null, null, null,null);
 			this.ddlCodigoProduto.DataBind();

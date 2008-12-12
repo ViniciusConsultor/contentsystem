@@ -68,13 +68,15 @@
             <asp:Panel runat="server" Visible="false" ID="pnlEstoque">
                 <h1>
                     Estoque</h1>
-            </asp:Panel>
+                    
             <ul>
                 <li>
                     <asp:HyperLink ID="ListaEstoque" runat="server" NavigateUrl="~/Compras/Pedido/Default.aspx"
                         Text="Consultar Estoque" />
                 </li>
             </ul>
+            </asp:Panel>
+
             <asp:Panel runat="server" Visible="false" ID="pnlVendas">
                 <h1>
                     Vendas</h1>
