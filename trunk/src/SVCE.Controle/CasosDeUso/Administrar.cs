@@ -9,6 +9,20 @@ namespace SVCE.Controle.CasosDeUso
     public class Administrar
     {
         #region FORMAPAGAMENTO
+        public FormaPagamento[] Listar()
+        {
+            BancoDeDados b = new BancoDeDados();
+            try
+            {
+                b.Conectar();
+                return FormaPagamento.Listar(b);
+            }
+            finally
+            {
+                b.Desconectar();
+            }
+        }
+
         public void IncluirPagamento(string descricao)
         {
             BancoDeDados b = new BancoDeDados();
