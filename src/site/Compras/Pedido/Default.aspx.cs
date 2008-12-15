@@ -46,8 +46,22 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            ListarEstoque();
             BindProdutosEmEstoque();
+
+
+            int matricula = Int32.Parse(Page.User.Identity.Name);
+            ManterFuncionarios m = new ManterFuncionarios();
+            var func = m.CarregarFuncionario(matricula);
+            if (func.Perfil == Perfil.Estoque || func.Perfil == Perfil.Master)
+            {
+                lblAbaixoestoque.Visible = true;
+                ListarEstoque();
+            }
+            else
+            {
+                lblAbaixoestoque.Visible = false;
+            }
+
             Produtos = new List<ItemTransacao>();
         }
     }

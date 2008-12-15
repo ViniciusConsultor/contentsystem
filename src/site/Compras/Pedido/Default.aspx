@@ -10,7 +10,7 @@
     <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
         <asp:View ID="ViewListagem" runat="server">
             <div>
-                <h3>Listar produtos abaixo do estoque:</h3>
+                <h3><asp:Label ID="lblAbaixoestoque" Text="Listar produtos abaixo do estoque:" runat="server" /></h3>
                 <asp:Repeater runat="server" ID="rpListagem">
                     <HeaderTemplate>
                         <table class="tabela" cellspacing="0" cellpadding="0" width="100%">
