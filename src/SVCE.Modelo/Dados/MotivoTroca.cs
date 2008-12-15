@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
+using System;
 namespace SVCE.Modelo.Dados
 {
 	public class MotivoTroca
@@ -25,7 +27,25 @@ namespace SVCE.Modelo.Dados
 		#endregion
 
 		#region Métodos
+        public void Inserir(BancoDeDados b)
+        {
+            string sql = @"INSERT INTO MOTIVOS_TROCA (DESCRICAO) VALUES(@DESCRICAO)";
+            SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
+            cmd.Parameters.Add(new SqlParameter("@DESCRICAO", Descricao));
+            int count = cmd.ExecuteNonQuery();
+            if (count == 0)
+                throw new Exception("Não foi possível incluir o motivo.");
+        }
 
+        public void Remover(BancoDeDados b)
+        {
+            string sql = @"DELETE FROM MOTIVOS_TROCA WHERE ID_MOTIVO = @IDMOTIVO";
+            SqlCommand com = b.CriarComando(sql, System.Data.CommandType.Text);
+            com.Parameters.Add(new SqlParameter("@IDMOTIVO", IdMotivoTroca));
+            int count = com.ExecuteNonQuery();
+            if (count == 0)
+                throw new Exception("Motivo inexistente!");
+        }
 
 		public static MotivoTroca[] Listar(BancoDeDados banco)
 		{
