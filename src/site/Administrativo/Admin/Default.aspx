@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Administrativo_Admin_Default" %>
 
 <asp:Content ID="Titulo" ContentPlaceHolderID="Titulo" runat="Server">
-    Admin
+    Manter forma de pagamento
 </asp:Content>
 <asp:Content ID="Conteudo" ContentPlaceHolderID="Conteudo" runat="Server">
     <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
