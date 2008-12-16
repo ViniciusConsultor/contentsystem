@@ -46,7 +46,7 @@
                         <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Relatorios/Default.aspx" Text="Gerar Relatorios" />
                     </li>
                     <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Admin/Default.aspx" Text="Admin" />
+                        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Admin/Default.aspx" Text="Manter forma de pagamento" />
                     </li>
                 </ul>
             </asp:Panel>
