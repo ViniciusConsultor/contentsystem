@@ -14,7 +14,7 @@ namespace SVCE.Modelo.Dados
 
         public void Inserir(BancoDeDados b)
         {
-            string sql = @"INSERT INTO FORMA_PAGAMENTO (DESCRICAO) VALUES(@DESCRICAO)";
+            string sql = @"INSERT INTO FORMA_PAGAMENTO (DESCRICAO, ISACTIVE) VALUES(@DESCRICAO, 1)";
             SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
             cmd.Parameters.Add(new SqlParameter("@DESCRICAO", Descricao));
             int count = cmd.ExecuteNonQuery();
@@ -24,7 +24,7 @@ namespace SVCE.Modelo.Dados
 
         public void Remover(BancoDeDados b)
         {
-            string sql = @"DELETE FROM FORMA_PAGAMENTO WHERE ID_FORMA_PAGAMENTO = @ID";
+            string sql = @"UPDATE FORMA_PAGAMENTO SET ISACTIVE = 0 WHERE ID_FORMA_PAGAMENTO = @ID";
             SqlCommand com = b.CriarComando(sql, System.Data.CommandType.Text);
             com.Parameters.Add(new SqlParameter("@ID", ID));
             int count = com.ExecuteNonQuery();
@@ -36,7 +36,7 @@ namespace SVCE.Modelo.Dados
 		{
 			List<FormaPagamento> formas = new List<FormaPagamento>();
 
-			string sql = "SELECT * FROM FORMA_PAGAMENTO";
+			string sql = "SELECT * FROM FORMA_PAGAMENTO WHERE ISACTIVE = 1";
 
 			var cmd = banco.CriarComando(sql, System.Data.CommandType.Text);
 			var reader = cmd.ExecuteReader();
