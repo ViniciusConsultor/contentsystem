@@ -53,6 +53,7 @@
                     <tr>
                         <td>
                             <asp:Button runat="server" Text="Pesquisar" ID="btnPesquisar" OnCommand="Pesquisar" />
+                            <asp:Button runat="server" Text="Retornar Lista total" btn="BackList" OnCommand="BackList" />
                         </td>
                     </tr>
                 </table>

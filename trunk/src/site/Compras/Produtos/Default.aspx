@@ -116,6 +116,11 @@
                     </FooterTemplate>
                 </asp:Repeater>
             </div>
+        <div>
+		<a href="javascript:;" onclick="window.print();">
+		    Imprimir
+		</a>
+        </div>
         </asp:View>
         <asp:View ID="ViewCadastro" runat="server">
             <table>

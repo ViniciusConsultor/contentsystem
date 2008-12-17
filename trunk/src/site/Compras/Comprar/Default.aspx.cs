@@ -68,8 +68,25 @@ public partial class Compras_Comprar_Default : System.Web.UI.Page
 		if (!IsValid)
 			return;
 
-		this.Listar();
+        this.ListarPedidos();
 	}
+
+    public void BackList(object sender, CommandEventArgs e)
+    {
+        if (!IsValid)
+            return;
+
+        Nullable<int> idProduto = 0;
+        Nullable<DateTime> dtPedido = null;
+
+        txtdata.Text = "";
+        txtProduto.Text = "";
+        if (idProduto == 0)
+            idProduto = null;
+        RealizarCompra r = new RealizarCompra();
+        this.rpListagem.DataSource = r.Listarpedido(idProduto, dtPedido);
+        rpListagem.DataBind();
+    }
 	public void SelecionarPedido(object sender, CommandEventArgs e)
 	{
 		IdPedido = Int32.Parse((string)e.CommandArgument);
