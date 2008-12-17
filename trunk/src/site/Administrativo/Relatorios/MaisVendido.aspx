@@ -9,6 +9,10 @@
 <body>
     <form id="form1" runat="server">
             <div>
+            
+				<asp:ValidationSummary runat=server />
+            
+            
                 <table>
                     <tr>
                         <td>
@@ -16,11 +20,13 @@
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtdi" MaxLength="10" />
+                            <svce:ValidadorData runat=server ControlToValidate="txtdi" Text="*" ErrorMessage="Data inicial inválida" />
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <asp:Label ID="lbldf" runat="server" AssociatedControlID="txtdf" Text="Data Final" />
+                            <svce:ValidadorData ID="ValidadorData1" runat=server ControlToValidate="txtdf" Text="*" ErrorMessage="Data final inválida" />
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtdf" MaxLength="10" />
