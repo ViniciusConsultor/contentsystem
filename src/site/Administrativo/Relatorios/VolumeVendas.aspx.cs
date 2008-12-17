@@ -23,6 +23,8 @@ public partial class Administrativo_Relatorios_VolumeVendas : System.Web.UI.Page
 
     public void Pesquisar(object sender, CommandEventArgs e)
     {
+		if (!IsValid)
+			return;
         this.Listagem();
     }
 

@@ -11,6 +11,10 @@
     <asp:MultiView runat="server" ID="mvCompras" ActiveViewIndex="0">
         <asp:View ID="ViewListagem" runat="server">
             <div>
+            
+            
+            <asp:ValidationSummary runat=server />
+            
             <table>
                 <tr>
                     <td>
@@ -38,6 +42,7 @@
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtdata" MaxLength="10" />
+                            <svce:ValidadorData runat=server ControlToValidate="txtdata" ErrorMessage="Data inválida" Text="*" />
                         </td>
                     </tr>
                     <tr>

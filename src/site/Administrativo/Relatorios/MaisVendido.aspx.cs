@@ -26,6 +26,8 @@ public partial class Administrativo_Relatorios_MaisVendido : System.Web.UI.Page
 
     public void Pesquisar(object sender, CommandEventArgs e)
     {
+		if (!Page.IsValid)
+			return;
         this.Listagem();
     }
 
@@ -37,6 +39,9 @@ public partial class Administrativo_Relatorios_MaisVendido : System.Web.UI.Page
 
     public ItemRelatorioProdutosMaisVendidos[] Listar()
     {
+
+		
+
         GeraRelatorio g = new GeraRelatorio();
         Nullable<DateTime> df = null;
         Nullable<DateTime> di = null;
