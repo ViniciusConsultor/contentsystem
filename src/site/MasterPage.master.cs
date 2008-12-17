@@ -35,14 +35,19 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     pnlCompras.Visible = true;
                     pnlEstoque.Visible = true;
                     pnlVendas.Visible = true;
+                    pnlEmfalta.Visible = true;
+                    pnlPorperiodo.Visible = true;
+                    pnlMaisVendido.Visible = true;
                     break;
                 case SVCE.Modelo.Dados.Perfil.Administrativo:
                     pnlAdministrativo.Visible = true;
                     pnlEstoque.Visible = true;
+                    pnlPorperiodo.Visible = true;
                     break;
                 case SVCE.Modelo.Dados.Perfil.Compras:
                     pnlCompras.Visible = true;
                     pnlEstoque.Visible = true;
+                    pnlEmfalta.Visible = true;
                     break;
                 case SVCE.Modelo.Dados.Perfil.Estoque:
                     pnlEstoque.Visible = true;
@@ -50,6 +55,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                 case SVCE.Modelo.Dados.Perfil.Vendas:
                     pnlVendas.Visible = true;
                     pnlEstoque.Visible = true;
+                    pnlMaisVendido.Visible = true;
                     break;
             }
 

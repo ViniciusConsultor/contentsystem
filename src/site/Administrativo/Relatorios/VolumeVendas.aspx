@@ -25,6 +25,7 @@
 				</td>
 				<td>
 					<asp:TextBox runat="server" ID="txtdi" MaxLength="10" />
+					<asp:RequiredFieldValidator runat="server" ID="rfvdi" ControlToValidate="txtdi" Text="*" ErrorMessage="preencha a data inicial por favor" />
 					<svce:ValidadorData ID="ValidadorData1" runat="server" ControlToValidate="txtdi"
 						Text="*" ErrorMessage="Data inicial inválida" />
 				</td>
@@ -35,7 +36,7 @@
 				</td>
 				<td>
 					<asp:TextBox runat="server" ID="txtdf" MaxLength="10" />
-					
+					<asp:RequiredFieldValidator runat="server" ControlToValidate="txtdf" ID="rfvdf" Text="*" ErrorMessage="preencha a data final por favor" />
 					<svce:ValidadorData ID="ValidadorData2" runat="server" ControlToValidate="txtdf"
 						Text="*" ErrorMessage="Data final inválida" />
 				</td>
@@ -50,6 +51,7 @@
 						<asp:ListItem Text="Mensal" Value="M" />
 						<asp:ListItem Text="Anual" Value="A" />
 					</asp:RadioButtonList>
+					<asp:RequiredFieldValidator runat="server" ID="rfvperiodo" ControlToValidate="rdbPeriodo" Text="*" ErrorMessage="preencha o período por favor" />
 				</td>
 			</tr>
 			<tr>

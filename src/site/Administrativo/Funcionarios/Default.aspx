@@ -78,6 +78,11 @@
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
+        <div>
+		<a href="javascript:;" onclick="window.print();">
+		    Imprimir
+		</a>
+        </div>
         </asp:View>
         <asp:View runat="server" ID="vwFormulario">
         

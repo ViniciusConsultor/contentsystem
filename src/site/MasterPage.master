@@ -43,13 +43,34 @@
                             Text="Manter Funcionários" />
                     </li>
                     <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Relatorios/Default.aspx" Text="Gerar Relatorios" />
+                        <asp:HyperLink ID="rltFormaPagamento" runat="server" NavigateUrl="~/Administrativo/Admin/Default.aspx" Text="Manter forma de pagamento" />
                     </li>
+                </ul> 
+            </asp:Panel>
+            <asp:Panel runat="server" Visible="false" ID="pnlMaisVendido">
+                <ul>
                     <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Admin/Default.aspx" Text="Manter forma de pagamento" />
+                        <asp:HyperLink ID="rltMaisVendido" runat="server" NavigateUrl="~/Administrativo/Relatorios/MaisVendido.aspx" Text="Relatório por produto mais vendido." Target="_blank" />  
                     </li>
                 </ul>
             </asp:Panel>
+            <asp:Panel runat="server" Visible="false" ID="pnlEmfalta">
+                <ul>
+                    <li>
+                        <asp:HyperLink ID="rltPorVenda" runat="server" NavigateUrl="~/Administrativo/Relatorios/SemEstoque.aspx" Text="Relatório produto em falta no Estoque." Target="_blank" />
+                    </li>
+                </ul>
+            </asp:Panel>
+            <asp:Panel runat="server" Visible="false" ID="pnlPorperiodo">
+                <ul>
+                    <li>
+                         <asp:HyperLink ID="rltMelhorVenda" runat="server" NavigateUrl="~/Administrativo/Relatorios/VolumeVendas.aspx" Text="Relatório por volume de venda." Target="_blank" />
+                    </li>
+                </ul>
+            </asp:Panel>
+                    
+
+
             <asp:Panel runat="server" Visible="false" ID="pnlCompras">
                 <h1>
                     Compras</h1>
