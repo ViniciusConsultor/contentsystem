@@ -38,6 +38,16 @@ public partial class Administrativo_Relatorios_VolumeVendas : System.Web.UI.Page
             df = DateTime.Parse(txtdf.Text);
         if (txtdi.Text != "")
             di = DateTime.Parse(txtdi.Text);
+
+
+
+        if (df > DateTime.Today)
+            df = DateTime.Today;
+
+        if (di > DateTime.Today)
+            di = DateTime.Today;
+
+
         if (rdbPeriodo.Items[0].Selected)
             periodo = rdbPeriodo.Items[0].Value;
         else if (rdbPeriodo.Items[1].Selected)

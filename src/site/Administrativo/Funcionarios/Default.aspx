@@ -79,6 +79,7 @@
                 </ItemTemplate>
             </asp:Repeater>
         <div>
+        <asp:HyperLink runat="server" NavigateUrl="~/Administrativo/Funcionarios/GerarFuncionarios.aspx" Text="Gerar Relátorios" />
 		<a href="javascript:;" onclick="window.print();">
 		    Imprimir
 		</a>
