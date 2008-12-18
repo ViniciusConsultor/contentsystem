@@ -117,6 +117,7 @@
                 </asp:Repeater>
             </div>
         <div>
+        <asp:HyperLink runat="server" NavigateUrl="~/Compras/Produtos/GerarProdutos.aspx" Text="Gerar Relátorios" />
 		<a href="javascript:;" onclick="window.print();">
 		    Imprimir
 		</a>

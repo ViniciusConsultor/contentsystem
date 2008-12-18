@@ -40,13 +40,22 @@ public partial class Administrativo_Relatorios_MaisVendido : System.Web.UI.Page
 
     public ItemRelatorioProdutosMaisVendidos[] Listar()
     {
-            GeraRelatorio g = new GeraRelatorio();
-            Nullable<DateTime> df = null;
-            Nullable<DateTime> di = null;
-            if (txtdi.Text != "")
-                di = DateTime.Parse(txtdi.Text);
-            if (txtdf.Text != "")
-                df = DateTime.Parse(txtdf.Text);
+        GeraRelatorio g = new GeraRelatorio();
+        Nullable<DateTime> df = null;
+        Nullable<DateTime> di = null;
+
+        if (txtdi.Text != "")
+            di = DateTime.Parse(txtdi.Text);
+        if (txtdf.Text != "")
+            df = DateTime.Parse(txtdf.Text);
+
+        if (df > DateTime.Today)
+            df = DateTime.Today;
+
+        if (di > DateTime.Today)
+            di = DateTime.Today;
+
+
 
             var maisVendido = g.ListarProdutosMaisVendido(df, di);
             return maisVendido;
