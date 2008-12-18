@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
             <div>
             
-				<asp:ValidationSummary runat=server />
+				<asp:ValidationSummary runat="server" />
             
             
                 <table>
@@ -34,7 +34,7 @@
                             <svce:ValidadorData ID="ValidadorData2" runat=server ControlToValidate="txtdf" Text="*" ErrorMessage="Data final inválida" />
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtdi" Text="*" ErrorMessage="preencha a data inicial por favor" />
                             <asp:CompareValidator runat="server" ID="cmpDtfDi" ControlToValidate="txtdf" ControlToCompare="txtdi" Operator="GreaterThan" Text="*" ErrorMessage="A data final tem que ser maior que a inicial" />
-                        </td>
+                        </td;.
                     </tr>
                     <tr>
                         <td>
