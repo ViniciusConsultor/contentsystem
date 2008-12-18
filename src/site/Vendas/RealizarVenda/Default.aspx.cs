@@ -86,7 +86,7 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
         {
             if (e.qtEstoque > 0)
             {
-                ddl.Add(e); 
+                ddl.Add(e);
             }
         }
         txtCodigoProduto.DataSource = ddl;
@@ -115,7 +115,15 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
             List<Estoque> le = new List<Estoque>();
             le = controle.ConsultarEstoque().ToList<Estoque>();
             if (ddl.Count == 0)
-                PopularProdutos();
+            {
+                foreach (Estoque et in le)
+                {
+                    if (et.qtEstoque > 0)
+                    {
+                        ddl.Add(et);
+                    }
+                }
+            }
 
             foreach (Estoque es in ddl)
             {
