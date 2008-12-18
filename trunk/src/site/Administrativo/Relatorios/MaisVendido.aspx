@@ -21,15 +21,19 @@
                         <td>
                             <asp:TextBox runat="server" ID="txtdi" MaxLength="10" />
                             <svce:ValidadorData runat=server ControlToValidate="txtdi" Text="*" ErrorMessage="Data inicial inválida" />
+                            <asp:RequiredFieldValidator runat="server" ID="rfvdiObrigatoria" ControlToValidate="txtdi" Text="*" ErrorMessage="preencha a data inicial por favor" />
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <asp:Label ID="lbldf" runat="server" AssociatedControlID="txtdf" Text="Data Final" />
-                            <svce:ValidadorData ID="ValidadorData1" runat=server ControlToValidate="txtdf" Text="*" ErrorMessage="Data final inválida" />
+                            
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtdf" MaxLength="10" />
+                            <svce:ValidadorData ID="ValidadorData2" runat=server ControlToValidate="txtdf" Text="*" ErrorMessage="Data final inválida" />
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtdi" Text="*" ErrorMessage="preencha a data inicial por favor" />
+                            <asp:CompareValidator runat="server" ID="cmpDtfDi" ControlToValidate="txtdf" ControlToCompare="txtdi" Operator="GreaterThan" Text="*" ErrorMessage="A data final tem que ser maior que a inicial" />
                         </td>
                     </tr>
                     <tr>

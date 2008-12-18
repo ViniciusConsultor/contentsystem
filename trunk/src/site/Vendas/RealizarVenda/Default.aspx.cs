@@ -18,6 +18,7 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 {
 
 	private RealizarVenda controle;
+    List<Estoque> ddl = new List<Estoque>();
 
 	public List<ItemTransacao> Produtos
 	{
@@ -27,6 +28,18 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 		}
 		set { ViewState["Produtos"] = value; }
 	}
+
+    //public List<Estoque> ddl
+    //{
+    //    get
+    //    {
+    //        return (List<Estoque>)ViewState["ddl"];
+    //    }
+    //    set
+    //    {
+    //        ViewState["ddl"] = value;
+    //    }
+    //}
 
 
 	protected void Page_Load(object sender, EventArgs e)
@@ -68,13 +81,12 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
     {
         //ManterProduto p = new ManterProduto();
         List<Estoque> le = new List<Estoque>();
-        List<Estoque> ddl = new List<Estoque>();
         le = controle.ConsultarEstoque().ToList<Estoque>();
         foreach (Estoque e in le)
         {
             if (e.qtEstoque > 0)
             {
-                ddl.Add(e);
+                ddl.Add(e); 
             }
         }
         txtCodigoProduto.DataSource = ddl;
@@ -102,7 +114,10 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
             int quantidade = Int32.Parse(txtQuantidade.Text);
             List<Estoque> le = new List<Estoque>();
             le = controle.ConsultarEstoque().ToList<Estoque>();
-            foreach (Estoque es in le)
+            if (ddl.Count == 0)
+                PopularProdutos();
+
+            foreach (Estoque es in ddl)
             {
                 if (es.codInterno == codigo)
                 {
@@ -142,6 +157,7 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
                     {
                         Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('quantidade inferior!');", true);
                     }
+                    return;
                 }
             }
 
