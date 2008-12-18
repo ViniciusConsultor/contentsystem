@@ -48,8 +48,8 @@
 				<td>
 					<asp:RadioButtonList runat="server" ID="rdbPeriodo">
 						<asp:ListItem Text="Diário" Value="D" />
+						<asp:ListItem Text="Semanal" Value="S" />
 						<asp:ListItem Text="Mensal" Value="M" />
-						<asp:ListItem Text="Anual" Value="A" />
 					</asp:RadioButtonList>
 					<asp:RequiredFieldValidator runat="server" ID="rfvperiodo" ControlToValidate="rdbPeriodo" Text="*" ErrorMessage="preencha o período por favor" />
 				</td>

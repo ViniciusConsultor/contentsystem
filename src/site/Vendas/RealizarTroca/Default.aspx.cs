@@ -259,7 +259,10 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
         foreach (ItemTransacao i in it)
         {
             if (i.IdProduto == id)
+            {
                 validProduto = true;
+                return true;
+            }
             else
                 validProduto = false;
             
@@ -279,9 +282,15 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
             if (e.codInterno == id)
             {
                 if (e.qtEstoque >= qt)
+                {
                     validProduto = true;
+                    return true;
+                }
                 else
+                {
                     validProduto = false;
+                    return false;
+                }
             }
         }
 
