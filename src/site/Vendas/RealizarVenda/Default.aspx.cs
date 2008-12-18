@@ -157,7 +157,6 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
                     {
                         Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('quantidade inferior!');", true);
                     }
-                    return;
                 }
             }
 

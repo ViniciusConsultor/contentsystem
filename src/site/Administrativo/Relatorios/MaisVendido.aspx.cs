@@ -21,8 +21,9 @@ public partial class Administrativo_Relatorios_MaisVendido : System.Web.UI.Page
         if (!IsPostBack)
         {
             this.Listagem();
-        }
+        }   
     }
+
 
     public void Pesquisar(object sender, CommandEventArgs e)
     {
@@ -39,19 +40,16 @@ public partial class Administrativo_Relatorios_MaisVendido : System.Web.UI.Page
 
     public ItemRelatorioProdutosMaisVendidos[] Listar()
     {
+            GeraRelatorio g = new GeraRelatorio();
+            Nullable<DateTime> df = null;
+            Nullable<DateTime> di = null;
+            if (txtdi.Text != "")
+                di = DateTime.Parse(txtdi.Text);
+            if (txtdf.Text != "")
+                df = DateTime.Parse(txtdf.Text);
 
-		
-
-        GeraRelatorio g = new GeraRelatorio();
-        Nullable<DateTime> df = null;
-        Nullable<DateTime> di = null;
-        if(txtdi.Text != "")
-            di = DateTime.Parse(txtdi.Text);
-        if (txtdf.Text != "")
-            df = DateTime.Parse(txtdf.Text);
-
-        var maisVendido = g.ListarProdutosMaisVendido(df, di);
-        return maisVendido;
+            var maisVendido = g.ListarProdutosMaisVendido(df, di);
+            return maisVendido;
 
     }
 

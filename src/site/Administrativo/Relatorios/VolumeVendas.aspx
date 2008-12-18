@@ -39,6 +39,7 @@
 					<asp:RequiredFieldValidator runat="server" ControlToValidate="txtdf" ID="rfvdf" Text="*" ErrorMessage="preencha a data final por favor" />
 					<svce:ValidadorData ID="ValidadorData2" runat="server" ControlToValidate="txtdf"
 						Text="*" ErrorMessage="Data final inválida" />
+						<asp:CompareValidator runat="server" ID="rfvcompardatas" ControlToValidate="txtdf" ControlToCompare="txtdi" Operator="GreaterThan" Text="*" ErrorMessage="A data Final tem que ser maior que a inicial" />
 				</td>
 			</tr>
 			<tr>
