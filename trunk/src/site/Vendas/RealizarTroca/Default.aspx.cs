@@ -67,8 +67,17 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 	protected void ProsseguirParaFormasPagamento(object sender, CommandEventArgs e)
 	{
 		mv.ActiveViewIndex = 1;
-		rblFormasPagamento.DataSource = controle.ListarFormasPagamento();
-		rblFormasPagamento.DataBind();
+        decimal sl = Convert.ToDecimal(Session["saldo"]);
+        if (sl > 0)
+        {
+            rblFormasPagamento.DataSource = controle.ListarFormasPagamento();
+            rblFormasPagamento.DataBind();
+        }
+        else if (sl == 0)
+        {
+            rblFormasPagamento.Visible = false;
+            lblformapagamento.Visible = false;
+        }
 	}
 	protected void SalvarVenda(object sender, CommandEventArgs e)
 	{
@@ -77,7 +86,10 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 		Troca troca = new Troca();
 		troca.IdResponsavel = Int32.Parse(User.Identity.Name);
 		troca.IdTransacaoPai = this.VendaSelecionada.IdTransacao;
-		troca.IdFormaPagamento = Int32.Parse(rblFormasPagamento.SelectedValue);
+        if (lblformapagamento.Visible == true)
+            troca.IdFormaPagamento = Int32.Parse(rblFormasPagamento.SelectedValue);
+        else
+            troca.IdFormaPagamento = 6;
 		troca.Itens = new List<ItemTransacao>();
 		foreach (var p in Produtos)
 			troca.Itens.Add(p);

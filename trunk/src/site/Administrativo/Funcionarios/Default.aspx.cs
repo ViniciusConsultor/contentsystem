@@ -35,6 +35,8 @@ public partial class Administrativo_Funcionarios_Default : Page
     {
         base.OnLoad(e);
         Controle = new ManterFuncionarios();
+        txtCPF.Attributes.Add("onkeypress", "return formataCPF(event);");
+        txtSalario.Attributes.Add("onkeypress", "return formataCPF(event);");
             
         if (!IsPostBack)
         {

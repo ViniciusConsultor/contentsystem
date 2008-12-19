@@ -1,8 +1,35 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="Administrativo_Funcionarios_Default"  %>
-
 <asp:Content ID="Titulo" ContentPlaceHolderID="Titulo" runat="Server">
     Manter Funcionários
+    
+<script src="../../lib/prototype-1.6.0.3.js"></script>
+<script src="../../lib/scriptaculous-1.8.1/scriptaculous.js"></script>
+
+<script type="text/javascript">
+function formataCPF(event)
+{
+    var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        
+        if(tecla < 48 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
+         
+}   
+</script>
 </asp:Content>
 <asp:Content ID="Conteudo" ContentPlaceHolderID="Conteudo" runat="Server">
     <asp:MultiView runat="server" ID="mv" ActiveViewIndex="0">
@@ -114,7 +141,7 @@
                         <asp:Label ID="Label1" runat="server" AssociatedControlID="txtNome" Text="Nome" />
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtNome" MaxLength="50" />
+                        <asp:TextBox runat="server" ID="txtNome" MaxLength="50"  />
                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" Text="*" ControlToValidate="txtNome"
                             ErrorMessage="Nome obrigatório" />
                     </td>

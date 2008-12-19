@@ -30,6 +30,13 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        txtCadastroQuantidade.Attributes.Add("onkeypress", "return formataNUMBER(event);");
+        txtCodInterno.Attributes.Add("onkeypress", "return formataNUMBER(event);");
+        txtPrecoVenda.Attributes.Add("onkeypress", "return formataNUMBER(event);");
+
+
+
+
         if (!IsPostBack)
         {
             ListaProdutos();
