@@ -33,6 +33,10 @@ public partial class Compras_Fornecedores_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        txtTelefone.Attributes.Add("onkeypress", "return formataTEL(event);");
+        txtCNPJ.Attributes.Add("onkeypress", "return formataCNPJ(event);");
+        txtFiltroCNPJ.Attributes.Add("onkeypress", "return formataCNPJ(event);");
+
         if (!IsPostBack)
         {
             ListarFornecedores();

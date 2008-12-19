@@ -2,6 +2,58 @@
     CodeFile="Default.aspx.cs" Inherits="Compras_Fornecedores_Default"  %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<script src="../../lib/prototype-1.6.0.3.js"></script>
+<script src="../../lib/scriptaculous-1.8.1/scriptaculous.js"></script>
+
+<script type="text/javascript">
+function formataCNPJ(event)
+{
+var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        //alert(tecla);
+        if(tecla < 47 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
+}
+
+
+function formataTEL(event)
+{
+    var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        //alert(tecla);
+        if(tecla < 48 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else if(tecla == 32)
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
+         
+}   
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Titulo" runat="Server">
     Manter Fornecedores
@@ -155,7 +207,7 @@
                                     <asp:Label ID="Label6" runat="server" AssociatedControlID="txtTelefone" Text="Telefone" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtTelefone" MaxLength="50" />
+                                    <asp:TextBox runat="server" ID="txtTelefone" MaxLength="11" />
                                     <asp:RequiredFieldValidator Display="Dynamic" ID="RequiredFieldValidator4" runat="server"
                                         ControlToValidate="txtTelefone" Text="*" ErrorMessage="Telefone obrigatório" />
                                         <svce:ValidadorTelefone

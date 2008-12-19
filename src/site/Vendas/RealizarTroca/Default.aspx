@@ -203,7 +203,7 @@
 				<div>
 				
 					 <% var saldo = CalcularSaldo();
-
+         Session["saldo"] = saldo;
 			   if (saldo < 0)
 				   Response.Write(string.Format("Valor restante: {0:C}", -saldo));
 			   else
@@ -241,7 +241,7 @@
 			</p>
 		
 			<p>
-				Selecione a forma de pagamento
+				<asp:Label runat="server" ID="lblformapagamento" Text="Selecione a forma de pagamento" />
 					<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Selecione a forma de pagamento" Text="*"
 					ControlToValidate="rblFormasPagamento" />
 			
