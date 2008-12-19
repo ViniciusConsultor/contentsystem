@@ -34,7 +34,7 @@ window.onload = function()
 				<table>
 					<tr>
 						<td>
-							<asp:Label runat="server" AssociatedControlID="txtCodigoProduto" Text="Código do Produto" />
+							<asp:Label runat="server" AssociatedControlID="txtCodigoProduto" Text="Produto" />
 						</td>
 						<td>
 						    <asp:DropDownList runat="server" ID="txtCodigoProduto" AppendDataBoundItems="true" DataValueField="codInterno" DataTextField="nome" />
