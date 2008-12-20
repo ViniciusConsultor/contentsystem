@@ -44,6 +44,8 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        txtQuantidade.Attributes.Add("onkeypress", "return formataNUMBER(event)");
         if (!IsPostBack)
         {
             BindProdutosEmEstoque();

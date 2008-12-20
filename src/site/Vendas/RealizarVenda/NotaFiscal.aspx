@@ -35,7 +35,7 @@
 				N&ordm;
 			</td>
 			<td>
-				<%#Eval("NUMERO_NOTA_FISCAL") %>
+				<%# Eval("NUMERO_NOTA_FISCAL") %>
 			</td>
 		</tr>
 		<tr>
@@ -50,7 +50,7 @@
 		
 			<td>Forma de Pagamento</td>
 			<td>
-				<%# Eval("FORMA_PAGAMENTO") %>
+				<%# ValidaNotafiscal(Eval("valor_total")) %>
 			</td>
 		</tr>
 		<tr>
