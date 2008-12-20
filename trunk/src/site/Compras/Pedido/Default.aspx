@@ -2,6 +2,32 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<script src="../../lib/prototype-1.6.0.3.js"></script>
+<script src="../../lib/scriptaculous-1.8.1/scriptaculous.js"></script>
+
+<script type="text/javascript">
+function formataNUMBER(event)
+{
+var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        //alert(tecla);
+        if(tecla < 48 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
+}
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Titulo" runat="Server">
     Pedidos
@@ -136,7 +162,7 @@
                                     <asp:Label ID="lblFornecedor" runat="server" AssociatedControlID="ddlIDFornecedor" Text="Fornecedor" />
                                 </td>
                                 <td>
-                                    <asp:DropDownList runat="server" ID="ddlIDFornecedor" />
+                                    <asp:DropDownList runat="server" ID="ddlIDFornecedor" Enabled="false" />
                                 </td>
                             </tr>
                             <tr>
@@ -144,15 +170,15 @@
                                     <asp:Label ID="lblCodInterno" runat="server" AssociatedControlID="txtcodInterno" Text="Código Interno" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtcodInterno" MaxLength="50" />
+                                    <asp:TextBox runat="server" ID="txtcodInterno" MaxLength="50" Enabled="false" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="lblNome" runat="server" AssociatedControlID="txtNome" Text="Nome" />
+                                    <asp:Label ID="lblNome" runat="server" AssociatedControlID="txtNome" Text="Nome" Enabled="false" />
                                 </td>
                                 <td>
-                                    <asp:TextBox runat="server" ID="txtNome" MaxLength="14" />
+                                    <asp:TextBox runat="server" ID="txtNome" MaxLength="14" Enabled="false" />
                                 </td>
                             </tr>
                             <tr>

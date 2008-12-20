@@ -37,6 +37,7 @@ public partial class Administrativo_Funcionarios_Default : Page
         Controle = new ManterFuncionarios();
         txtCPF.Attributes.Add("onkeypress", "return formataCPF(event);");
         txtSalario.Attributes.Add("onkeypress", "return formataCPF(event);");
+        txtDataAdmissao.Attributes.Add("onkeypress", "function formataDATA(event)");
             
         if (!IsPostBack)
         {
@@ -119,15 +120,27 @@ public partial class Administrativo_Funcionarios_Default : Page
         if (!IsValid)
             return;
 
-        Funcionario funcionario = PreencherFuncionario();
-        Funcionario[] listagem;
-        if (MatriculaEdicao == 0)
-        listagem =    Controle.IncluirFuncionario(funcionario);
-        else
-            listagem = Controle.AlterarFuncionario(funcionario);
+        Nullable<DateTime> dtadm = null;
 
-        MostrarFuncionarios(listagem);
-        mv.ActiveViewIndex = 0;
+        if (!string.IsNullOrEmpty(txtDataAdmissao.Text))
+            dtadm = Convert.ToDateTime(txtDataAdmissao.Text);
+
+        if (dtadm <= DateTime.Today)
+        {
+            Funcionario funcionario = PreencherFuncionario();
+            Funcionario[] listagem;
+            if (MatriculaEdicao == 0)
+                listagem = Controle.IncluirFuncionario(funcionario);
+            else
+                listagem = Controle.AlterarFuncionario(funcionario);
+
+            MostrarFuncionarios(listagem);
+            mv.ActiveViewIndex = 0;
+        }
+        else
+        {
+            Page.ClientScript.RegisterClientScriptBlock(GetType(), "Produto", "alert('Data maior que a de Hoje, ');", true);
+        }
     }
 
 	protected string TraduzirPerfil(Perfil perfil)

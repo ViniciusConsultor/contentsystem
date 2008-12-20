@@ -44,8 +44,9 @@ public partial class Vendas_RealizarVenda_Default : System.Web.UI.Page
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
-		controle = new RealizarVenda();
-
+        txtQuantidade.Attributes.Add("onkeypress", "formataNUMBER(event)");
+        controle = new RealizarVenda();
+        
 
         if (!IsPostBack)
         {

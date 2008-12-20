@@ -36,6 +36,7 @@ public partial class Compras_Fornecedores_Default : System.Web.UI.Page
         txtTelefone.Attributes.Add("onkeypress", "return formataTEL(event);");
         txtCNPJ.Attributes.Add("onkeypress", "return formataCNPJ(event);");
         txtFiltroCNPJ.Attributes.Add("onkeypress", "return formataCNPJ(event);");
+        txtTelefone.Attributes.Add("onkeypress", "formataDATA(event)");
 
         if (!IsPostBack)
         {

@@ -198,6 +198,16 @@ var tecla = null;
                             </tr>
                             <tr>
                                 <td valign="top">
+                                    <asp:Label ID="lblprecoCompra" runat="server" AssociatedControlID="txtprecoCompra" Text="Preço Compra" />
+                                </td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtprecoCompra" MaxLength="20" />
+                                    <asp:RequiredFieldValidator Display="Dynamic" ID="rfvprecoCompra" runat="server"
+                                        ControlToValidate="txtprecoCompra" Text="*" ErrorMessage="Preço Compra obrigatório" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
                                     <asp:Label ID="lblCadastroQuantidade" runat="server" AssociatedControlID="txtCadastroQuantidade" Text="Quantidade Mínima" />
                                 </td>
                                 <td>

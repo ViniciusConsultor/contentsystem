@@ -28,6 +28,27 @@ function formataCPF(event)
         else
             return true;
          
+}
+function formataDATA(event)
+{
+var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        //alert(tecla);
+        if(tecla < 47 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
 }   
 </script>
 </asp:Content>
@@ -174,11 +195,15 @@ function formataCPF(event)
                             <asp:Label ID="Label4" runat="server" AssociatedControlID="txtDataAdmissao" Text="Data Admissão" />
                         </td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtDataAdmissao" />
+                            <asp:TextBox runat="server" ID="txtDataAdmissao" MaxLength="10" />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" Display="Dynamic"
                                 Text="*" ControlToValidate="txtDataAdmissao" ErrorMessage="Data de Admissão obrigatória" />
                             <svce:ValidadorData runat="server" ControlToValidate="txtDataAdmissao" Text="*" ErrorMessage="Data de admissão inválida!" />
                         </td>
+                        <tr>
+                        <td>&#160; &#160; &#160; &#160; &#160; &#160; &#160; </td>
+                        <td><asp:label id="lblDATAformato" runat="server" Text=" formato dd/mm/aaaa" /></td>
+                        </tr>
                     </tr>
                     <tr>
                         <td colspan="2">

@@ -29,4 +29,20 @@ public partial class Vendas_RealizarVenda_NotaFiscal : System.Web.UI.Page
 
 
 	}
+
+    public string ValidaNotafiscal(object x)
+    {
+        int aux = 1 ;
+        if (x != null)
+            aux = Convert.ToInt32(x);
+
+        if (aux == 0)
+        {
+            return "TROCA";
+        }
+        else
+        {
+            return Eval("FORMA_PAGAMENTO").ToString();
+        }
+    }
 }

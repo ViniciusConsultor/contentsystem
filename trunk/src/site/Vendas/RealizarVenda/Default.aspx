@@ -6,7 +6,27 @@
 <script src="../../lib/scriptaculous-1.8.1/scriptaculous.js"></script>
 
 <script type="text/javascript">
-
+function formataNUMBER(event)
+{
+var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        //alert(tecla);
+        if(tecla < 48 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
+}
 /*
 window.onload = function()
 {

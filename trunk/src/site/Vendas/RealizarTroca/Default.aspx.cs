@@ -82,14 +82,14 @@ public partial class Vendas_RealizarTroca_Default : System.Web.UI.Page
 	protected void SalvarVenda(object sender, CommandEventArgs e)
 	{
 
-
 		Troca troca = new Troca();
 		troca.IdResponsavel = Int32.Parse(User.Identity.Name);
 		troca.IdTransacaoPai = this.VendaSelecionada.IdTransacao;
         if (lblformapagamento.Visible == true)
             troca.IdFormaPagamento = Int32.Parse(rblFormasPagamento.SelectedValue);
         else
-            troca.IdFormaPagamento = 6;
+            troca.IdFormaPagamento = 1;
+
 		troca.Itens = new List<ItemTransacao>();
 		foreach (var p in Produtos)
 			troca.Itens.Add(p);
