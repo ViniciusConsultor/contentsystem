@@ -167,7 +167,7 @@ var tecla = null;
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="lblCadastroID" runat="server" AssociatedControlID="ddlIDFornecedor" Text="ID Fornecedor" />
+                                    <asp:Label ID="lblCadastroID" runat="server" AssociatedControlID="ddlIDFornecedor" Text="Fornecedor" />
                                 </td>
                                 <td>
                                     <%--<asp:TextBox runat="server" ID="txtCadastroID" MaxLength="10" />--%>

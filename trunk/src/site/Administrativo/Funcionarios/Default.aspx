@@ -150,10 +150,10 @@ var tecla = null;
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="matricula">
                         <asp:Label runat="server" AssociatedControlID="txtMatricula" Text="Matrícula" />
                     </td>
-                    <td>
+                    <td class="matricula">
                         <asp:TextBox runat="server" ID="txtMatricula" Enabled="false" />
                     </td>
                 </tr>

@@ -123,3 +123,7 @@ table.tabela thead tr td
 	margin-left:5px;
 	margin-top:3px;
 }
+.matricula
+{
+	display:none;
+}
