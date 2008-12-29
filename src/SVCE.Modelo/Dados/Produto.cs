@@ -34,7 +34,7 @@ namespace SVCE.Modelo.Dados
                // codigoInterno = string.Format(formato, codigoInterno);
 
             var sql = @"		SELECT	P.CODIGO_INTERNO, P.NOME,P.CODIGO_EXTERNO,P.ID_FORNECEDOR,
-				P.PRECO_VENDA,P.QUNTIDADE_MINIMA,P.ID_STATUS 
+				P.PRECO_VENDA,P.PRECO_COMPRA,P.QUNTIDADE_MINIMA,P.ID_STATUS 
 		FROM	PRODUTOS P
 		LEFT OUTER JOIN FORNECEDORES F
 		ON		P.ID_FORNECEDOR = F.ID_FORNECEDOR
@@ -64,7 +64,8 @@ namespace SVCE.Modelo.Dados
                     p.CodigoExterno = r.GetString(2);
                     p.IdFornecedor = r.GetInt32(3);
                     p.PrecoVenda = r.GetDecimal(4);
-                    p.QuantidadeMinima = r.GetInt32(5);
+                    p.precoCompra = r.GetDecimal(5);
+                    p.QuantidadeMinima = r.GetInt32(6);
                     retorno.Add(p);
                 }
                 return retorno.ToArray();
@@ -84,6 +85,7 @@ INSERT INTO [PRODUTOS]
            ,[CODIGO_EXTERNO]
            ,[ID_FORNECEDOR]
            ,[PRECO_VENDA]
+            ,[PRECO_COMPRA]
            ,[QUNTIDADE_MINIMA]
            ,[ID_STATUS])
      VALUES
@@ -91,6 +93,7 @@ INSERT INTO [PRODUTOS]
            ,@EXTERNO
            ,@IDFORNECEDOR
            ,@PRECOVENDA
+            ,@PRECOCOMPPA
            ,@QUNTIDADEMINIMA
            ,1)
 ";
@@ -99,6 +102,7 @@ INSERT INTO [PRODUTOS]
             cmd.Parameters.Add(new SqlParameter("@EXTERNO", CodigoExterno));
             cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
             cmd.Parameters.Add(new SqlParameter("@PRECOVENDA", PrecoVenda));
+            cmd.Parameters.Add(new SqlParameter("@PRECOCOMPPA", precoCompra));
             cmd.Parameters.Add(new SqlParameter("QUNTIDADEMINIMA", QuantidadeMinima));
             int count = cmd.ExecuteNonQuery();
             if (count == 0)
@@ -106,13 +110,14 @@ INSERT INTO [PRODUTOS]
         }
         public void Alterar(BancoDeDados b)
         {
-            string sql = "UPDATE [PRODUTOS] SET [NOME] = @NOME, [CODIGO_EXTERNO] = @CODIGOEXTERNO, [ID_FORNECEDOR] = @IDFORNECEDOR, [PRECO_VENDA] = @PRECOVENDA, [QUNTIDADE_MINIMA] = @QUNTIDADEMINIMA WHERE CODIGO_INTERNO = @CODIGOINTERNO";
+            string sql = "UPDATE [PRODUTOS] SET [NOME] = @NOME, [CODIGO_EXTERNO] = @CODIGOEXTERNO, [ID_FORNECEDOR] = @IDFORNECEDOR, [PRECO_VENDA] = @PRECOVENDA, [PRECO_COMPRA] = @PRECOCOMPRA, [QUNTIDADE_MINIMA] = @QUNTIDADEMINIMA WHERE CODIGO_INTERNO = @CODIGOINTERNO";
             SqlCommand cmd = b.CriarComando(sql, System.Data.CommandType.Text);
             cmd.Parameters.Add(new SqlParameter("@CODIGOINTERNO", CodigoInterno));
             cmd.Parameters.Add(new SqlParameter("@NOME", Nome));
             cmd.Parameters.Add(new SqlParameter("@CODIGOEXTERNO", CodigoExterno));
             cmd.Parameters.Add(new SqlParameter("@IDFORNECEDOR", IdFornecedor));
             cmd.Parameters.Add(new SqlParameter("@PRECOVENDA", PrecoVenda));
+            cmd.Parameters.Add(new SqlParameter("@PRECOCOMPRA", precoCompra));
             cmd.Parameters.Add(new SqlParameter("@QUNTIDADEMINIMA", QuantidadeMinima));
             int count = cmd.ExecuteNonQuery();
             if (count == 0)

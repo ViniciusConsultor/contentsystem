@@ -22,7 +22,7 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void Alterar(int codigoInterno,string codigoExterno,int idFornecedor, string nome, decimal precovenda, int quantidade)
+        public void Alterar(int codigoInterno,string codigoExterno,int idFornecedor, string nome, decimal precovenda, decimal precocompra, int quantidade)
         {
             BancoDeDados b = new BancoDeDados();
             Produto p = new Produto();
@@ -31,6 +31,7 @@ namespace SVCE.Controle.CasosDeUso
             p.IdFornecedor = idFornecedor;
             p.Nome = nome;
             p.PrecoVenda = precovenda;
+            p.precoCompra = precocompra;
             p.QuantidadeMinima = quantidade;
 
             try
@@ -44,7 +45,7 @@ namespace SVCE.Controle.CasosDeUso
                 b.Desconectar();
             }
         }
-        public void Incluir(string codigoExterno, int idFornecedor, string nome, decimal precovenda, int quantidade)
+        public void Incluir(string codigoExterno, int idFornecedor, string nome, decimal precovenda,decimal precocompra, int quantidade)
         {
             BancoDeDados b = new BancoDeDados();
             Produto p = new Produto();
@@ -52,6 +53,7 @@ namespace SVCE.Controle.CasosDeUso
             p.IdFornecedor = idFornecedor;
             p.Nome = nome;
             p.PrecoVenda = precovenda;
+            p.precoCompra = precocompra;
             p.QuantidadeMinima = quantidade;
             try
             {
