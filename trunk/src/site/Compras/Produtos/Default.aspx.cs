@@ -32,7 +32,8 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     {
         txtCadastroQuantidade.Attributes.Add("onkeypress", "return formataNUMBER(event);");
         txtCodInterno.Attributes.Add("onkeypress", "return formataNUMBER(event);");
-        txtPrecoVenda.Attributes.Add("onkeypress", "return formataNUMBER(event);");
+        txtPrecoVenda.Attributes.Add("onkeypress", "return formataVALOR(event);");
+        txtprecoCompra.Attributes.Add("onkeypress", "return formataVALOR(event);");
 
 
 
@@ -90,6 +91,7 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
         txtCadastroNome.Text = cod.Nome;
         txtCadastroQuantidade.Text = cod.QuantidadeMinima.ToString();
         txtPrecoVenda.Text = cod.PrecoVenda.ToString("N");
+        txtprecoCompra.Text = cod.precoCompra.ToString("N");
 
         mvprodutos.ActiveViewIndex = 1;
 
@@ -122,11 +124,12 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
             //int auxID = Convert.ToInt32(txtCadastroID.Text);
         int auxQuant= Convert.ToInt32(txtCadastroQuantidade.Text);
         decimal auxPreco = Convert.ToDecimal(txtPrecoVenda.Text);
+        decimal auxCompra = Convert.ToDecimal(txtprecoCompra.Text);
 
         if(CodInterno == 0)
-            produto.Incluir(txtCadastroExterno.Text, auxID, txtCadastroNome.Text, auxPreco, auxQuant);
+            produto.Incluir(txtCadastroExterno.Text, auxID, txtCadastroNome.Text, auxPreco,auxCompra, auxQuant);
         else
-            produto.Alterar(CodInterno, txtCadastroExterno.Text, auxID, txtCadastroNome.Text, auxPreco, auxQuant);
+            produto.Alterar(CodInterno, txtCadastroExterno.Text, auxID, txtCadastroNome.Text, auxPreco,auxCompra, auxQuant);
         RetornarListagem(sender, e);
     }
 
@@ -134,7 +137,7 @@ public partial class Compras_Produtos_Default : System.Web.UI.Page
     {
         CodInterno = 0;
         //txtCadastroID.Text =
-        txtCadastroExterno.Text =  txtCadastroNome.Text = txtCodExterno.Text = txtCodInterno.Text = txtNome.Text = txtPrecoVenda.Text = txtCadastroQuantidade.Text = "";
+        txtCadastroExterno.Text =  txtCadastroNome.Text = txtCodExterno.Text = txtprecoCompra.Text = txtCodInterno.Text = txtNome.Text = txtPrecoVenda.Text = txtCadastroQuantidade.Text = "";
     }
 
     // traz os fornecedores..

@@ -28,6 +28,39 @@ var tecla = null;
         else
             return true;
 }
+
+
+
+function formataVALOR(event)
+{
+int count = 0;
+var tecla = null;
+    if(navigator.appName.indexOf('Internet Explorer')>0)
+        tecla = event.keyCode;
+    else
+        tecla = event.which;
+        
+        //alert(tecla);
+        if(tecla < 48 || tecla > 57)
+        {
+            if(tecla == 8 )
+                return true;
+            else if(tecla == 0)
+                return true;
+            else if(tecla == 44)
+            {
+                count = 1;
+                if(count == 1)
+                    return false;
+                else
+                    return true;
+            }    
+            else
+                return false;
+        }
+        else
+            return true;
+}
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Titulo" runat="Server">
