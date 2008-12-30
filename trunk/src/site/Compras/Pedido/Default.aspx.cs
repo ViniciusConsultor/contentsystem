@@ -140,8 +140,8 @@ public partial class Compras_Pedido_Default : System.Web.UI.Page
 
         if (produto != null)
         {
-            decimal vlTotal = produto.PrecoVenda * quant;   
-            var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.PrecoVenda, Quantidade = quant };
+            decimal vlTotal = produto.precoCompra * quant;   
+            var item = new ItemTransacao() { IdProduto = produto.CodigoInterno, Sequencial = sequencial, NomeProduto = produto.Nome, PrecoUnitario = produto.precoCompra, Quantidade = quant };
             List<ItemTransacao> it = new List<ItemTransacao>();
             it.Add(item);
             pedido.IncluirPedido(idF, matricula, vlTotal, it); 

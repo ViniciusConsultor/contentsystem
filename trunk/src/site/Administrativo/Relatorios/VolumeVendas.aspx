@@ -73,7 +73,7 @@
 								Data
 							</td>
 							<td>
-								Quantidade
+								Volume(R$)
 							</td>
 						</tr>
 					</thead>
