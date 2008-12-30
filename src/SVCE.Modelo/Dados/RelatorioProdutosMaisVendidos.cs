@@ -35,6 +35,8 @@ namespace SVCE.Modelo.Dados
                     ItemRelatorioProdutosMaisVendidos i = new ItemRelatorioProdutosMaisVendidos();
                     i.data = r.GetString(0);
                     i.VolumeVendas = r.GetDecimal(1);
+                    i.vendasEntrada = r.GetDecimal(2);
+                    i.vendasSaida = r.GetDecimal(3);
                     l.Add(i);
                 }
                 return l.ToArray();
@@ -96,6 +98,8 @@ namespace SVCE.Modelo.Dados
         public int QuantidadeVendida { get; set; }
         public decimal VolumeVendas { get; set; }
         public string data { get; set; }
+        public decimal vendasEntrada { get; set; }
+        public decimal vendasSaida { get; set; }
 
     }
 }
