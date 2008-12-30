@@ -75,6 +75,12 @@
 							<td>
 								Volume(R$)
 							</td>
+							<td>
+								Vendas(R$)
+							</td>
+							<td>
+								Compras(R$)
+							</td>
 						</tr>
 					</thead>
 			</HeaderTemplate>
@@ -84,7 +90,13 @@
 						<%#Eval("data", "{0:d}")%>
 					</td>
 					<td>
-						<%#Eval("VolumeVendas")%>
+						<%#Eval("VolumeVendas", "{0:N}")%>
+					</td>
+					<td>
+						<%#Eval("vendasSaida", "{0:N}")%>
+					</td>
+					<td>
+						<%#Eval("vendasEntrada", "{0:N}")%>
 					</td>
 				</tr>
 			</ItemTemplate>
